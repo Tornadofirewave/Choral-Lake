@@ -10,8 +10,6 @@ Builds
 MemoryCaptures
 UserSettings
 nul
-/Assets/Docs
-/Docs
 *.csproj
 .vsconfig
 *.sln
