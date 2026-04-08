@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3103911b2729fbe448897332c905d8b1, type: 3}
+  m_Name: FishDatabase
+  m_EditorClassIdentifier: ChoralLake::ChoralLake.Data.FishDatabase
+  entries:
+  - id: starfish_1
+    displayName: Starfish
+    rarity: 0
+    sellCost: 100
+    icon: {fileID: 8966945178157639174, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: pufferfish_1
+    displayName: Pufferfish
+    rarity: 1
+    sellCost: 200
+    icon: {fileID: 7910131988914132003, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: salmon_1
+    displayName: Salmon
+    rarity: 2
+    sellCost: 250
+    icon: {fileID: 4694313144681828600, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 

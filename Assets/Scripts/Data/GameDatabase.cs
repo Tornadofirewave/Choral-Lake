@@ -7,63 +7,57 @@ namespace ChoralLake.Data
     [CreateAssetMenu(fileName = "GameDatabase", menuName = "Choral Lake/Game Database")]
     public class GameDatabase : ScriptableObject
     {
-        // TODO: replace ScriptableObject with strongly-typed content classes (FishSO, FishingRodSO, BaitSO, LakeSO) once those are defined.
-        [SerializeField] private List<ScriptableObject> fish = new();
-        [SerializeField] private List<ScriptableObject> rods = new();
-        [SerializeField] private List<ScriptableObject> bait = new();
-        [SerializeField] private List<ScriptableObject> lakes = new();
+        [Header("Aggregated Sub-Databases")]
+        [SerializeField] private FishDatabase fishDatabase;
+        [SerializeField] private BaitDatabase baitDatabase;
 
-        private Dictionary<string, ScriptableObject> _fishById;
-        private Dictionary<string, ScriptableObject> _rodsById;
-        private Dictionary<string, ScriptableObject> _baitById;
-        private Dictionary<string, ScriptableObject> _lakesById;
+        [Header("Per-Asset Content")]
+        [SerializeField] private List<FishingRodSO> rods = new();
+        [SerializeField] private List<LakeSO> lakes = new();
 
-        public IReadOnlyList<ScriptableObject> AllFish => fish;
-        public IReadOnlyList<ScriptableObject> AllRods => rods;
-        public IReadOnlyList<ScriptableObject> AllBait => bait;
-        public IReadOnlyList<ScriptableObject> AllLakes => lakes;
+        private Dictionary<string, FishingRodSO> _rodsById;
+        private Dictionary<string, LakeSO> _lakesById;
 
-        public ScriptableObject GetFishById(string id) => Lookup(_fishById, id, "fish");
-        public ScriptableObject GetRodById(string id) => Lookup(_rodsById, id, "rod");
-        public ScriptableObject GetBaitById(string id) => Lookup(_baitById, id, "bait");
-        public ScriptableObject GetLakeById(string id) => Lookup(_lakesById, id, "lake");
+        public FishDatabase FishDatabase => fishDatabase;
+        public BaitDatabase BaitDatabase => baitDatabase;
+        public IReadOnlyList<FishingRodSO> AllRods => rods;
+        public IReadOnlyList<LakeSO> AllLakes => lakes;
+
+        public FishEntry GetFishById(string id) => fishDatabase != null ? fishDatabase.GetById(id) : null;
+        public BaitEntry GetBaitById(string id) => baitDatabase != null ? baitDatabase.GetById(id) : null;
+        public FishingRodSO GetRodById(string id) => Lookup(_rodsById, id, "rod");
+        public LakeSO GetLakeById(string id) => Lookup(_lakesById, id, "lake");
 
         private void OnEnable() => RebuildCaches();
 
         private void RebuildCaches()
         {
-            _fishById  = BuildCache(fish,  "fish");
             _rodsById  = BuildCache(rods,  "rod");
-            _baitById  = BuildCache(bait,  "bait");
             _lakesById = BuildCache(lakes, "lake");
         }
 
-        private Dictionary<string, ScriptableObject> BuildCache(List<ScriptableObject> source, string category)
+        private Dictionary<string, T> BuildCache<T>(List<T> source, string category)
+            where T : ScriptableObject, IIdentifiable
         {
-            var dict = new Dictionary<string, ScriptableObject>();
+            var dict = new Dictionary<string, T>();
             foreach (var entry in source)
             {
                 if (entry == null) continue;
-                if (entry is not IIdentifiable identifiable)
-                {
-                    // Fields are raw ScriptableObject until content classes are defined — nothing implements IIdentifiable yet.
-                    continue;
-                }
-                if (string.IsNullOrEmpty(identifiable.Id))
+                if (string.IsNullOrEmpty(entry.Id))
                 {
                     Debug.LogError($"[GameDatabase] {category} entry '{entry.name}' has an empty ID.", entry);
                     continue;
                 }
-                if (dict.ContainsKey(identifiable.Id))
+                if (dict.ContainsKey(entry.Id))
                 {
-                    Debug.LogError($"[GameDatabase] Duplicate {category} ID '{identifiable.Id}' on '{entry.name}'. Previous entry overwritten.", entry);
+                    Debug.LogError($"[GameDatabase] Duplicate {category} ID '{entry.Id}' on '{entry.name}'. Previous entry overwritten.", entry);
                 }
-                dict[identifiable.Id] = entry;
+                dict[entry.Id] = entry;
             }
             return dict;
         }
 
-        private ScriptableObject Lookup(Dictionary<string, ScriptableObject> cache, string id, string category)
+        private T Lookup<T>(Dictionary<string, T> cache, string id, string category) where T : class
         {
             if (string.IsNullOrEmpty(id)) return null;
             if (cache != null && cache.TryGetValue(id, out var result)) return result;

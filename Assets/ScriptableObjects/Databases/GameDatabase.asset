@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5854a4106758a3c4280535179cb57a14, type: 3}
   m_Name: GameDatabase
   m_EditorClassIdentifier: ChoralLake::ChoralLake.Data.GameDatabase
-  fish: []
-  rods: []
-  bait: []
+  fishDatabase: {fileID: 11400000, guid: 8e25663de2f198642acacd2c30b33b50, type: 2}
+  baitDatabase: {fileID: 11400000, guid: 2d39c74b85edcda4ea6ca13c369537d8, type: 2}
+  rods:
+  - {fileID: 11400000, guid: a9e783b52a8181f4e8844e0cb567a15e, type: 2}
   lakes: []

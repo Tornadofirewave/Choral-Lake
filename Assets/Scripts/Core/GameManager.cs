@@ -71,15 +71,23 @@ namespace ChoralLake.Core
             int total = 0;
             foreach (var id in SaveData.unsoldFishIds)
             {
-                // TODO: resolve fish sell cost via database once FishSO is defined.
-                // Placeholder: flat 10 per fish.
-                total += 10;
+                var fish = database != null ? database.GetFishById(id) : null;
+                if (fish != null)
+                {
+                    total += fish.SellCost;
+                }
+                else
+                {
+                    Debug.LogWarning($"[GameManager] SellAllFish could not resolve fish ID '{id}'. It will be sold for 0.");
+                }
             }
             SaveData.unsoldFishIds.Clear();
-            // NOTE: uniqueFishCaughtIds is intentionally NOT cleared. It is permanent progression.
-            SaveData.money += total;
             OnInventoryChanged?.Invoke();
-            if (total != 0) OnMoneyChanged?.Invoke();
+            if (total != 0)
+            {
+                SaveData.money += total;
+                OnMoneyChanged?.Invoke();
+            }
             return total;
         }
 
