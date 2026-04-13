@@ -401,6 +401,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1183133704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183133703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f29024ab9466c40b5760c7846fc696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ChoralLake::ChoralLake.DebugTools.PromptTwoSmokeTest
+  fishIdA: starfish_1
+  fishIdB: pufferfish_1
+  fishIdC: salmon_1
+  commonRodId: rod_common
 --- !u!114 &1183133705
 MonoBehaviour:
   m_ObjectHideFlags: 0
