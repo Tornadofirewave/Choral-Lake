@@ -13,3 +13,4 @@ nul
 *.csproj
 .vsconfig
 *.sln
+*.slnx
