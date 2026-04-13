@@ -13,9 +13,7 @@ nul
 *.csproj
 .vsconfig
 *.sln
-<<<<<<< HEAD
 *.slnx
-=======
 
 .utmp/
 /[Ll]ibrary/
@@ -112,4 +110,3 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
->>>>>>> 72c9dc92d83a8735e9c82c32ce194db4eb55d460
