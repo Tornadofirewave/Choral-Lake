@@ -12,6 +12,7 @@ namespace ChoralLake.Core
         public GameDatabase Database => database;
 
         public PlayerSaveData SaveData { get; private set; }
+        public ChoralLake.Dialogue.DialogueDatabase DialogueDatabase { get; private set; }
 
         public const string DEFAULT_STARTING_LAKE_ID = "lake_01";
 
@@ -33,6 +34,8 @@ namespace ChoralLake.Core
             DontDestroyOnLoad(gameObject);
             SaveData = PlayerSaveData.NewGame();
             // TODO: Save/Load — replace with disk load or new game based on title-screen choice.
+            DialogueDatabase = new ChoralLake.Dialogue.DialogueDatabase();
+            DialogueDatabase.LoadFromResources("dialogue");
         }
 
         // --- Money ---
