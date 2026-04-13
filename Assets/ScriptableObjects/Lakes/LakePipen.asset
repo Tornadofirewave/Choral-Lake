@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aebb286223c67c4c87ce4435aceb249, type: 3}
+  m_Script: {fileID: 11500000, guid: fd8158206a024e345aebfdc0bd38b79b, type: 3}
   m_Name: LakePipen
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Data.LakeSO
   id: lake_pipen
   displayName: Lake Pipen
   sceneName: Lake_Pipen
   uniqueFishRequiredToUnlock: 20
+  fishIdPool: []

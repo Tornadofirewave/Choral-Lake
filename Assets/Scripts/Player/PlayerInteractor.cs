@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ChoralLake.Core;
 using ChoralLake.Gameplay;
 
 namespace ChoralLake.Player

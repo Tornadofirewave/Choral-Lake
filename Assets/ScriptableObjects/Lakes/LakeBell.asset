@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8158206a024e345aebfdc0bd38b79b, type: 3}
   m_Name: LakeBell
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Data.LakeSO
-  id: 
-  displayName: 
-  sceneName: 
-  uniqueFishRequiredToUnlock: 0
+  id: lake_bell
+  displayName: Lake Bell
+  sceneName: Lake_Bell
+  uniqueFishRequiredToUnlock: 40
   fishIdPool: []
