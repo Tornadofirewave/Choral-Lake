@@ -393,7 +393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1183133706}
   - component: {fileID: 1183133705}
-  - component: {fileID: 1183133707}
+  - component: {fileID: 1183133704}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -445,20 +445,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183133707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183133703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f29024ab9466c40b5760c7846fc696, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.DebugTools.SmokeTest
-  loadDelaySeconds: 1
-  targetScene: Town
 --- !u!1 &1336581400
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +491,7 @@ Transform:
   - {fileID: 930905454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1987943134
+--- !u!1 &1966077194
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,39 +499,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1987943136}
-  - component: {fileID: 1987943135}
+  - component: {fileID: 1966077196}
+  - component: {fileID: 1966077195}
   m_Layer: 0
-  m_Name: PlayerSpawnpoint
+  m_Name: BootLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1987943135
+--- !u!114 &1966077195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987943134}
+  m_GameObject: {fileID: 1966077194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0db68a8207759e4fa032b981524d1eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 62f4cd5652ea0624a87d4d204a8ac331, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.PlayerSpawnPoint
-  spawnId: default
-  facingDirection: 0
---- !u!4 &1987943136
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.BootLoader
+  startingScene: Town
+  startingSpawnId: default
+--- !u!4 &1966077196
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987943134}
+  m_GameObject: {fileID: 1966077194}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.66199, y: 0.35438, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -603,4 +589,4 @@ SceneRoots:
   - {fileID: 1183133706}
   - {fileID: 1336581402}
   - {fileID: 2014757443}
-  - {fileID: 1987943136}
+  - {fileID: 1966077196}

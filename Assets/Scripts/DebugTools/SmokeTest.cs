@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using ChoralLake.Core;
 using ChoralLake.Data;
@@ -65,10 +64,6 @@ namespace ChoralLake.DebugTools
             enabled = false;
         }
 
-        private void OnDestroy()
-        {
-            if (GameManager.Instance != null)
-                GameManager.Instance.OnSceneLoadComplete -= OnLoaded;
-        }
+
     }
 }
