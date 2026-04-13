@@ -170,5 +170,17 @@ namespace ChoralLake.Core
         }
 
         public bool IsLakeUnlocked(string lakeId) => SaveData.unlockedLakeIds.Contains(lakeId);
+
+        // --- Scene load hook ---
+        /// <summary>
+        /// Fired by SceneLoader once the player is positioned in the new scene.
+        /// Subscribe to react to scene-ready state (NPC spawns, HUD refresh, etc.).
+        /// </summary>
+        public event Action OnSceneLoadComplete;
+
+        public void NotifySceneLoadComplete()
+        {
+            OnSceneLoadComplete?.Invoke();
+        }
     }
 }

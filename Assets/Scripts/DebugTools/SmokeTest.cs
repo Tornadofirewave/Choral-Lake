@@ -1,40 +1,52 @@
+using System.Collections;
 using UnityEngine;
 using ChoralLake.Core;
+using ChoralLake.SceneManagement;
 
 namespace ChoralLake.DebugTools
 {
     /// <summary>
-    /// TEMPORARY: verifies GameManager wiring. Delete after smoke test passes.
+    /// TEMPORARY: verifies scene transition wiring. Delete after acceptance criteria pass.
     /// </summary>
     public class SmokeTest : MonoBehaviour
     {
+        [SerializeField] private float loadDelaySeconds = 1f;
+        [SerializeField] private string targetScene = SceneIds.Lake01;
+
         private void Start()
         {
             if (GameManager.Instance == null)
             {
-                Debug.LogError("[SmokeTest] GameManager.Instance is null. Is the GameManager component on a GameObject in this scene?");
+                Debug.LogError("[SmokeTest] GameManager.Instance is null.");
                 return;
             }
 
+            GameManager.Instance.OnSceneLoadComplete += OnLoaded;
+            Debug.Log($"[SmokeTest] Starting scene: {GameManager.Instance.SaveData.currentSceneName}");
+            StartCoroutine(LoadAfterDelay());
+        }
+
+        private IEnumerator LoadAfterDelay()
+        {
+            yield return new WaitForSeconds(loadDelaySeconds);
+            Debug.Log($"[SmokeTest] Requesting transition to '{targetScene}'...");
+            SceneLoader.LoadScene(targetScene, "default");
+        }
+
+        private void OnLoaded()
+        {
             var gm = GameManager.Instance;
-
-            Debug.Log($"[SmokeTest] Starting money: {gm.SaveData.money} (expected 0)");
-            Debug.Log($"[SmokeTest] Unlocked lakes: {string.Join(", ", gm.SaveData.unlockedLakeIds)} (expected lake_01)");
-
-            gm.AddMoney(50);
-            Debug.Log($"[SmokeTest] After AddMoney(50): {gm.SaveData.money} (expected 50)");
-
-            gm.AddFishToInventory("fish_test");
-            gm.AddFishToInventory("fish_test"); // duplicate species
-            Debug.Log($"[SmokeTest] Unique fish count: {gm.UniqueFishCount} (expected 1)");
-            Debug.Log($"[SmokeTest] Unsold fish count: {gm.SaveData.unsoldFishIds.Count} (expected 2)");
-
-            int sold = gm.SellAllFish();
-            Debug.Log($"[SmokeTest] Sold for: {sold} (expected 20 — placeholder flat 10/fish)");
-            Debug.Log($"[SmokeTest] Money after sell: {gm.SaveData.money} (expected 70)");
-            Debug.Log($"[SmokeTest] Unique fish count after sell: {gm.UniqueFishCount} (expected 1 — must NOT be cleared)");
-
+            if (gm == null) return;
+            Debug.Log($"[SmokeTest] Scene load complete. Current scene: {gm.SaveData.currentSceneName}");
+            Debug.Log($"[SmokeTest] Player position: {gm.SaveData.playerPosition}");
+            gm.OnSceneLoadComplete -= OnLoaded;
             enabled = false;
+        }
+
+        private void OnDestroy()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.OnSceneLoadComplete -= OnLoaded;
         }
     }
 }
