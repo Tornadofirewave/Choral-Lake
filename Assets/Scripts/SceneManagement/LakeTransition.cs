@@ -15,8 +15,12 @@ namespace ChoralLake.SceneManagement
         [SerializeField] private LakeSO lake;
 
         [Header("Blocked Behavior")]
-        [Tooltip("Shown in console when entry is blocked. Prompt 5 replaces this with dialogue.")]
+        [Tooltip("Fallback console message when no blocked dialogue is configured.")]
         [SerializeField] private string lockedMessage = "The path is blocked. You need more unique fish to proceed.";
+
+        [Header("Blocked Dialogue")]
+        [Tooltip("Conversation ID played when entry is blocked. Leave empty to fall back to a Debug.Log.")]
+        [SerializeField] private string blockedConversationId;
 
         private float _nextBlockedLogTime;
 
@@ -51,8 +55,8 @@ namespace ChoralLake.SceneManagement
             {
                 if (Time.time >= _nextBlockedLogTime)
                 {
-                    Debug.Log($"[LakeTransition] Blocked: {lockedMessage} ({gm.UniqueFishCount}/{lake.UniqueFishRequiredToUnlock} unique fish)");
                     _nextBlockedLogTime = Time.time + 1f;
+                    TryPlayBlockedDialogue();
                 }
                 return false;
             }
@@ -61,6 +65,20 @@ namespace ChoralLake.SceneManagement
                 gm.UnlockLake(lake.Id);
 
             return true;
+        }
+
+        private void TryPlayBlockedDialogue()
+        {
+            var dm = ChoralLake.Dialogue.DialogueManager.Instance;
+            if (dm != null && !string.IsNullOrEmpty(blockedConversationId)
+                && !dm.IsOpen
+                && GameManager.Instance?.DialogueDatabase != null
+                && GameManager.Instance.DialogueDatabase.Contains(blockedConversationId))
+            {
+                dm.StartConversation(blockedConversationId);
+                return;
+            }
+            Debug.Log($"[LakeTransition] Blocked: {lockedMessage} ({GameManager.Instance?.UniqueFishCount}/{lake.UniqueFishRequiredToUnlock} unique fish)");
         }
     }
 }
