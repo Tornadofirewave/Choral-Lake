@@ -5,11 +5,12 @@ public class FishingCircle : MonoBehaviour {
     [SerializeField] private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
-    private float perfectWindow = 0.25f;
+    [SerializeField] private float perfectWindow = 0.25f;
     [SerializeField] private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
     private Transform circleSprite;
+    private Collider2D circleCollider;
     private Vector3 ringStartScale;
     private Vector3 ringTargetScale;
     private bool hasLoggedGraceWindowStart;
@@ -18,18 +19,14 @@ public class FishingCircle : MonoBehaviour {
     {
         ringSprite = transform.GetChild(0);
         circleSprite = transform.GetChild(1);
+        circleCollider = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        timeDuration = Mathf.Max(0f, timeDuration);
-        perfectWindow = Mathf.Max(0f, perfectWindow);
-        elapsedTime = 0f;
-        timeRemaining = timeDuration;
         ringStartScale = ringSprite.localScale;
         ringTargetScale = circleSprite.localScale;
-        hasLoggedGraceWindowStart = false;
-
+        ResetState();
     }
 
     private void Update()
@@ -50,8 +47,7 @@ public class FishingCircle : MonoBehaviour {
 
         // Detect on-time Mouse Clicks
         var mouse = Mouse.current;
-        
-        if (Mouse.current != null && mouse.leftButton.wasPressedThisFrame) {
+        if (mouse != null && mouse.leftButton.wasPressedThisFrame && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
                 Debug.Log("Deleted!");
                 Destroy(gameObject);
@@ -72,6 +68,34 @@ public class FishingCircle : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
+    }
+
+    public void Initialize(float newTimeDuration, float newPerfectWindow, bool enableDebugLogs)
+    {
+        timeDuration = Mathf.Max(0f, newTimeDuration);
+        perfectWindow = Mathf.Max(0f, newPerfectWindow);
+        debugGraceWindowLogs = enableDebugLogs;
+        ResetState();
+    }
+
+    private void ResetState()
+    {
+        timeDuration = Mathf.Max(0f, timeDuration);
+        perfectWindow = Mathf.Max(0f, perfectWindow);
+        elapsedTime = 0f;
+        timeRemaining = timeDuration;
+        hasLoggedGraceWindowStart = false;
+    }
+
+    private bool IsMouseOverThisCircle(Mouse mouse)
+    {
+        if (circleCollider == null || Camera.main == null)
+        {
+            return false;
+        }
+
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
+        return circleCollider.OverlapPoint(mouseWorldPos);
     }
 
 }
