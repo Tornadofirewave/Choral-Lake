@@ -874,7 +874,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -888,7 +888,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -912,7 +912,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -937,13 +937,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Water 1 Horizontal Tiles_7
+      name: Water 1 Horizontal Tiles_6.5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 375
-        width: 16
-        height: 16
+        x: 148
+        y: 394
+        width: 4
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -7075,13 +7075,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water 1 Horizontal Tiles_280
+      name: Water 1 Horizontal Tiles_7
       rect:
         serializedVersion: 2
-        x: 23
-        y: 394
-        width: 2
-        height: 6
+        x: 16
+        y: 375
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -7090,8 +7090,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9301db470fbf23e40975986904106eb4
-      internalID: 1717107789
+      spriteID: f1da57cb4dcf1934c86efe5c4337f17f
+      internalID: -1448646241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water 1 Horizontal Tiles_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 394
+        width: 2
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2137bf8ddeee12845a7a5f79fdb03e9d
+      internalID: 1652648889
       vertices: []
       indices: 
       edges: []
@@ -7110,8 +7132,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Water 1 Horizontal Tiles_0: 1652648889
       Water 1 Horizontal Tiles_1: 8406893104050201684
       Water 1 Horizontal Tiles_10: 1533086174812743527
       Water 1 Horizontal Tiles_100: -6835687078612685354
@@ -7313,7 +7336,7 @@ TextureImporter:
       Water 1 Horizontal Tiles_278: 7828506300461951162
       Water 1 Horizontal Tiles_279: -3674041091328675764
       Water 1 Horizontal Tiles_28: 2272901581950902652
-      Water 1 Horizontal Tiles_280: 1717107789
+      Water 1 Horizontal Tiles_281: -529776153
       Water 1 Horizontal Tiles_29: -1174943330309858912
       Water 1 Horizontal Tiles_3: 5919042451850583475
       Water 1 Horizontal Tiles_30: 1143081489768340404
@@ -7349,6 +7372,7 @@ TextureImporter:
       Water 1 Horizontal Tiles_58: 2853393669393879866
       Water 1 Horizontal Tiles_59: -165531820818815741
       Water 1 Horizontal Tiles_6: -4198560211208471408
+      Water 1 Horizontal Tiles_6.5: 991195406093965845
       Water 1 Horizontal Tiles_60: 8208005069177278213
       Water 1 Horizontal Tiles_61: -3655177987827128393
       Water 1 Horizontal Tiles_62: -8920025160467487012
@@ -7359,7 +7383,7 @@ TextureImporter:
       Water 1 Horizontal Tiles_67: 8545878530114095335
       Water 1 Horizontal Tiles_68: 5159214518249198684
       Water 1 Horizontal Tiles_69: -3674550626926394057
-      Water 1 Horizontal Tiles_7: 991195406093965845
+      Water 1 Horizontal Tiles_7: -1448646241
       Water 1 Horizontal Tiles_70: -2524185772576658572
       Water 1 Horizontal Tiles_71: 3905652031003127761
       Water 1 Horizontal Tiles_72: 7806721169109247369

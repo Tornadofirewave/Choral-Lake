@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: AnimatedWater1
+  m_Name: Water1Animation
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
   m_AnimatedSprites:
-  - {fileID: 991195406093965845, guid: b552648ed8878464993e4469f6452656, type: 3}
+  - {fileID: -1448646241, guid: b552648ed8878464993e4469f6452656, type: 3}
   - {fileID: 2355309698405313392, guid: b552648ed8878464993e4469f6452656, type: 3}
   - {fileID: -4383683959634716901, guid: b552648ed8878464993e4469f6452656, type: 3}
   - {fileID: 1533086174812743527, guid: b552648ed8878464993e4469f6452656, type: 3}
@@ -21,8 +21,8 @@ MonoBehaviour:
   - {fileID: 6288269389060442152, guid: b552648ed8878464993e4469f6452656, type: 3}
   - {fileID: 1966457055119403188, guid: b552648ed8878464993e4469f6452656, type: 3}
   - {fileID: 583635977734392599, guid: b552648ed8878464993e4469f6452656, type: 3}
-  m_MinSpeed: 10
-  m_MaxSpeed: 10
+  m_MinSpeed: 8
+  m_MaxSpeed: 8
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
