@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6688846388665471203}
-  - component: {fileID: 6022690128302842918}
+  - component: {fileID: 5850315382288075692}
   m_Layer: 0
   m_Name: FishingCircle
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4832645709146523478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6022690128302842918
+--- !u!114 &5850315382288075692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingRing
   timeDuration: 3
-  perfectWindow: 0.5
   debugGraceWindowLogs: 1
 --- !u!1 &2861536457737060810
 GameObject:
