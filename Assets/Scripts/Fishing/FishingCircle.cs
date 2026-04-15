@@ -6,20 +6,25 @@ public class FishingCircle : MonoBehaviour {
     private float timeRemaining;
     private float elapsedTime;
     [SerializeField] private float perfectWindow = 0.25f;
+    [SerializeField] private float fadeDuration = 0.2f;
     [SerializeField] private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
     private Transform circleSprite;
     private Collider2D circleCollider;
+    private SpriteRenderer[] spriteRenderers;
     private Vector3 ringStartScale;
     private Vector3 ringTargetScale;
     private bool hasLoggedGraceWindowStart;
+    private bool isFadingOut;
+    private float fadeElapsedTime;
 
     private void Awake()
     {
         ringSprite = transform.GetChild(0);
         circleSprite = transform.GetChild(1);
         circleCollider = GetComponent<Collider2D>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     private void Start()
@@ -31,6 +36,12 @@ public class FishingCircle : MonoBehaviour {
 
     private void Update()
     {
+        if (isFadingOut)
+        {
+            UpdateFadeOut();
+            return;
+        }
+
         elapsedTime += Time.deltaTime;
 
         // Outer Ring Closes in
@@ -45,12 +56,13 @@ public class FishingCircle : MonoBehaviour {
             Debug.Log($"Fishing ring grace window started ({perfectWindow:F2}s)");
         }
 
-        // Detect on-time Mouse Clicks
+        // Detect on-time Key Presses
         var mouse = Mouse.current;
-        if (mouse != null && mouse.leftButton.wasPressedThisFrame && IsMouseOverThisCircle(mouse)) {
+        var keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.dKey.wasPressedThisFrame && mouse != null && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
                 Debug.Log("Deleted!");
-                Destroy(gameObject);
+                StartFadeOut();
             } else {
                 Debug.Log("Too early");
             }
@@ -65,7 +77,7 @@ public class FishingCircle : MonoBehaviour {
             }
 
             ringSprite.localScale = ringTargetScale;
-            Destroy(gameObject);
+            StartFadeOut();
             return;
         }
     }
@@ -82,9 +94,18 @@ public class FishingCircle : MonoBehaviour {
     {
         timeDuration = Mathf.Max(0f, timeDuration);
         perfectWindow = Mathf.Max(0f, perfectWindow);
+        fadeDuration = Mathf.Max(0f, fadeDuration);
         elapsedTime = 0f;
         timeRemaining = timeDuration;
         hasLoggedGraceWindowStart = false;
+        isFadingOut = false;
+        fadeElapsedTime = 0f;
+
+        RestoreSpriteAlpha();
+        if (circleCollider != null)
+        {
+            circleCollider.enabled = true;
+        }
     }
 
     private bool IsMouseOverThisCircle(Mouse mouse)
@@ -96,6 +117,73 @@ public class FishingCircle : MonoBehaviour {
 
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouse.position.ReadValue());
         return circleCollider.OverlapPoint(mouseWorldPos);
+    }
+
+    private void StartFadeOut()
+    {
+        if (isFadingOut)
+        {
+            return;
+        }
+
+        isFadingOut = true;
+        fadeElapsedTime = 0f;
+
+        if (circleCollider != null)
+        {
+            circleCollider.enabled = false;
+        }
+
+        if (fadeDuration <= 0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void UpdateFadeOut()
+    {
+        if (fadeDuration <= 0f)
+        {
+            return;
+        }
+
+        fadeElapsedTime += Time.deltaTime;
+        float t = Mathf.Clamp01(fadeElapsedTime / fadeDuration);
+        float alpha = 1f - t;
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            SpriteRenderer renderer = spriteRenderers[i];
+            if (renderer == null)
+            {
+                continue;
+            }
+
+            Color color = renderer.color;
+            color.a = alpha;
+            renderer.color = color;
+        }
+
+        if (t >= 1f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void RestoreSpriteAlpha()
+    {
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            SpriteRenderer renderer = spriteRenderers[i];
+            if (renderer == null)
+            {
+                continue;
+            }
+
+            Color color = renderer.color;
+            color.a = 1f;
+            renderer.color = color;
+        }
     }
 
 }
