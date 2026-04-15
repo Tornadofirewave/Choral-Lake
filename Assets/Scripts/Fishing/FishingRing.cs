@@ -5,7 +5,7 @@ public class FishingRing : MonoBehaviour {
     [SerializeField] private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
-    [SerializeField] private float perfectWindow = 0.5f;
+    [SerializeField] private float perfectWindow = 0.25f;
     [SerializeField] private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
@@ -54,7 +54,7 @@ public class FishingRing : MonoBehaviour {
         if (Mouse.current != null && mouse.leftButton.wasPressedThisFrame) {
             if (timeRemaining <= perfectWindow) {
                 Debug.Log("Deleted!");
-                // Destroy(gameObject);
+                Destroy(gameObject);
             } else {
                 Debug.Log("Too early");
             }
