@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FishingRing : MonoBehaviour {
+public class FishingCircle : MonoBehaviour {
     [SerializeField] private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
-    [SerializeField] private float perfectWindow = 0.25f;
+    private float perfectWindow = 0.25f;
     [SerializeField] private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
