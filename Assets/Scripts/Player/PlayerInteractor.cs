@@ -54,7 +54,7 @@ namespace ChoralLake.Player
         private IInteractable FindFocus()
         {
             if (movement == null) return null;
-            Vector2 origin = transform.position;
+            Vector2 origin = movement.transform.position;
             Vector2 dir = DirectionVectors[Mathf.Clamp(movement.FacingDirection, 0, 3)];
 
             var hits = Physics2D.RaycastAll(origin, dir, interactRange, interactableLayers);
@@ -83,7 +83,7 @@ namespace ChoralLake.Player
         private void OnDrawGizmosSelected()
         {
             if (movement == null) return;
-            Vector2 origin = transform.position;
+            Vector2 origin = movement.transform.position;
             Vector2 dir = DirectionVectors[Mathf.Clamp(movement.FacingDirection, 0, 3)];
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(origin, origin + dir * interactRange);

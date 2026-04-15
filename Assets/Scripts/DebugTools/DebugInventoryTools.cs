@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using ChoralLake.Core;
 
 namespace ChoralLake.DebugTools
@@ -11,10 +12,18 @@ namespace ChoralLake.DebugTools
     public class DebugInventoryTools : MonoBehaviour
     {
         [Header("Fish IDs to grant (comma-separated)")]
-        [SerializeField] private string fishIdsToGrant = "fish_lake1_minnow,fish_lake1_minnow,fish_lake1_trout,fish_lake1_bass";
+        [SerializeField] private string fishIdsToGrant = "pufferfish_1,salmon_1,starfish_1";
+
+
 
         [Header("Money")]
         [SerializeField] private int moneyAmount = 100;
+
+        private void Update()
+        {
+            if (Keyboard.current != null && Keyboard.current.f5Key.wasPressedThisFrame)
+                GrantFishFromField();
+        }
 
         [ContextMenu("Grant Fish From Field")]
         public void GrantFishFromField()

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 827d5ae2d3e746b4187d7775c15dda36
+guid: 52bd9d624232dd2488066b6338d3e04d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Determination
+  - Determination Mono Web
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

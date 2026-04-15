@@ -366,6 +366,17 @@ namespace ChoralLake.Core
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""00000000-0000-0000-0000-000000000015"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Advance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""2D Vector"",
                     ""id"": ""00000000-0000-0000-0000-000000000005"",
                     ""path"": ""2DVector"",
