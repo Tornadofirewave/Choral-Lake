@@ -3007,13 +3007,14 @@ MonoBehaviour:
     button: {fileID: 416881235}
     icon: {fileID: 1655868881}
     nameText: {fileID: 1876642742}
-    priceText: {fileID: 535344565}
+    priceText: {fileID: 673571439}
   - ticket: {fileID: 11400000, guid: b19dea681cc78c940aff6e4f807020e3, type: 2}
     button: {fileID: 1170729697}
     icon: {fileID: 1650321196}
     nameText: {fileID: 2094493138}
     priceText: {fileID: 1350020889}
   closeButton: {fileID: 1642064254}
+  clickAwayOverlay: {fileID: 0}
 --- !u!114 &1324112917
 MonoBehaviour:
   m_ObjectHideFlags: 0
