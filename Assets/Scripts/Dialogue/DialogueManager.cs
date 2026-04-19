@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using ChoralLake.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using ChoralLake.Core;
@@ -32,6 +34,9 @@ namespace ChoralLake.Dialogue
         [SerializeField, Min(1)] private int tickEveryNChars = 2;
 
         public bool IsOpen { get; private set; }
+
+        /// <summary>Fires when a conversation closes naturally. Passes the conversation id.</summary>
+        public event Action<string> OnConversationEnded;
 
         private DialogueConversation _activeConversation;
         private int _currentLineIndex;
@@ -93,6 +98,7 @@ namespace ChoralLake.Dialogue
             _activeConversation = convo;
             _currentLineIndex = 0;
             IsOpen = true;
+            ModalStack.Push();
 
             _controls.Player.Disable();
             _controls.UI.Enable();
@@ -133,7 +139,7 @@ namespace ChoralLake.Dialogue
 
                 if (!char.IsWhiteSpace(c) && typewriterAudio != null && charCount % tickEveryNChars == 0)
                 {
-                    typewriterAudio.pitch = Random.Range(pitchMin, pitchMax);
+                    typewriterAudio.pitch = UnityEngine.Random.Range(pitchMin, pitchMax);
                     typewriterAudio.PlayOneShot(typewriterAudio.clip);
                 }
                 charCount++;
@@ -171,14 +177,17 @@ namespace ChoralLake.Dialogue
 
         private void CloseDialogue()
         {
+            string endedId = _activeConversation?.Id;
             if (dialoguePanel != null) dialoguePanel.SetActive(false);
             IsOpen = false;
+            ModalStack.Pop();
             _activeConversation = null;
 
             _controls.UI.Disable();
             _controls.Player.Enable();
 
             PlayerRoot.Instance?.Movement?.UnlockMovement();
+            OnConversationEnded?.Invoke(endedId);
         }
     }
 }

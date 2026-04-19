@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e353468c9ea0437448ee160886e557a6, type: 3}
+  m_Name: rod_rare
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Data.FishingRodSO
+  id: rod_rare
+  displayName: Rare Rod
+  maxBaitRarity: 1
+  commonWeight: 40
+  rareWeight: 40
+  epicWeight: 20
+  legendaryWeight: 0
+  inventoryIcon: {fileID: 2267404652545599347, guid: 5149e78e64c97cd4a8000e19780d3cdc, type: 3}
+  heldSprite: {fileID: 0}

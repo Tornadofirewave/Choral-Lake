@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887936d80c095d44e8eef99a69062c86, type: 3}
+  m_Name: ticket_common
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Data.TicketSO
+  id: ticket_common
+  displayName: Common Ticket
+  rarity: 0
+  price: 500
+  icon: {fileID: 1378673856500498318, guid: f366f7cd52cf0714baac1737bf12868a, type: 3}
+  flavorText: A ticket for the layman.
+  lootTable: {fileID: 11400000, guid: 1252bb5337b370849b7f7bd74c11f124, type: 2}

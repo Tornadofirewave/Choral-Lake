@@ -16,4 +16,16 @@ MonoBehaviour:
   baitDatabase: {fileID: 11400000, guid: 2d39c74b85edcda4ea6ca13c369537d8, type: 2}
   rods:
   - {fileID: 11400000, guid: a9e783b52a8181f4e8844e0cb567a15e, type: 2}
-  lakes: []
+  - {fileID: 11400000, guid: db99c38fca8904d43894ab85ce3d4d2d, type: 2}
+  - {fileID: 11400000, guid: 2e2e232cbbc5ebc4697a5c2c4b77e5df, type: 2}
+  - {fileID: 11400000, guid: 3b604acaf89363f4fad9439d70b65f52, type: 2}
+  lakes:
+  - {fileID: 11400000, guid: cfe6f7d703f25824d9fa7282c4b2b414, type: 2}
+  - {fileID: 11400000, guid: 37fa0d5814a4b344ca6dc76d1e570d35, type: 2}
+  - {fileID: 11400000, guid: adfd814e442cd484f97843f07ef090c2, type: 2}
+  tickets:
+  - {fileID: 11400000, guid: 72b211d10bcac834cbc5238c8a3dcf51, type: 2}
+  - {fileID: 11400000, guid: 4eb2b54f2419be047bc8576c77859527, type: 2}
+  - {fileID: 11400000, guid: 9d3ff91345286cb45858e479b6ce5732, type: 2}
+  - {fileID: 11400000, guid: b19dea681cc78c940aff6e4f807020e3, type: 2}
+  attendants: []

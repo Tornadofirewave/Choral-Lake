@@ -15,25 +15,43 @@ namespace ChoralLake.Data
         [SerializeField] private List<FishingRodSO> rods = new();
         [SerializeField] private List<LakeSO> lakes = new();
 
+        [Header("Ticket System")]
+        [SerializeField] private List<TicketSO> tickets = new();
+        [SerializeField] private List<NpcAttendantSO> attendants = new();
+
         private Dictionary<string, FishingRodSO> _rodsById;
         private Dictionary<string, LakeSO> _lakesById;
+        private Dictionary<string, TicketSO> _ticketsById;
+        private Dictionary<string, NpcAttendantSO> _attendantsById;
 
         public FishDatabase FishDatabase => fishDatabase;
         public BaitDatabase BaitDatabase => baitDatabase;
         public IReadOnlyList<FishingRodSO> AllRods => rods;
         public IReadOnlyList<LakeSO> AllLakes => lakes;
+        public IReadOnlyList<TicketSO> AllTickets => tickets;
+        public IReadOnlyList<NpcAttendantSO> AllAttendants => attendants;
 
         public FishEntry GetFishById(string id) => fishDatabase != null ? fishDatabase.GetById(id) : null;
         public BaitEntry GetBaitById(string id) => baitDatabase != null ? baitDatabase.GetById(id) : null;
         public FishingRodSO GetRodById(string id) => Lookup(_rodsById, id, "rod");
         public LakeSO GetLakeById(string id) => Lookup(_lakesById, id, "lake");
+        public TicketSO GetTicketById(string id) => Lookup(_ticketsById, id, "ticket");
+        public NpcAttendantSO GetAttendantById(string id) => Lookup(_attendantsById, id, "attendant");
+
+        public NpcAttendantSO GetRandomAttendant()
+        {
+            if (attendants == null || attendants.Count == 0) return null;
+            return attendants[UnityEngine.Random.Range(0, attendants.Count)];
+        }
 
         private void OnEnable() => RebuildCaches();
 
         private void RebuildCaches()
         {
-            _rodsById  = BuildCache(rods,  "rod");
-            _lakesById = BuildCache(lakes, "lake");
+            _rodsById      = BuildCache(rods,      "rod");
+            _lakesById     = BuildCache(lakes,     "lake");
+            _ticketsById   = BuildCache(tickets,   "ticket");
+            _attendantsById = BuildCache(attendants, "attendant");
         }
 
         private Dictionary<string, T> BuildCache<T>(List<T> source, string category)

@@ -6,6 +6,7 @@ namespace ChoralLake.Core
 {
     public class GameManager : MonoBehaviour
     {
+        public const string LEGENDARY_ROD_ID = "rod_legendary";
         public static GameManager Instance { get; private set; }
 
         [SerializeField] private GameDatabase database;
@@ -181,6 +182,56 @@ namespace ChoralLake.Core
         }
 
         public bool IsLakeUnlocked(string lakeId) => SaveData.unlockedLakeIds.Contains(lakeId);
+
+        // --- Ticket System ---
+        public event Action OnPendingTicketChanged;
+
+        public bool HasPendingTicket => !string.IsNullOrEmpty(SaveData.pendingTicketId);
+
+        public bool TryPurchaseTicket(TicketSO ticket)
+        {
+            if (ticket == null) return false;
+            if (HasPendingTicket)
+            {
+                Debug.LogWarning("[GameManager] TryPurchaseTicket called while a ticket is already pending.");
+                return false;
+            }
+            if (!TrySpendMoney(ticket.Price)) return false;
+
+            var attendant = database?.GetRandomAttendant();
+            SaveData.pendingTicketId = ticket.Id;
+            SaveData.pendingAttendantId = attendant != null ? attendant.Id : string.Empty;
+            SaveData.pendingShipPhase = TicketShipPhase.Approaching;
+            OnPendingTicketChanged?.Invoke();
+            return true;
+        }
+
+        public void ClearPendingTicket()
+        {
+            SaveData.pendingTicketId = string.Empty;
+            SaveData.pendingAttendantId = string.Empty;
+            SaveData.pendingShipPhase = TicketShipPhase.None;
+            OnPendingTicketChanged?.Invoke();
+        }
+
+        public LootResult RollPendingTicketReward()
+        {
+            var ticket = database?.GetTicketById(SaveData.pendingTicketId);
+            if (ticket == null || ticket.LootTable == null)
+            {
+                Debug.LogError("[GameManager] RollPendingTicketReward: ticket or loot table not found.");
+                return default;
+            }
+
+            var result = ticket.LootTable.Roll(OwnsRod(LEGENDARY_ROD_ID));
+
+            if (result.Kind == LootKind.Rod)
+                GrantRod(result.Id);
+            else
+                GrantBait(result.Id, 1);
+
+            return result;
+        }
 
         // --- Scene load hook ---
         /// <summary>

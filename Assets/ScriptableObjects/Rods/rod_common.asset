@@ -19,5 +19,5 @@ MonoBehaviour:
   rareWeight: 20
   epicWeight: 10
   legendaryWeight: 0
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: -2825911378681066337, guid: 5149e78e64c97cd4a8000e19780d3cdc, type: 3}
   heldSprite: {fileID: 0}

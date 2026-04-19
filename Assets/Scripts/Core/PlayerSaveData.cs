@@ -24,6 +24,11 @@ namespace ChoralLake.Core
         public List<string> unsoldFishIds;
         public List<string> unlockedLakeIds;
 
+        // Ticket ship persistence — money is spent at purchase, so pending state survives quit.
+        public string pendingTicketId;
+        public string pendingAttendantId;
+        public TicketShipPhase pendingShipPhase;
+
         public PlayerSaveData()
         {
             money = 0;
@@ -36,6 +41,9 @@ namespace ChoralLake.Core
             uniqueFishCaughtIds = new List<string>();
             unsoldFishIds = new List<string>();
             unlockedLakeIds = new List<string>();
+            pendingTicketId = string.Empty;
+            pendingAttendantId = string.Empty;
+            pendingShipPhase = TicketShipPhase.None;
         }
 
         public static PlayerSaveData NewGame()

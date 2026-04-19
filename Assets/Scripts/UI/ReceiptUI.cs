@@ -78,6 +78,7 @@ namespace ChoralLake.UI
             }
 
             IsOpen = true;
+            ModalStack.Push();
             _controls.Player.Disable();
             _controls.UI.Enable();
             if (PlayerRoot.Instance != null && PlayerRoot.Instance.Movement != null)
@@ -155,6 +156,7 @@ namespace ChoralLake.UI
             if (panelRoot != null) panelRoot.SetActive(false);
             ClearEntries();
             IsOpen = false;
+            ModalStack.Pop();
 
             _controls.UI.Disable();
             _controls.Player.Enable();

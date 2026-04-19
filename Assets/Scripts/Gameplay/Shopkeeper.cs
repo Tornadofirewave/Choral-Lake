@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using ChoralLake.Core;
 using ChoralLake.UI;
 
 namespace ChoralLake.Gameplay
 {
-    /// <summary>
-    /// Interactable shopkeeper. On Interact, sells all unsold fish and opens the receipt UI
-    /// with a snapshot of what was sold. The receipt is a summary of a completed transaction.
-    /// </summary>
-    public class Shopkeeper : MonoBehaviour, IInteractable
+    public class Shopkeeper : MonoBehaviour, IInteractable, IPointerClickHandler
     {
         [SerializeField] private string promptText = "Sell fish";
 
         public string InteractPrompt => promptText;
-        public bool CanInteract => ReceiptUI.Instance == null || !ReceiptUI.Instance.IsOpen;
+        public bool CanInteract => !ModalStack.AnyOpen;
         public Transform Transform => transform;
 
         public void Interact()
@@ -43,6 +40,12 @@ namespace ChoralLake.Gameplay
             int earned = gm.SellAllFish();
             var fishDb = gm.Database != null ? gm.Database.FishDatabase : null;
             ReceiptUI.Instance.ShowReceipt(snapshot, earned, fishDb);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (ModalStack.AnyOpen || ModalStack.JustClosed) return;
+            Interact();
         }
     }
 }
