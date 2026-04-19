@@ -8,6 +8,7 @@ namespace ChoralLake.Audio
 
         [SerializeField] private SfxLibrarySO sfxLibrary;
         [SerializeField] private AudioSource sfxSource;
+        private AudioSource _pitchedSource;
 
         private void Awake()
         {
@@ -17,6 +18,9 @@ namespace ChoralLake.Audio
 
             if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
+
+            _pitchedSource = gameObject.AddComponent<AudioSource>();
+            _pitchedSource.playOnAwake = false;
         }
 
         public void PlaySfx(string id)
@@ -29,6 +33,19 @@ namespace ChoralLake.Audio
             }
             if (entry.Clip == null) return;
             sfxSource.PlayOneShot(entry.Clip, entry.Volume);
+        }
+
+        public void PlaySfxPitched(string id, float pitch)
+        {
+            if (sfxLibrary == null || _pitchedSource == null) return;
+            if (!sfxLibrary.TryGet(id, out var entry))
+            {
+                Debug.LogWarning($"[AudioManager] SFX id '{id}' not found in library.");
+                return;
+            }
+            if (entry.Clip == null) return;
+            _pitchedSource.pitch = pitch;
+            _pitchedSource.PlayOneShot(entry.Clip, entry.Volume);
         }
     }
 }

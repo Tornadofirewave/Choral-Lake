@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac33897f9b66394e93a5a003bdeb756, type: 3}
   m_Name: SFXLibrary
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Audio.SfxLibrarySO
-  entries: []
+  entries:
+  - id: sfx_footstep
+    clip: {fileID: 8300000, guid: e46a800e7be4747458700a6c52a05fde, type: 3}
+    volume: 0.5

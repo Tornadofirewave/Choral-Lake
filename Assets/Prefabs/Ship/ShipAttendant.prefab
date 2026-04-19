@@ -91,6 +91,8 @@ GameObject:
   - component: {fileID: 125894961907715638}
   - component: {fileID: 698953046767817740}
   - component: {fileID: 4046336402654917705}
+  - component: {fileID: -3912270166911529922}
+  - component: {fileID: 7051887401487803771}
   m_Layer: 0
   m_Name: ShipAttendant
   m_TagString: Untagged
@@ -253,3 +255,29 @@ MonoBehaviour:
   rb: {fileID: 7754129892463319018}
   spriteRenderer: {fileID: 125894961907715638}
   animator: {fileID: 0}
+--- !u!210 &-3912270166911529922
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559921302461930504}
+  m_Enabled: 1
+  m_SortingLayerID: 409434755
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
+--- !u!114 &7051887401487803771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559921302461930504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f311dcf874f0308409d2e3e74f0efca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Rendering.YSort
+  precision: 100

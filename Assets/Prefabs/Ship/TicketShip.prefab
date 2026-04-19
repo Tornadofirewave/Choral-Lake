@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2525073202595738317}
   - component: {fileID: 1841596973495049205}
   - component: {fileID: 5008537224792322486}
+  - component: {fileID: -2898248678995134353}
+  - component: {fileID: -7005776301880951279}
   m_Layer: 0
   m_Name: TicketShip
   m_TagString: Untagged
@@ -138,6 +140,32 @@ MonoBehaviour:
   deckPoint: {fileID: 2086221137594196411}
   attendantPrefab: {fileID: 6559921302461930504, guid: f94d1e5b87cb9054baf9733e44bfbcad, type: 3}
   rb: {fileID: 2525073202595738317}
+--- !u!210 &-2898248678995134353
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647497244551213143}
+  m_Enabled: 1
+  m_SortingLayerID: 409434755
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
+--- !u!114 &-7005776301880951279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647497244551213143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f311dcf874f0308409d2e3e74f0efca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Rendering.YSort
+  precision: 100
 --- !u!1 &4334391583937424044
 GameObject:
   m_ObjectHideFlags: 0
