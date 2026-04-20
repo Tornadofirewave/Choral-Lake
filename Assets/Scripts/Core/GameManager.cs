@@ -33,8 +33,7 @@ namespace ChoralLake.Core
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            SaveData = PlayerSaveData.NewGame();
-            // TODO: Save/Load — replace with disk load or new game based on title-screen choice.
+            SaveData = SaveSystem.Load() ?? PlayerSaveData.NewGame();
             DialogueDatabase = new ChoralLake.Dialogue.DialogueDatabase();
             DialogueDatabase.LoadFromResources("dialogue");
         }
@@ -233,6 +232,11 @@ namespace ChoralLake.Core
             return result;
         }
 
+        // --- Persistence ---
+        public void SaveGame() => SaveSystem.Save(SaveData);
+
+        private void OnApplicationQuit() => SaveSystem.Save(SaveData);
+
         // --- Scene load hook ---
         /// <summary>
         /// Fired by SceneLoader once the player is positioned in the new scene.
@@ -242,6 +246,7 @@ namespace ChoralLake.Core
 
         public void NotifySceneLoadComplete()
         {
+            SaveSystem.Save(SaveData);
             OnSceneLoadComplete?.Invoke();
         }
     }
