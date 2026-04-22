@@ -1,5 +1,6 @@
 using UnityEngine;
 using ChoralLake.Data;
+using UnityEngine.SceneManagement;
 
 namespace ChoralLake.SceneManagement
 {
@@ -9,9 +10,17 @@ namespace ChoralLake.SceneManagement
     /// </summary>
     public class SceneFishing : SceneTransition
     {
+        public static LakeSO ActiveLake { get; private set; }
+        public static string ReturnSceneName { get; private set; }
+        public static string ReturnSpawnId { get; private set; } = "default";
+
         [Header("Lake Context")]
         [Tooltip("Lake this dock belongs to. Used for validation and editor convenience.")]
         [SerializeField] private LakeSO sourceLake;
+
+        [Header("Return Target")]
+        [Tooltip("Spawn ID in the lake scene to use when leaving the fishing minigame.")]
+        [SerializeField] private string returnSpawnId = "default";
 
         [Header("Fishing Target")]
         [Tooltip("Fishing minigame scene name.")]
@@ -46,6 +55,10 @@ namespace ChoralLake.SceneManagement
             {
                 Debug.LogWarning($"[SceneFishing] '{name}' has no sourceLake assigned.", this);
             }
+
+            ActiveLake = sourceLake;
+            ReturnSceneName = SceneManager.GetActiveScene().name;
+            ReturnSpawnId = string.IsNullOrEmpty(returnSpawnId) ? "default" : returnSpawnId;
 
             return true;
         }

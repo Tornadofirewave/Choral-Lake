@@ -1,6 +1,9 @@
 using ChoralLake.Core;
 using ChoralLake.Data;
+using ChoralLake.SceneManagement;
+using ChoralLake.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Main fishing game controller. Spawns circles, tracks player success,
@@ -16,15 +19,34 @@ public class FishingGame : MonoBehaviour {
 	private int spawnedCount;
 	private int circlesCompleted; // Total circles deleted (success or miss)
 	private int successfulClicks; // Circles clicked successfully in grace window
+	private bool fishAwarded;
+	private bool playerWasHidden;
 
 
 	private void Start()
 	{
-		spawnParent = spawnParent == null ? transform : spawnParent;
+		spawnParent = spawnParent != null ? spawnParent : transform;
+		if (currentLake == null)
+		{
+			currentLake = SceneFishing.ActiveLake;
+		}
+
+		HidePlayerForMinigame();
+	}
+
+	private void OnDestroy()
+	{
+		RestorePlayerVisibility();
 	}
 
 	private void Update()
 	{
+		if (fishAwarded && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+		{
+			ReturnToLake();
+			return;
+		}
+
 		// If all circles have been handled, check if session is complete
 		if (circlesCompleted >= settings.CirclesToSpawn)
 		{
@@ -124,7 +146,9 @@ public class FishingGame : MonoBehaviour {
 		if (fish != null)
 		{
 			gm.AddFishToInventory(fish.Id);
+			fishAwarded = true;
 			Debug.Log($"[FishingGame] Granted fish: {fish.DisplayName} ({fish.Rarity})");
+			Debug.Log("[FishingGame] Press Escape to return to the lake.");
 		}
 		else
 		{
@@ -187,5 +211,38 @@ public class FishingGame : MonoBehaviour {
 		if (legendaryFish.Count > 0) return legendaryFish[Random.Range(0, legendaryFish.Count)];
 
 		return null;
+	}
+
+	private void HidePlayerForMinigame()
+	{
+		var player = PlayerRoot.Instance;
+		if (player == null || !player.gameObject.activeSelf) return;
+
+		playerWasHidden = true;
+		player.gameObject.SetActive(false);
+	}
+
+	private void RestorePlayerVisibility()
+	{
+		if (!playerWasHidden) return;
+
+		var player = PlayerRoot.Instance;
+		if (player != null)
+		{
+			player.gameObject.SetActive(true);
+		}
+		playerWasHidden = false;
+	}
+
+	private void ReturnToLake()
+	{
+		if (string.IsNullOrEmpty(SceneFishing.ReturnSceneName))
+		{
+			Debug.LogWarning("[FishingGame] Return scene is unknown. Staying in fishing scene.");
+			return;
+		}
+
+		RestorePlayerVisibility();
+		SceneLoader.LoadScene(SceneFishing.ReturnSceneName, SceneFishing.ReturnSpawnId);
 	}
 }

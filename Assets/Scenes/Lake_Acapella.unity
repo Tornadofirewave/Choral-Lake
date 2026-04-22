@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.SceneTransition
   targetSceneName: Fishing
-  targetSpawnId: fishing
+  targetSpawnId: lake_acapella
 --- !u!1 &1817459143
 GameObject:
   m_ObjectHideFlags: 0
