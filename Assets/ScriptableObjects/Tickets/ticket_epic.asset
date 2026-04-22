@@ -15,7 +15,7 @@ MonoBehaviour:
   id: ticket_epic
   displayName: Epic Ticket
   rarity: 2
-  price: 3500
+  price: 200
   icon: {fileID: 1223660900, guid: f366f7cd52cf0714baac1737bf12868a, type: 3}
   flavorText: A ticket for the posh.
   lootTable: {fileID: 11400000, guid: 29c61e620fd57c6428ad8d183d62c2df, type: 2}

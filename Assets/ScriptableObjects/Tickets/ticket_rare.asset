@@ -15,7 +15,7 @@ MonoBehaviour:
   id: ticket_rare
   displayName: Rare Ticket
   rarity: 1
-  price: 1500
+  price: 100
   icon: {fileID: -1238025032, guid: f366f7cd52cf0714baac1737bf12868a, type: 3}
   flavorText: A tourist ticket.
   lootTable: {fileID: 11400000, guid: fe192d6f15de7f64cabba4647c3a26b0, type: 2}

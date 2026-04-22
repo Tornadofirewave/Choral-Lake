@@ -15,7 +15,7 @@ MonoBehaviour:
   id: ticket_legendary
   displayName: Legendary Ticket
   rarity: 3
-  price: 10000
+  price: 500
   icon: {fileID: -421298001, guid: f366f7cd52cf0714baac1737bf12868a, type: 3}
   flavorText: A ticket inviting legends.
   lootTable: {fileID: 11400000, guid: 3e4c94ac0cbeb8c4aa4fc4ba59c87866, type: 2}

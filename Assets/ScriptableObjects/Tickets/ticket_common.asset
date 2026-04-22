@@ -15,7 +15,7 @@ MonoBehaviour:
   id: ticket_common
   displayName: Common Ticket
   rarity: 0
-  price: 500
+  price: 30
   icon: {fileID: 1378673856500498318, guid: f366f7cd52cf0714baac1737bf12868a, type: 3}
   flavorText: A ticket for the layman.
   lootTable: {fileID: 11400000, guid: 1252bb5337b370849b7f7bd74c11f124, type: 2}
