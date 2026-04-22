@@ -248,6 +248,26 @@ namespace ChoralLake.Core
         // --- Persistence ---
         public void SaveGame() => SaveSystem.Save(SaveData);
 
+        public void ResetSaveData(bool saveImmediately = true)
+        {
+            SaveSystem.Delete();
+            SaveData = PlayerSaveData.NewGame();
+            ValidatePendingTicket();
+
+            OnMoneyChanged?.Invoke();
+            OnInventoryChanged?.Invoke();
+            OnUniqueFishCountChanged?.Invoke();
+            OnEquippedRodChanged?.Invoke();
+            OnEquippedBaitChanged?.Invoke();
+            OnLakeUnlocked?.Invoke();
+            OnPendingTicketChanged?.Invoke();
+
+            if (saveImmediately)
+            {
+                SaveSystem.Save(SaveData);
+            }
+        }
+
         private void OnApplicationQuit() => SaveSystem.Save(SaveData);
 
         // --- Scene load hook ---

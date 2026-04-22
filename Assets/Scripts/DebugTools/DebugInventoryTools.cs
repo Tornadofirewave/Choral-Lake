@@ -28,6 +28,9 @@ namespace ChoralLake.DebugTools
 
             if (Keyboard.current != null && Keyboard.current.f6Key.wasPressedThisFrame)
                 GrantCommonRod();
+
+            if (Keyboard.current != null && Keyboard.current.f7Key.wasPressedThisFrame)
+                ResetSaveData();
         }
 
         [ContextMenu("Grant Fish From Field")]
@@ -94,6 +97,19 @@ namespace ChoralLake.DebugTools
             Debug.Log($"[DebugInventoryTools] Money: {gm.SaveData.money}");
             Debug.Log($"[DebugInventoryTools] Unsold fish ({gm.SaveData.unsoldFishIds.Count}): {string.Join(", ", gm.SaveData.unsoldFishIds)}");
             Debug.Log($"[DebugInventoryTools] Unique fish caught: {gm.UniqueFishCount}");
+        }
+
+        [ContextMenu("Reset Save Data")]
+        public void ResetSaveData()
+        {
+            if (GameManager.Instance == null)
+            {
+                Debug.LogError("[DebugInventoryTools] GameManager.Instance is null.");
+                return;
+            }
+
+            GameManager.Instance.ResetSaveData(saveImmediately: true);
+            Debug.Log("[DebugInventoryTools] Save data reset to New Game state.");
         }
     }
 }
