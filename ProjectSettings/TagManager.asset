@@ -14,8 +14,8 @@ TagManager:
   - Background
   - Characters
   - Foreground
-  - 
-  - 
+  - ShipNPC
+  - Walls
   - 
   - 
   - 
@@ -41,8 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Ground
     uniqueID: 1069237465
+    locked: 0
+  - name: Walls
+    uniqueID: 1041582905
     locked: 0
   - name: Characters
     uniqueID: 409434755

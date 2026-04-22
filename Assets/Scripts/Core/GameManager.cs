@@ -34,6 +34,7 @@ namespace ChoralLake.Core
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SaveData = SaveSystem.Load() ?? PlayerSaveData.NewGame();
+            ValidatePendingTicket();
             DialogueDatabase = new ChoralLake.Dialogue.DialogueDatabase();
             DialogueDatabase.LoadFromResources("dialogue");
         }
@@ -203,6 +204,18 @@ namespace ChoralLake.Core
             SaveData.pendingShipPhase = TicketShipPhase.Approaching;
             OnPendingTicketChanged?.Invoke();
             return true;
+        }
+
+        private void ValidatePendingTicket()
+        {
+            if (!HasPendingTicket) return;
+            if (database == null || database.GetTicketById(SaveData.pendingTicketId) == null)
+            {
+                Debug.LogWarning($"[GameManager] Clearing stale pendingTicketId '{SaveData.pendingTicketId}' — not found in database.");
+                SaveData.pendingTicketId = string.Empty;
+                SaveData.pendingAttendantId = string.Empty;
+                SaveData.pendingShipPhase = TicketShipPhase.None;
+            }
         }
 
         public void ClearPendingTicket()

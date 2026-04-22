@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8019175059511032998}
   - component: {fileID: 7326657785414322189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: InteractTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4046336402654917705}
   - component: {fileID: -3912270166911529922}
   - component: {fileID: 7051887401487803771}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShipAttendant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ SortingGroup:
   m_GameObject: {fileID: 6559921302461930504}
   m_Enabled: 1
   m_SortingLayerID: 409434755
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
