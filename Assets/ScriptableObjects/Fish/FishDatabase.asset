@@ -31,3 +31,63 @@ MonoBehaviour:
     sellCost: 250
     icon: {fileID: 4694313144681828600, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
     flavorText: 
+  - id: butterfly_fish
+    displayName: 'Butterfly Fish '
+    rarity: 0
+    sellCost: 10
+    icon: {fileID: 4177943815818732514, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: bass
+    displayName: 'Smallmouth Bass '
+    rarity: 0
+    sellCost: 3
+    icon: {fileID: 636170262714865824, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: goldfish
+    displayName: Goldfish
+    rarity: 0
+    sellCost: 3
+    icon: {fileID: -6466221823273959262, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: rainbow_trout
+    displayName: 'Rainbow Trout '
+    rarity: 1
+    sellCost: 15
+    icon: {fileID: 8562202301317368195, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: 'blue_discus '
+    displayName: 'Blue Discus '
+    rarity: 1
+    sellCost: 25
+    icon: {fileID: -4440527869562961428, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: clownfish
+    displayName: Clownfish
+    rarity: 1
+    sellCost: 18
+    icon: {fileID: -7784685719765339314, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: crab
+    displayName: crab
+    rarity: 2
+    sellCost: 30
+    icon: {fileID: 3888636848816401433, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: anchovy
+    displayName: Anchovy
+    rarity: 0
+    sellCost: 5
+    icon: {fileID: -2146682926, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: pufferfish
+    displayName: Pufferfish
+    rarity: 2
+    sellCost: 35
+    icon: {fileID: -6259949449885876755, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: 
+  - id: L_rainbow_trout
+    displayName: Legendary Rainbow Trout
+    rarity: 3
+    sellCost: 100
+    icon: {fileID: -2860549909802170002, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
+    flavorText: 
