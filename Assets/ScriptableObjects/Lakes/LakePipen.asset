@@ -15,5 +15,5 @@ MonoBehaviour:
   id: lake_pipen
   displayName: Lake Pipen
   sceneName: Lake_Pipen
-  uniqueFishRequiredToUnlock: 20
+  uniqueFishRequiredToUnlock: 10
   fishIdPool: []

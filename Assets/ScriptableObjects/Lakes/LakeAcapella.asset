@@ -16,4 +16,14 @@ MonoBehaviour:
   displayName: Lake Acapella
   sceneName: Lake_Acapella
   uniqueFishRequiredToUnlock: 0
-  fishIdPool: []
+  fishIdPool:
+  - anchovy
+  - bass
+  - goldfish
+  - rainbow_trout
+  - clownfish
+  - blue_discus
+  - butterfly_fish
+  - crab
+  - pufferfish
+  - L_rainbow_trout
