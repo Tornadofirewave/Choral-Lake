@@ -19,4 +19,5 @@ MonoBehaviour:
   spawnMax: {x: 6, y: 3}
   timeDuration: 3
   perfectWindow: 0.25
+  completionThreshold: 0.8
   debugGraceWindowLogs: 1

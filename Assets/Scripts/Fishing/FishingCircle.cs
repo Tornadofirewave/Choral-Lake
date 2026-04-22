@@ -1,7 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class FishingCircle : MonoBehaviour {
+    /// <summary>
+    /// Called when the circle is deleted (success, timeout, or fade-out complete).
+    /// wasSuccessful = true if player clicked in grace window, false if expired/missed.
+    /// </summary>
+    public Action<bool> OnCircleCompleted;
     [SerializeField] private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
@@ -62,6 +68,7 @@ public class FishingCircle : MonoBehaviour {
         if (keyboard != null && keyboard.dKey.wasPressedThisFrame && mouse != null && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
                 Debug.Log("Deleted!");
+                OnCircleCompleted?.Invoke(true); // success
                 StartFadeOut();
             } else {
                 Debug.Log("Too early");
@@ -77,6 +84,7 @@ public class FishingCircle : MonoBehaviour {
             }
 
             ringSprite.localScale = ringTargetScale;
+            OnCircleCompleted?.Invoke(false); // missed/expired
             StartFadeOut();
             return;
         }

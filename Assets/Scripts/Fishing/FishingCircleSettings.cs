@@ -5,14 +5,15 @@ public class FishingCircleSettings : ScriptableObject
 {
     [Header("Spawn")]
     [SerializeField] private FishingCircle circlePrefab;
-    [SerializeField] private float spawnInterval = 0.5f;
-    [SerializeField] private int circlesToSpawn = 10;
+    [SerializeField] private float spawnInterval;
+    [SerializeField] private int circlesToSpawn;
     [SerializeField] private Vector2 spawnMin = new Vector2(-4f, -2f);
     [SerializeField] private Vector2 spawnMax = new Vector2(4f, 2f);
 
     [Header("Circle Timing")]
-    [SerializeField] private float timeDuration = 3f;
-    [SerializeField] private float perfectWindow = 0.25f;
+    [SerializeField] private float timeDuration;
+    [SerializeField] private float perfectWindow;
+    [SerializeField] private float completionThreshold;
     [SerializeField] private bool debugGraceWindowLogs;
 
     public FishingCircle CirclePrefab => circlePrefab;
@@ -22,5 +23,6 @@ public class FishingCircleSettings : ScriptableObject
     public Vector2 SpawnMax => spawnMax;
     public float TimeDuration => Mathf.Max(0f, timeDuration);
     public float PerfectWindow => Mathf.Max(0f, perfectWindow);
+    public float CompletionThreshold => Mathf.Clamp01(completionThreshold);
     public bool DebugGraceWindowLogs => debugGraceWindowLogs;
 }

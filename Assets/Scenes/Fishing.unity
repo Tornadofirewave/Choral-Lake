@@ -5049,7 +5049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5029637934714241855, guid: 7513716bdb08e854ea64f9558d7d4885, type: 3}
       propertyPath: m_Name
-      value: CircleGeneration
+      value: FishingGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
