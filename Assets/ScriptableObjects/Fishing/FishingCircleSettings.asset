@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishingCircleSettings
   circlePrefab: {fileID: 5850315382288075692, guid: aa2fc9e39a5b8a348a3289240dc901b8, type: 3}
   spawnInterval: 1
-  circlesToSpawn: 45
+  circlesToSpawn: 20
   spawnMin: {x: -6, y: -3}
   spawnMax: {x: 6, y: 3}
   timeDuration: 3
