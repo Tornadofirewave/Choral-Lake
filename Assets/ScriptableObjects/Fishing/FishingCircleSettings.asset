@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: FishingCircleSettings
   m_EditorClassIdentifier: Assembly-CSharp::FishingCircleSettings
   circlePrefab: {fileID: 5850315382288075692, guid: aa2fc9e39a5b8a348a3289240dc901b8, type: 3}
-  spawnInterval: 0.5
-  circlesToSpawn: 10
-  spawnMin: {x: -4, y: -2}
-  spawnMax: {x: 4, y: 2}
+  spawnInterval: 1
+  circlesToSpawn: 45
+  spawnMin: {x: -6, y: -3}
+  spawnMax: {x: 6, y: 3}
   timeDuration: 3
   perfectWindow: 0.25
   debugGraceWindowLogs: 1
