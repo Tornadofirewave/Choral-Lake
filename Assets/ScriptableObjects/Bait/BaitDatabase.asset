@@ -16,16 +16,16 @@ MonoBehaviour:
   - id: bait_common
     displayName: Common Bait
     guaranteedRarity: 0
-    icon: {fileID: 1083210429, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    icon: {fileID: 2865906195106238846, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
   - id: bait_rare
     displayName: Rare Bait
     guaranteedRarity: 1
-    icon: {fileID: 0}
+    icon: {fileID: -9177039919303097523, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
   - id: bait_epic
     displayName: Epic Bait
     guaranteedRarity: 2
-    icon: {fileID: 0}
+    icon: {fileID: 7142516469680083159, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
   - id: bait_legendary
     displayName: Legendary Bait
     guaranteedRarity: 3
-    icon: {fileID: 0}
+    icon: {fileID: -6131971823601528324, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
