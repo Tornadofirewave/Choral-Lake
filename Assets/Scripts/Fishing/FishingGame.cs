@@ -20,6 +20,7 @@ public class FishingGame : MonoBehaviour {
 	private int circlesCompleted; // Total circles deleted (success or miss)
 	private int successfulClicks; // Circles clicked successfully in grace window
 	private bool fishAwarded;
+	private bool sessionCompleted;
 	private bool playerWasHidden;
 
 
@@ -48,7 +49,7 @@ public class FishingGame : MonoBehaviour {
 		}
 
 		// If all circles have been handled, check if session is complete
-		if (circlesCompleted >= settings.CirclesToSpawn)
+		if (!sessionCompleted && circlesCompleted >= settings.CirclesToSpawn)
 		{
 			OnFishingSessionComplete();
 			return;
@@ -109,6 +110,8 @@ public class FishingGame : MonoBehaviour {
 
 	private void OnFishingSessionComplete()
 	{
+		sessionCompleted = true;
+
 		float successRate = (float)successfulClicks / settings.CirclesToSpawn;
 		bool metThreshold = successRate >= settings.CompletionThreshold;
 
@@ -120,8 +123,10 @@ public class FishingGame : MonoBehaviour {
 			RollAndGrantFishReward();
 		}
 
-		// TODO: End scene, show results, return to town, etc.
-		enabled = false;
+		if (!metThreshold)
+		{
+			Debug.Log("[FishingGame] Threshold not met. No fish awarded.");
+		}
 	}
 
 	private void RollAndGrantFishReward()
@@ -242,7 +247,15 @@ public class FishingGame : MonoBehaviour {
 			return;
 		}
 
-		RestorePlayerVisibility();
-		SceneLoader.LoadScene(SceneFishing.ReturnSceneName, SceneFishing.ReturnSpawnId);
+		bool transitionStarted = SceneLoader.LoadScene(
+			SceneFishing.ReturnSceneName,
+			SceneFishing.ReturnSpawnId,
+			forceIfBusy: true,
+			skipPlayerPlacement: true);
+
+		if (transitionStarted)
+		{
+			RestorePlayerVisibility();
+		}
 	}
 }

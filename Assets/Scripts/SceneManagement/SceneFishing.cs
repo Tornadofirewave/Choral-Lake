@@ -1,6 +1,8 @@
 using UnityEngine;
 using ChoralLake.Data;
+using ChoralLake.Core;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 namespace ChoralLake.SceneManagement
 {
@@ -13,6 +15,9 @@ namespace ChoralLake.SceneManagement
         public static LakeSO ActiveLake { get; private set; }
         public static string ReturnSceneName { get; private set; }
         public static string ReturnSpawnId { get; private set; } = "default";
+
+        private bool _playerInRange;
+        private Collider2D _playerCollider;
 
         [Header("Lake Context")]
         [Tooltip("Lake this dock belongs to. Used for validation and editor convenience.")]
@@ -49,8 +54,60 @@ namespace ChoralLake.SceneManagement
         }
 #endif
 
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player")) return;
+            _playerInRange = true;
+            _playerCollider = other;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (_playerCollider != other) return;
+            _playerInRange = false;
+            _playerCollider = null;
+        }
+
+        private void Update()
+        {
+            if (!_playerInRange || _playerCollider == null) return;
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null || !keyboard.eKey.wasPressedThisFrame) return;
+
+            if (!CanTransition(_playerCollider)) return;
+
+            bool started = SceneLoader.LoadScene(
+                fishingSceneName,
+                fishingSpawnId,
+                forceIfBusy: false,
+                skipPlayerPlacement: true);
+
+            if (started)
+            {
+                _playerInRange = false;
+                _playerCollider = null;
+            }
+        }
+
         protected override bool CanTransition(Collider2D player)
         {
+            var gm = GameManager.Instance;
+            if (gm == null)
+            {
+                Debug.LogWarning("[SceneFishing] GameManager.Instance is null. Blocking fishing entry.");
+                return false;
+            }
+
+            string equippedRodId = gm.SaveData.equippedRodId;
+            if (string.IsNullOrEmpty(equippedRodId) || !gm.OwnsRod(equippedRodId))
+            {
+                Debug.Log("[SceneFishing] You need to equip a rod before fishing.");
+                return false;
+            } else {
+                Debug.Log($"[SceneFishing] '{gm.SaveData.equippedRodId}'");
+            }
+
             if (sourceLake == null)
             {
                 Debug.LogWarning($"[SceneFishing] '{name}' has no sourceLake assigned.", this);

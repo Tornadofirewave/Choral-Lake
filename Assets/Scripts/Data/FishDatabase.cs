@@ -16,11 +16,19 @@ namespace ChoralLake.Data
 
         public FishEntry GetById(string id)
         {
-            if (string.IsNullOrEmpty(id)) return null;
-            EnsureCache();
-            if (_byId.TryGetValue(id, out var entry)) return entry;
-            Debug.LogError($"[FishDatabase] No fish found with ID '{id}'.");
+            if (TryGetById(id, out var entry)) return entry;
+            Debug.LogError($"[FishDatabase] No fish found with ID '{id?.Trim()}'.");
             return null;
+        }
+
+        public bool TryGetById(string id, out FishEntry entry)
+        {
+            entry = null;
+            var normalizedId = NormalizeId(id);
+            if (string.IsNullOrEmpty(normalizedId)) return false;
+
+            EnsureCache();
+            return _byId.TryGetValue(normalizedId, out entry);
         }
 
         public List<FishEntry> GetByRarity(Rarity rarity)
@@ -46,22 +54,29 @@ namespace ChoralLake.Data
             if (_byId == null) RebuildCache();
         }
 
+        private static string NormalizeId(string id)
+        {
+            return string.IsNullOrWhiteSpace(id) ? string.Empty : id.Trim();
+        }
+
         private void RebuildCache()
         {
-            _byId = new Dictionary<string, FishEntry>();
+            _byId = new Dictionary<string, FishEntry>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var entry in entries)
             {
                 if (entry == null) continue;
-                if (string.IsNullOrEmpty(entry.Id))
+
+                var normalizedId = NormalizeId(entry.Id);
+                if (string.IsNullOrEmpty(normalizedId))
                 {
                     Debug.LogError($"[FishDatabase] '{name}' contains a fish entry with an empty ID.", this);
                     continue;
                 }
-                if (_byId.ContainsKey(entry.Id))
+                if (_byId.ContainsKey(normalizedId))
                 {
-                    Debug.LogError($"[FishDatabase] '{name}' has duplicate fish ID '{entry.Id}'. Previous entry overwritten.", this);
+                    Debug.LogError($"[FishDatabase] '{name}' has duplicate fish ID '{normalizedId}'. Previous entry overwritten.", this);
                 }
-                _byId[entry.Id] = entry;
+                _byId[normalizedId] = entry;
             }
         }
     }

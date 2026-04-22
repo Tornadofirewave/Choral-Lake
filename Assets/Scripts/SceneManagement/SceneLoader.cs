@@ -16,26 +16,35 @@ namespace ChoralLake.SceneManagement
     {
         private static string _pendingSpawnId = "default";
         private static bool _isLoading;
+        private static bool _skipNextPlayerPlacement;
+
+        public static bool IsLoading => _isLoading;
 
         /// <summary>
         /// Starts a transition to the given scene. The next scene's SceneBootstrap will place the
         /// player at a PlayerSpawnPoint matching spawnId (or "default" if no match is found).
         /// </summary>
-        public static void LoadScene(string sceneName, string spawnId = "default")
+        public static bool LoadScene(string sceneName, string spawnId = "default", bool forceIfBusy = false, bool skipPlayerPlacement = false)
         {
             if (_isLoading)
             {
-                Debug.LogWarning($"[SceneLoader] Ignoring LoadScene('{sceneName}') — a load is already in progress.");
-                return;
+                if (!forceIfBusy)
+                {
+                    Debug.LogWarning($"[SceneLoader] Ignoring LoadScene('{sceneName}') — a load is already in progress.");
+                    return false;
+                }
+
+                Debug.LogWarning($"[SceneLoader] Forcing LoadScene('{sceneName}') while another load was marked in progress.");
             }
             if (string.IsNullOrEmpty(sceneName))
             {
                 Debug.LogError("[SceneLoader] LoadScene called with empty scene name.");
-                return;
+                return false;
             }
 
             _isLoading = true;
             _pendingSpawnId = spawnId ?? "default";
+            _skipNextPlayerPlacement = skipPlayerPlacement;
 
             // Persist where the player is going so save/load can restore it later.
             if (GameManager.Instance != null)
@@ -44,6 +53,7 @@ namespace ChoralLake.SceneManagement
             }
 
             FadeOut(() => SceneManager.LoadScene(sceneName));
+            return true;
         }
 
         /// <summary>
@@ -52,28 +62,40 @@ namespace ChoralLake.SceneManagement
         /// </summary>
         public static void NotifySceneReady()
         {
-            var spawn = FindSpawnPoint(_pendingSpawnId);
-            if (spawn == null)
+            if (_skipNextPlayerPlacement)
             {
-                Debug.LogWarning($"[SceneLoader] No PlayerSpawnPoint found with id '{_pendingSpawnId}' in scene '{SceneManager.GetActiveScene().name}'. Player will not be moved.");
+                var player = PlayerRoot.Instance;
+                if (player != null && GameManager.Instance != null)
+                {
+                    GameManager.Instance.SaveData.playerPosition = player.transform.position;
+                }
             }
             else
             {
-                var player = PlayerRoot.Instance;
-                if (player != null)
+                var spawn = FindSpawnPoint(_pendingSpawnId);
+                if (spawn == null)
                 {
-                    player.TeleportTo(spawn.transform.position, spawn.FacingDirection);
-                    if (GameManager.Instance != null)
-                    {
-                        GameManager.Instance.SaveData.playerPosition = spawn.transform.position;
-                    }
+                    Debug.LogWarning($"[SceneLoader] No PlayerSpawnPoint found with id '{_pendingSpawnId}' in scene '{SceneManager.GetActiveScene().name}'. Player will not be moved.");
                 }
                 else
                 {
-                    Debug.LogError("[SceneLoader] PlayerRoot.Instance is null. Is the Player prefab in the Boot scene?");
+                    var player = PlayerRoot.Instance;
+                    if (player != null)
+                    {
+                        player.TeleportTo(spawn.transform.position, spawn.FacingDirection);
+                        if (GameManager.Instance != null)
+                        {
+                            GameManager.Instance.SaveData.playerPosition = spawn.transform.position;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("[SceneLoader] PlayerRoot.Instance is null. Is the Player prefab in the Boot scene?");
+                    }
                 }
             }
 
+            _skipNextPlayerPlacement = false;
             GameManager.Instance?.NotifySceneLoadComplete();
             FadeIn(() => { _isLoading = false; });
         }

@@ -39,7 +39,7 @@ namespace ChoralLake.Data
             if (fishDb == null) return result;
             foreach (var id in fishIdPool)
             {
-                var fish = fishDb.GetById(id);
+                if (!fishDb.TryGetById(id, out var fish)) continue;
                 if (fish != null && fish.Rarity == rarity) result.Add(fish);
             }
             return result;

@@ -74,7 +74,8 @@ namespace ChoralLake.DebugTools
             }
 
             GameManager.Instance.GrantRod(commonRodId);
-            Debug.Log($"[DebugInventoryTools] Granted rod '{commonRodId}'.");
+            GameManager.Instance.EquipRod(commonRodId);
+            Debug.Log($"[DebugInventoryTools] Granted and equipped rod '{commonRodId}'.");
         }
 
         [ContextMenu("Clear Unsold Fish")]
