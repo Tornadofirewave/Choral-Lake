@@ -14,6 +14,8 @@ namespace ChoralLake.DebugTools
         [Header("Fish IDs to grant (comma-separated)")]
         [SerializeField] private string fishIdsToGrant = "pufferfish_1,salmon_1,starfish_1";
 
+        [Header("Rod")]
+        [SerializeField] private string commonRodId = "rod_common";
 
 
         [Header("Money")]
@@ -23,6 +25,9 @@ namespace ChoralLake.DebugTools
         {
             if (Keyboard.current != null && Keyboard.current.f5Key.wasPressedThisFrame)
                 GrantFishFromField();
+
+            if (Keyboard.current != null && Keyboard.current.f6Key.wasPressedThisFrame)
+                GrantCommonRod();
         }
 
         [ContextMenu("Grant Fish From Field")]
@@ -51,6 +56,25 @@ namespace ChoralLake.DebugTools
             if (GameManager.Instance == null) return;
             GameManager.Instance.AddMoney(moneyAmount);
             Debug.Log($"[DebugInventoryTools] Added {moneyAmount}. Total: {GameManager.Instance.SaveData.money}.");
+        }
+
+        [ContextMenu("Grant Common Rod")]
+        public void GrantCommonRod()
+        {
+            if (GameManager.Instance == null)
+            {
+                Debug.LogError("[DebugInventoryTools] GameManager.Instance is null.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(commonRodId))
+            {
+                Debug.LogWarning("[DebugInventoryTools] Common rod ID is empty.");
+                return;
+            }
+
+            GameManager.Instance.GrantRod(commonRodId);
+            Debug.Log($"[DebugInventoryTools] Granted rod '{commonRodId}'.");
         }
 
         [ContextMenu("Clear Unsold Fish")]
