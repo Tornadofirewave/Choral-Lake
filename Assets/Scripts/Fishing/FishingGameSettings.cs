@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FishingCircleSettings", menuName = "Fishing/Fishing Circle Settings")]
-public class FishingCircleSettings : ScriptableObject
+[CreateAssetMenu(fileName = "FishingGameSettings", menuName = "FishingGameSettings")]
+public class FishingGameSettings : ScriptableObject
 {
     [Header("Spawn")]
     [SerializeField] private FishingCircle circlePrefab;

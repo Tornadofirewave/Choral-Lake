@@ -8,7 +8,7 @@ using UnityEngine;
 /// Instantiate this in each lake's fishing scene with LakeSO and FishingCircleSettings assigned.
 /// </summary>
 public class FishingGame : MonoBehaviour {
-	[SerializeField] private FishingCircleSettings settings;
+	[SerializeField] private FishingGameSettings settings;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
 	
