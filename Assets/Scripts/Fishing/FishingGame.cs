@@ -42,7 +42,7 @@ public class FishingGame : MonoBehaviour {
 
 	private void Update()
 	{
-		if (fishAwarded && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+		if (fishAwarded && Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
 		{
 			ReturnToLake();
 			return;
