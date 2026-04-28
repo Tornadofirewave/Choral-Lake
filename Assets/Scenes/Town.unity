@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.LakeTransition
   targetSceneName: Lake_Acapella
-  targetSpawnId: default
+  targetSpawnId: lake_acapella_spawn
   lake: {fileID: 11400000, guid: cfe6f7d703f25824d9fa7282c4b2b414, type: 2}
   lockedMessage: The path is blocked. You need more unique fish to proceed.
   blockedConversationId: 
@@ -209,8 +209,8 @@ Transform:
   m_GameObject: {fileID: 64975525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51587, y: 4.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.3602, y: 5.26, z: 0}
+  m_LocalScale: {x: 4.5562, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3032,7 +3032,7 @@ Transform:
   m_GameObject: {fileID: 548014244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -0, y: 4.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
