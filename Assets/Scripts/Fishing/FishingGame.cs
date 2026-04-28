@@ -19,7 +19,7 @@ public class FishingGame : MonoBehaviour {
 	private int spawnedCount;
 	private int circlesCompleted; // Total circles deleted (success or miss)
 	private int successfulClicks; // Circles clicked successfully in grace window
-	private bool fishAwarded;
+	// private bool fishAwarded;
 	private bool sessionCompleted;
 	private bool playerWasHidden;
 
@@ -42,7 +42,7 @@ public class FishingGame : MonoBehaviour {
 
 	private void Update()
 	{
-		if (fishAwarded && Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
+		if (Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
 		{
 			ReturnToLake();
 			return;
