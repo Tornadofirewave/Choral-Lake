@@ -65,7 +65,9 @@ public class FishingCircle : MonoBehaviour {
         // Detect on-time Key Presses
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
-        if (keyboard != null && keyboard.dKey.wasPressedThisFrame && mouse != null && IsMouseOverThisCircle(mouse)) {
+        bool inputCheck = HasFishingInputPressed(keyboard, mouse);
+
+        if (inputCheck && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
                 Debug.Log("Deleted!");
                 OnCircleCompleted?.Invoke(true); // success
@@ -88,6 +90,29 @@ public class FishingCircle : MonoBehaviour {
             StartFadeOut();
             return;
         }
+    }
+
+    private bool HasFishingInputPressed(Keyboard keyboard, Mouse mouse)
+    {
+        if (keyboard == null && mouse == null)
+        {
+            return false;
+        }
+
+        bool keyInput = HasFishingKeyPressed(keyboard);
+        bool clickInput = mouse != null && mouse.leftButton.wasPressedThisFrame;
+
+        return keyInput || clickInput;
+    }
+
+    private bool HasFishingKeyPressed(Keyboard keyboard)
+    {
+        if (keyboard == null)
+        {
+            return false;
+        }
+
+        return keyboard.zKey.wasPressedThisFrame || keyboard.xKey.wasPressedThisFrame;
     }
 
     public void Initialize(float newTimeDuration, float newPerfectWindow, bool enableDebugLogs)
