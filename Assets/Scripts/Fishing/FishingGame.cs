@@ -151,7 +151,6 @@ public class FishingGame : MonoBehaviour {
 		if (fish != null)
 		{
 			gm.AddFishToInventory(fish.Id);
-			fishAwarded = true;
 			Debug.Log($"[FishingGame] Granted fish: {fish.DisplayName} ({fish.Rarity})");
 			Debug.Log("[FishingGame] Press Escape to return to the lake.");
 		}
