@@ -14,6 +14,8 @@ using UnityEngine.InputSystem;
 public class FishingGame : MonoBehaviour {
 	[SerializeField] private FishingGameSettings settings;
 	[SerializeField] private ProgressBar progressBar;
+	[Header("Completion UI")]
+	[SerializeField] private FishingCompleteUI fishingCompleteUIPrefab;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
 	[SerializeField, Min(0f)] private float spawnSpacingBuffer = 0.1f;
@@ -285,6 +287,13 @@ public class FishingGame : MonoBehaviour {
 			gm.AddFishToInventory(fish.Id);
 			Debug.Log($"[FishingGame] Granted fish: {fish.DisplayName} ({fish.Rarity})");
 			Debug.Log("[FishingGame] Press Escape to return to the lake.");
+
+			// Show completion UI if configured
+			if (fishingCompleteUIPrefab != null)
+			{
+				FishingCompleteUI ui = Instantiate(fishingCompleteUIPrefab);
+				ui.Show(fish.DisplayName, fish.Icon, () => ReturnToLake());
+			}
 		}
 		else
 		{
