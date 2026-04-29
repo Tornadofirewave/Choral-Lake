@@ -97,21 +97,21 @@ public class FishingGame : MonoBehaviour {
 		spawnedCount++;
 	}
 
-	private void OnCircleCompleted(bool wasSuccessful, int status)
+	private void OnCircleCompleted(bool wasSuccessful, FishingCircleResult status)
 	{
 		circlesCompleted++;
 		if (wasSuccessful)
 		{
 			switch (status)
 			{
-				case 1: // bad
-					totalScore += 0.3f;
+				case FishingCircleResult.Bad:
+					totalScore += 0.3f * 10;
 					break;
-				case 2: // good
-					totalScore += 0.5f;
+				case FishingCircleResult.Good:
+					totalScore += 0.5f * 10;
 					break;
-				case 3: // perfect
-					totalScore += 1.0f;
+				case FishingCircleResult.Perfect:
+					totalScore += 1.0f * 10;
 					break;
 				default:
 					break;
@@ -121,13 +121,13 @@ public class FishingGame : MonoBehaviour {
 		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
 	}
 
-	private string statusType(int status)
+	private string statusType(FishingCircleResult status)
 	{
         return status switch
         {
-            1 => "Bad",
-            2 => "Good",
-            3 => "Perfect",
+            FishingCircleResult.Bad => "Bad",
+            FishingCircleResult.Good => "Good",
+            FishingCircleResult.Perfect => "Perfect",
             _ => "Miss",
         };
     }
@@ -136,7 +136,7 @@ public class FishingGame : MonoBehaviour {
 	{
 		sessionCompleted = true;
 
-		float successRate = totalScore / settings.CirclesToSpawn;
+		float successRate = totalScore / (settings.CirclesToSpawn * 10);
 		bool metThreshold = successRate >= settings.CompletionThreshold;
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +

@@ -3,12 +3,20 @@ using UnityEngine.InputSystem;
 using System;
 using Unity.VisualScripting;
 
+public enum FishingCircleResult
+{
+    Miss = 0,
+    Bad = 1,
+    Good = 2,
+    Perfect = 3,
+}
+
 public class FishingCircle : MonoBehaviour {
     /// <summary>
     /// Called when the circle is deleted (success, timeout, or fade-out complete).
     /// wasSuccessful = true if player clicked in grace window, false if expired/missed.
     /// </summary>
-    public Action<bool, int> OnCircleCompleted;
+    public Action<bool, FishingCircleResult> OnCircleCompleted;
     private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
@@ -67,18 +75,18 @@ public class FishingCircle : MonoBehaviour {
         // Detect on-time Key Presses
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
-        var clickStatus = 0; // 0 = miss, 1 = bad, 2 = good, 3 = perfect
+        var clickStatus = FishingCircleResult.Miss;
         bool inputCheck = HasFishingInputPressed(keyboard, mouse);
 
         if (inputCheck && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
-                clickStatus = 3;
+                clickStatus = FishingCircleResult.Perfect;
                 Debug.Log("Perfect!");
             } else if (timeRemaining <= goodWindow) {
-                clickStatus = 2;
+                clickStatus = FishingCircleResult.Good;
                 Debug.Log("Good!");
             } else {
-                clickStatus = 1;
+                clickStatus = FishingCircleResult.Bad;
                 Debug.Log("Bad!");
             }
 
@@ -96,7 +104,7 @@ public class FishingCircle : MonoBehaviour {
             }
 
             ringSprite.localScale = ringTargetScale;
-            OnCircleCompleted?.Invoke(false, 0); // missed/expired
+            OnCircleCompleted?.Invoke(false, FishingCircleResult.Miss); // missed/expired
             StartFadeOut();
             return;
         }
