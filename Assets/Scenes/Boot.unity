@@ -1854,8 +1854,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8444257f2d7bcd64aae1472e2a6d099d, type: 2}
+  m_sharedMaterial: {fileID: 1125583724037074554, guid: 8444257f2d7bcd64aae1472e2a6d099d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4846,8 +4846,11 @@ MonoBehaviour:
   totalText: {fileID: 1535573838}
   emptyStateRoot: {fileID: 1379277527}
   totalsRoot: {fileID: 1420795130}
+  tallyDuration: 1.5
+  tallySfxId: sfx_receipt_tick
+  tickInterval: 0.05
   dismissHintText: {fileID: 1910994116}
-  dismissHint: Press E or Space to close
+  dismissHint: Click to Close
 --- !u!4 &1793365482
 Transform:
   m_ObjectHideFlags: 0
