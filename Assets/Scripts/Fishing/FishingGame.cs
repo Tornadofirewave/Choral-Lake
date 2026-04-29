@@ -123,6 +123,8 @@ public class FishingGame : MonoBehaviour {
 			activeCircles.Remove(completedCircle);
 		}
 
+		SpawnResultPopup(completedCircle, status);
+
 		circlesCompleted++;
 		if (wasSuccessful)
 		{
@@ -143,6 +145,39 @@ public class FishingGame : MonoBehaviour {
 		}
 		// Debug
 		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
+	}
+
+	private void SpawnResultPopup(FishingCircle completedCircle, FishingCircleResult status)
+	{
+		if (settings == null || settings.TextPopupPrefab == null || completedCircle == null)
+		{
+			return;
+		}
+
+		Vector3 spawnPosition = GetPopupSpawnPosition(completedCircle.transform.position);
+		FishingResultPopup popup = Instantiate(settings.TextPopupPrefab, spawnPosition, Quaternion.identity, spawnParent);
+		popup.Show(statusType(status), GetStatusColor(status));
+	}
+
+	private Vector3 GetPopupSpawnPosition(Vector3 origin)
+	{
+		float halfAngle = settings.PopupConeHalfAngle;
+		float randomAngle = Random.Range(-halfAngle, halfAngle);
+		float distance = Random.Range(settings.PopupMinDistance, settings.PopupMaxDistance);
+		Vector2 direction = Quaternion.Euler(0f, 0f, randomAngle) * Vector2.up;
+
+		return origin + new Vector3(direction.x, direction.y, 0f) * distance;
+	}
+
+	private Color GetStatusColor(FishingCircleResult status)
+	{
+		return status switch
+		{
+			FishingCircleResult.Bad => settings.BadPopupColor,
+			FishingCircleResult.Good => settings.GoodPopupColor,
+			FishingCircleResult.Perfect => settings.PerfectPopupColor,
+			_ => settings.MissPopupColor,
+		};
 	}
 
 	private bool IsSpawnPositionClear(Vector3 candidatePosition, float candidateRadius)
