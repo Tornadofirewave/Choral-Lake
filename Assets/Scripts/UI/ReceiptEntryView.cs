@@ -50,11 +50,9 @@ namespace ChoralLake.UI
                 priceText.text = $"${LineTotal}";
         }
 
-        /// <summary>Resets to pre-animation state. No-op until a receipt animator calls it.</summary>
-        public virtual void ClearForAnimation()
+        public void SetDisplayedPrice(int amount)
         {
-            if (nameText != null) nameText.text = string.Empty;
-            if (priceText != null) priceText.text = "$0";
+            if (priceText != null) priceText.text = $"${amount}";
         }
     }
 }

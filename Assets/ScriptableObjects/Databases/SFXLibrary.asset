@@ -16,3 +16,21 @@ MonoBehaviour:
   - id: sfx_footstep
     clip: {fileID: 8300000, guid: e46a800e7be4747458700a6c52a05fde, type: 3}
     volume: 0.5
+  - id: sfx_receipt_tick
+    clip: {fileID: 8300000, guid: 1e00c703f5165224d8daba215c8c7754, type: 3}
+    volume: 0.5
+  - id: sfx_ticket_purchase
+    clip: {fileID: 8300000, guid: 24dea1af698748a4890867b90da7010d, type: 3}
+    volume: 0.5
+  - id: sfx_reward_chime_common
+    clip: {fileID: 8300000, guid: 3626dca04c5143c41beacc73612a8369, type: 3}
+    volume: 0.5
+  - id: sfx_reward_chime_rare
+    clip: {fileID: 8300000, guid: 3626dca04c5143c41beacc73612a8369, type: 3}
+    volume: 0.5
+  - id: sfx_reward_chime_epic
+    clip: {fileID: 8300000, guid: 3626dca04c5143c41beacc73612a8369, type: 3}
+    volume: 0.5
+  - id: sfx_reward_chime_legendary
+    clip: {fileID: 8300000, guid: a05d56e24d170494f9a78699e50e02d0, type: 3}
+    volume: 0.5

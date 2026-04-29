@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using ChoralLake.Audio;
 using ChoralLake.Core;
 using ChoralLake.Data;
 using ChoralLake.Player;
@@ -32,6 +34,11 @@ namespace ChoralLake.UI
         [Tooltip("Shown when at least one fish is on the receipt.")]
         [SerializeField] private GameObject totalsRoot;
 
+        [Header("Tally Animation")]
+        [SerializeField] private float tallyDuration = 1.5f;
+        [SerializeField] private string tallySfxId = "sfx_receipt_tick";
+        [SerializeField] private float tickInterval = 0.05f;
+
         [Header("Dismiss Hint")]
         [SerializeField] private TMP_Text dismissHintText;
         [SerializeField] private string dismissHint = "Press E or Space to close";
@@ -43,6 +50,7 @@ namespace ChoralLake.UI
 
         private readonly List<ReceiptEntryView> _visibleEntries = new();
         private PlayerControls _controls;
+        private Coroutine _tallyCoroutine;
 
         private void Awake()
         {
@@ -95,7 +103,7 @@ namespace ChoralLake.UI
             if (!isEmpty)
             {
                 PopulateEntries(soldFishIds, fishDb);
-                if (totalText != null) totalText.text = $"Total: ${totalEarned}";
+                StartTally(totalEarned);
             }
         }
 
@@ -138,8 +146,51 @@ namespace ChoralLake.UI
             }
         }
 
+        private void StartTally(int grandTotal)
+        {
+            if (_tallyCoroutine != null) StopCoroutine(_tallyCoroutine);
+            foreach (var entry in _visibleEntries) entry.SetDisplayedPrice(0);
+            if (totalText != null) totalText.text = "Total: $0";
+            if (grandTotal > 0)
+                _tallyCoroutine = StartCoroutine(TallyCoroutine(grandTotal));
+        }
+
+        private IEnumerator TallyCoroutine(int grandTotal)
+        {
+            float rate = grandTotal / tallyDuration;
+            float current = 0f;
+            float tickTimer = 0f;
+
+            while (current < grandTotal)
+            {
+                current = Mathf.Min(current + rate * Time.deltaTime, grandTotal);
+                int displayed = Mathf.RoundToInt(current);
+
+                foreach (var entry in _visibleEntries)
+                    entry.SetDisplayedPrice(Mathf.Min(displayed, entry.LineTotal));
+
+                if (totalText != null)
+                    totalText.text = $"Total: ${displayed}";
+
+                tickTimer -= Time.deltaTime;
+                if (tickTimer <= 0f)
+                {
+                    AudioManager.Instance?.PlaySfx(tallySfxId);
+                    tickTimer = tickInterval;
+                }
+
+                yield return null;
+            }
+
+            foreach (var entry in _visibleEntries)
+                entry.SetDisplayedPrice(entry.LineTotal);
+            if (totalText != null) totalText.text = $"Total: ${grandTotal}";
+            _tallyCoroutine = null;
+        }
+
         private void ClearEntries()
         {
+            if (_tallyCoroutine != null) { StopCoroutine(_tallyCoroutine); _tallyCoroutine = null; }
             foreach (var entry in _visibleEntries)
                 if (entry != null) Destroy(entry.gameObject);
             _visibleEntries.Clear();

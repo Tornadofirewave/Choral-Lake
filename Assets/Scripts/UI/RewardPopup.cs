@@ -1,23 +1,16 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using ChoralLake.Player;
 
 namespace ChoralLake.UI
 {
-    /// <summary>
-    /// Zelda-style item-get popup. World-space canvas that follows the player.
-    /// Call Show() after a ticket reward is granted; it fades in, holds, then fades out.
-    /// </summary>
     public class RewardPopup : MonoBehaviour
     {
         public static RewardPopup Instance { get; private set; }
 
-        [SerializeField] private CanvasGroup canvasGroup;
-        [SerializeField] private Image rewardIcon;
-        [SerializeField] private TMP_Text rewardLabel;
-        [SerializeField] private Vector3 playerOffset = new Vector3(0f, 1.8f, 0f);
+        [SerializeField] private SpriteRenderer rewardIcon;
+        [SerializeField] private TextMeshPro rewardLabel;
+        [SerializeField] private SpriteRenderer[] fadedRenderers;
         [SerializeField] private float fadeInDuration = 0.25f;
         [SerializeField] private float holdDuration = 1.5f;
         [SerializeField] private float fadeOutDuration = 0.25f;
@@ -28,15 +21,7 @@ namespace ChoralLake.UI
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-            if (canvasGroup != null) canvasGroup.alpha = 0f;
-        }
-
-        private void LateUpdate()
-        {
-            var player = PlayerRoot.Instance;
-            if (player != null)
-                transform.position = player.transform.position + playerOffset;
+            SetAlpha(0f);
         }
 
         public void Show(Sprite sprite, string text)
@@ -62,11 +47,21 @@ namespace ChoralLake.UI
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
-                if (canvasGroup != null)
-                    canvasGroup.alpha = Mathf.Lerp(from, to, elapsed / duration);
+                SetAlpha(Mathf.Lerp(from, to, elapsed / duration));
                 yield return null;
             }
-            if (canvasGroup != null) canvasGroup.alpha = to;
+            SetAlpha(to);
+        }
+
+        private void SetAlpha(float alpha)
+        {
+            foreach (var sr in fadedRenderers)
+            {
+                if (sr == null) continue;
+                var c = sr.color;
+                sr.color = new Color(c.r, c.g, c.b, alpha);
+            }
+            if (rewardLabel != null) rewardLabel.alpha = alpha;
         }
     }
 }
