@@ -135,6 +135,7 @@ namespace ChoralLake.Tickets
             if (gm == null) { _phase = Phase.WalkingBack; return; }
 
             var result = gm.RollPendingTicketReward();
+            gm.ClearPendingTicket();
 
             Sprite rewardSprite = null;
             string rewardName = result.Id ?? string.Empty;
