@@ -10,21 +10,32 @@ public class FishingCompleteUI : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Image boxImage; // the 32x32 box background
     [SerializeField] private Image fishImage; // the fish sprite to display inside the box
-    [SerializeField, Min(0f)] private float closeInputDelay = 0.08f;
+    [SerializeField, Min(0f)] private float fadeInDuration = 0.5f;
 
     private Action onReturn;
-    private float shownTime;
+    private CanvasGroup canvasGroup;
+    private float fadeElapsedTime;
     private bool canClose;
 
     private void Awake()
     {
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
         SetRaycastTargets(false);
     }
 
     private void OnEnable()
     {
-        shownTime = Time.unscaledTime;
+        fadeElapsedTime = 0f;
         canClose = false;
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0f;
+        }
         SetRaycastTargets(false);
     }
 
@@ -35,14 +46,19 @@ public class FishingCompleteUI : MonoBehaviour
             return;
         }
 
-        if (!canClose)
+        if (canvasGroup != null && fadeInDuration > 0f && canvasGroup.alpha < 1f)
         {
-            if (Time.unscaledTime - shownTime >= closeInputDelay)
-            {
-                canClose = true;
-            }
-
+            fadeElapsedTime += Time.unscaledDeltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(fadeElapsedTime / fadeInDuration);
+            canClose = canvasGroup.alpha >= 1f;
             return;
+        }
+
+        canClose = true;
+
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 1f;
         }
 
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
@@ -60,6 +76,8 @@ public class FishingCompleteUI : MonoBehaviour
     public void Show(string fishName, Sprite fishSprite, Action onReturnCallback)
     {
         onReturn = onReturnCallback;
+        fadeElapsedTime = 0f;
+        canClose = false;
 
         if (titleText != null)
         {
