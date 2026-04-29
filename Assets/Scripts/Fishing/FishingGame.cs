@@ -18,7 +18,7 @@ public class FishingGame : MonoBehaviour {
 	private float spawnTimer;
 	private int spawnedCount;
 	private int circlesCompleted; // Total circles deleted (success or miss)
-	private int successfulClicks; // Circles clicked successfully in grace window
+	private float totalScore; // Totaled score based on Perfects, Goods, and Bads
 	// private bool fishAwarded;
 	private bool sessionCompleted;
 	private bool playerWasHidden;
@@ -97,22 +97,46 @@ public class FishingGame : MonoBehaviour {
 		spawnedCount++;
 	}
 
-	private void OnCircleCompleted(bool wasSuccessful)
+	private void OnCircleCompleted(bool wasSuccessful, int status)
 	{
 		circlesCompleted++;
 		if (wasSuccessful)
 		{
-			successfulClicks++;
+			switch (status)
+			{
+				case 1: // bad
+					totalScore += 0.3f;
+					break;
+				case 2: // good
+					totalScore += 0.5f;
+					break;
+				case 3: // perfect
+					totalScore += 1.0f;
+					break;
+				default:
+					break;
+			}
 		}
 		// Debug
-		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Successes: {successfulClicks}");
+		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
 	}
+
+	private string statusType(int status)
+	{
+        return status switch
+        {
+            1 => "Bad",
+            2 => "Good",
+            3 => "Perfect",
+            _ => "Miss",
+        };
+    }
 
 	private void OnFishingSessionComplete()
 	{
 		sessionCompleted = true;
 
-		float successRate = (float)successfulClicks / settings.CirclesToSpawn;
+		float successRate = totalScore / settings.CirclesToSpawn;
 		bool metThreshold = successRate >= settings.CompletionThreshold;
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +

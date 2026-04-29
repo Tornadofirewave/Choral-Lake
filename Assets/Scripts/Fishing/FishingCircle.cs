@@ -1,19 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using Unity.VisualScripting;
 
 public class FishingCircle : MonoBehaviour {
     /// <summary>
     /// Called when the circle is deleted (success, timeout, or fade-out complete).
     /// wasSuccessful = true if player clicked in grace window, false if expired/missed.
     /// </summary>
-    public Action<bool> OnCircleCompleted;
-    [SerializeField] private float timeDuration = 3f;
+    public Action<bool, int> OnCircleCompleted;
+    private float timeDuration = 3f;
     private float timeRemaining;
     private float elapsedTime;
-    [SerializeField] private float perfectWindow = 0.25f;
+    private float perfectWindow = 0.25f;
+    private float goodWindow = 0.75f;
     [SerializeField] private float fadeDuration = 0.2f;
-    [SerializeField] private bool debugGraceWindowLogs = true;
+    private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
     private Transform circleSprite;
@@ -65,16 +67,24 @@ public class FishingCircle : MonoBehaviour {
         // Detect on-time Key Presses
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
+        var clickStatus = 0; // 0 = miss, 1 = bad, 2 = good, 3 = perfect
         bool inputCheck = HasFishingInputPressed(keyboard, mouse);
 
         if (inputCheck && IsMouseOverThisCircle(mouse)) {
             if (timeRemaining <= perfectWindow) {
-                Debug.Log("Deleted!");
-                OnCircleCompleted?.Invoke(true); // success
-                StartFadeOut();
+                clickStatus = 3;
+                Debug.Log("Perfect!");
+            } else if (timeRemaining <= goodWindow) {
+                clickStatus = 2;
+                Debug.Log("Good!");
             } else {
-                Debug.Log("Too early");
+                clickStatus = 1;
+                Debug.Log("Bad!");
             }
+
+            // Always say circle is complete and fade out, regardless of outcome
+            OnCircleCompleted?.Invoke(true, clickStatus);
+            StartFadeOut();
         }
 
         // Delete object once the post-close grace window has passed.
@@ -86,7 +96,7 @@ public class FishingCircle : MonoBehaviour {
             }
 
             ringSprite.localScale = ringTargetScale;
-            OnCircleCompleted?.Invoke(false); // missed/expired
+            OnCircleCompleted?.Invoke(false, 0); // missed/expired
             StartFadeOut();
             return;
         }
