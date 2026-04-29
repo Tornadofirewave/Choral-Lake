@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using ChoralLake.Core;
 using ChoralLake.Data;
 using ChoralLake.Audio;
@@ -15,7 +16,7 @@ namespace ChoralLake.Tickets
     /// If no dialogue conversation is configured or found, skips straight to granting the reward.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    public class ShipAttendant : MonoBehaviour, IInteractable
+    public class ShipAttendant : MonoBehaviour, IInteractable, IPointerClickHandler
     {
         [Header("Movement")]
         [SerializeField, Min(0.1f)] private float moveSpeed = 1.8f;
@@ -169,6 +170,12 @@ namespace ChoralLake.Tickets
             RewardPopup.Instance?.Show(rewardSprite, rewardName);
 
             _phase = Phase.WalkingBack;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (ModalStack.AnyOpen || ModalStack.JustClosed) return;
+            Interact();
         }
 
         private void OnArrivedAtShip()

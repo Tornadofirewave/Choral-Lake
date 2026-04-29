@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using ChoralLake.Audio;
 using ChoralLake.Data;
 
 namespace ChoralLake.Core
@@ -202,7 +203,9 @@ namespace ChoralLake.Core
             SaveData.pendingTicketId = ticket.Id;
             SaveData.pendingAttendantId = attendant != null ? attendant.Id : string.Empty;
             SaveData.pendingShipPhase = TicketShipPhase.Approaching;
+            SaveSystem.Save(SaveData);
             OnPendingTicketChanged?.Invoke();
+            AudioManager.Instance?.PlaySfx("sfx_ticket_purchase");
             return true;
         }
 
