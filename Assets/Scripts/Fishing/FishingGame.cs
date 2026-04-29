@@ -2,6 +2,7 @@ using ChoralLake.Core;
 using ChoralLake.Data;
 using ChoralLake.SceneManagement;
 using ChoralLake.Player;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,9 +15,11 @@ public class FishingGame : MonoBehaviour {
 	[SerializeField] private FishingGameSettings settings;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
+	[SerializeField, Min(0f)] private float spawnSpacingBuffer = 0.1f;
 	
 	private float spawnTimer;
 	private int spawnedCount;
+	private readonly List<FishingCircle> activeCircles = new List<FishingCircle>();
 	private int circlesCompleted; // Total circles deleted (success or miss)
 	private float totalScore; // Totaled score based on Perfects, Goods, and Bads
 	// private bool fishAwarded;
@@ -83,35 +86,58 @@ public class FishingGame : MonoBehaviour {
 
 	private void SpawnCircle()
 	{
-		Vector2 randomLocalPos = new Vector2(
-			Random.Range(settings.SpawnMin.x, settings.SpawnMax.x),
-			Random.Range(settings.SpawnMin.y, settings.SpawnMax.y));
+		const int maxSpawnAttempts = 20;
 
-		Vector3 spawnWorldPos = transform.TransformPoint(new Vector3(randomLocalPos.x, randomLocalPos.y, 0f));
-		FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
-		circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
-		
-		// Subscribe to circle completion
-		circle.OnCircleCompleted += OnCircleCompleted;
+		for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
+		{
+			Vector2 randomLocalPos = new Vector2(
+				Random.Range(settings.SpawnMin.x, settings.SpawnMax.x),
+				Random.Range(settings.SpawnMin.y, settings.SpawnMax.y));
 
-		spawnedCount++;
+			Vector3 spawnWorldPos = transform.TransformPoint(new Vector3(randomLocalPos.x, randomLocalPos.y, 0f));
+			FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
+			circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
+
+			float circleRadius = GetCircleRadius(circle);
+			if (!IsSpawnPositionClear(spawnWorldPos, circleRadius))
+			{
+				Destroy(circle.gameObject);
+				continue;
+			}
+
+			activeCircles.Add(circle);
+			FishingCircle spawnedCircle = circle;
+			circle.OnCircleCompleted += (wasSuccessful, status) => OnCircleCompleted(spawnedCircle, wasSuccessful, status);
+
+			spawnedCount++;
+			return;
+		}
+
+		Debug.LogWarning("[FishingGame] Failed to find a valid spawn position for a circle.");
 	}
 
-	private void OnCircleCompleted(bool wasSuccessful, int status)
+	private void OnCircleCompleted(FishingCircle completedCircle, bool wasSuccessful, FishingCircleResult status)
 	{
+		if (completedCircle != null)
+		{
+			activeCircles.Remove(completedCircle);
+		}
+
+		SpawnResultPopup(completedCircle, status);
+
 		circlesCompleted++;
 		if (wasSuccessful)
 		{
 			switch (status)
 			{
-				case 1: // bad
-					totalScore += 0.3f;
+				case FishingCircleResult.Bad:
+					totalScore += 0.3f * 10;
 					break;
-				case 2: // good
-					totalScore += 0.5f;
+				case FishingCircleResult.Good:
+					totalScore += 0.5f * 10;
 					break;
-				case 3: // perfect
-					totalScore += 1.0f;
+				case FishingCircleResult.Perfect:
+					totalScore += 1.0f * 10;
 					break;
 				default:
 					break;
@@ -121,13 +147,82 @@ public class FishingGame : MonoBehaviour {
 		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
 	}
 
-	private string statusType(int status)
+	private void SpawnResultPopup(FishingCircle completedCircle, FishingCircleResult status)
+	{
+		if (settings == null || settings.TextPopupPrefab == null || completedCircle == null)
+		{
+			return;
+		}
+
+		Vector3 spawnPosition = GetPopupSpawnPosition(completedCircle.transform.position);
+		FishingResultPopup popup = Instantiate(settings.TextPopupPrefab, spawnPosition, Quaternion.identity, spawnParent);
+		popup.Show(statusType(status), GetStatusColor(status));
+	}
+
+	private Vector3 GetPopupSpawnPosition(Vector3 origin)
+	{
+		float halfAngle = settings.PopupConeHalfAngle;
+		float randomAngle = Random.Range(-halfAngle, halfAngle);
+		float distance = Random.Range(settings.PopupMinDistance, settings.PopupMaxDistance);
+		Vector2 direction = Quaternion.Euler(0f, 0f, randomAngle) * Vector2.up;
+
+		return origin + new Vector3(direction.x, direction.y, 0f) * distance;
+	}
+
+	private Color GetStatusColor(FishingCircleResult status)
+	{
+		return status switch
+		{
+			FishingCircleResult.Bad => settings.BadPopupColor,
+			FishingCircleResult.Good => settings.GoodPopupColor,
+			FishingCircleResult.Perfect => settings.PerfectPopupColor,
+			_ => settings.MissPopupColor,
+		};
+	}
+
+	private bool IsSpawnPositionClear(Vector3 candidatePosition, float candidateRadius)
+	{
+		activeCircles.RemoveAll(circle => circle == null);
+
+		for (int i = 0; i < activeCircles.Count; i++)
+		{
+			FishingCircle existingCircle = activeCircles[i];
+			float existingRadius = GetCircleRadius(existingCircle);
+			float minimumDistance = existingRadius + candidateRadius + spawnSpacingBuffer;
+
+			if (Vector3.Distance(candidatePosition, existingCircle.transform.position) < minimumDistance)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private float GetCircleRadius(FishingCircle circle)
+	{
+		if (circle == null)
+		{
+			return 0f;
+		}
+
+		Collider2D circleCollider = circle.GetComponent<Collider2D>();
+		if (circleCollider == null)
+		{
+			return 0f;
+		}
+
+		Bounds bounds = circleCollider.bounds;
+		return Mathf.Max(bounds.extents.x, bounds.extents.y);
+	}
+
+	private string statusType(FishingCircleResult status)
 	{
         return status switch
         {
-            1 => "Bad",
-            2 => "Good",
-            3 => "Perfect",
+            FishingCircleResult.Bad => "Bad",
+            FishingCircleResult.Good => "Good",
+            FishingCircleResult.Perfect => "Perfect",
             _ => "Miss",
         };
     }
@@ -136,7 +231,7 @@ public class FishingGame : MonoBehaviour {
 	{
 		sessionCompleted = true;
 
-		float successRate = totalScore / settings.CirclesToSpawn;
+		float successRate = totalScore / (settings.CirclesToSpawn * 10);
 		bool metThreshold = successRate >= settings.CompletionThreshold;
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +
