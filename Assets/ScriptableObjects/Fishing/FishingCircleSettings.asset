@@ -19,7 +19,7 @@ MonoBehaviour:
   spawnMax: {x: 6, y: 3}
   timeDuration: 3
   perfectWindow: 0.25
-  completionThreshold: 0.8
+  completionThreshold: 0.7
   debugGraceWindowLogs: 1
   textPopupPrefab: {fileID: 7504782307040615707, guid: ede6de58fe66f6d4487cada97edf5e3c, type: 3}
   popupMinDistance: 0.25

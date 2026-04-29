@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class FishingGame : MonoBehaviour {
 	[SerializeField] private FishingGameSettings settings;
+	[SerializeField] private ProgressBar progressBar;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
 	[SerializeField, Min(0f)] private float spawnSpacingBuffer = 0.1f;
@@ -35,6 +36,7 @@ public class FishingGame : MonoBehaviour {
 			currentLake = SceneFishing.ActiveLake;
 		}
 
+		UpdateProgressBar();
 		HidePlayerForMinigame();
 	}
 
@@ -131,20 +133,31 @@ public class FishingGame : MonoBehaviour {
 			switch (status)
 			{
 				case FishingCircleResult.Bad:
-					totalScore += 0.3f * 10;
+					totalScore += 3f;
 					break;
 				case FishingCircleResult.Good:
-					totalScore += 0.5f * 10;
+					totalScore += 5f;
 					break;
 				case FishingCircleResult.Perfect:
-					totalScore += 1.0f * 10;
+					totalScore += 10f;
 					break;
 				default:
 					break;
 			}
 		}
+		UpdateProgressBar();
 		// Debug
 		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
+	}
+
+	private void UpdateProgressBar()
+	{
+		if (progressBar == null || settings == null)
+		{
+			return;
+		}
+
+		progressBar.SetProgress(totalScore / 10f, settings.CirclesToSpawn, settings.CompletionThreshold);
 	}
 
 	private void SpawnResultPopup(FishingCircle completedCircle, FishingCircleResult status)
@@ -231,7 +244,7 @@ public class FishingGame : MonoBehaviour {
 	{
 		sessionCompleted = true;
 
-		float successRate = totalScore / (settings.CirclesToSpawn * 10);
+		float successRate = totalScore / (settings.CirclesToSpawn * 10f);
 		bool metThreshold = successRate >= settings.CompletionThreshold;
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +
