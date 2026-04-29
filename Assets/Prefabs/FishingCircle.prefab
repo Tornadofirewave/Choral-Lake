@@ -47,9 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20aa47009bb4f944a1a85824799e7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingRing
-  timeDuration: 3
-  perfectWindow: 0.25
-  debugGraceWindowLogs: 1
+  fadeDuration: 0.2
 --- !u!58 &2407797852874586170
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,7 +291,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4639237647690241143, guid: 123517e3bbe3a364cb673d48dd42a8ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
