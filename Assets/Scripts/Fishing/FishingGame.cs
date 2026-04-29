@@ -2,6 +2,7 @@ using ChoralLake.Core;
 using ChoralLake.Data;
 using ChoralLake.SceneManagement;
 using ChoralLake.Player;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,9 +15,11 @@ public class FishingGame : MonoBehaviour {
 	[SerializeField] private FishingGameSettings settings;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
+	[SerializeField, Min(0f)] private float spawnSpacingBuffer = 0.1f;
 	
 	private float spawnTimer;
 	private int spawnedCount;
+	private readonly List<FishingCircle> activeCircles = new List<FishingCircle>();
 	private int circlesCompleted; // Total circles deleted (success or miss)
 	private float totalScore; // Totaled score based on Perfects, Goods, and Bads
 	// private bool fishAwarded;
@@ -83,22 +86,43 @@ public class FishingGame : MonoBehaviour {
 
 	private void SpawnCircle()
 	{
-		Vector2 randomLocalPos = new Vector2(
-			Random.Range(settings.SpawnMin.x, settings.SpawnMax.x),
-			Random.Range(settings.SpawnMin.y, settings.SpawnMax.y));
+		const int maxSpawnAttempts = 20;
 
-		Vector3 spawnWorldPos = transform.TransformPoint(new Vector3(randomLocalPos.x, randomLocalPos.y, 0f));
-		FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
-		circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
-		
-		// Subscribe to circle completion
-		circle.OnCircleCompleted += OnCircleCompleted;
+		for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
+		{
+			Vector2 randomLocalPos = new Vector2(
+				Random.Range(settings.SpawnMin.x, settings.SpawnMax.x),
+				Random.Range(settings.SpawnMin.y, settings.SpawnMax.y));
 
-		spawnedCount++;
+			Vector3 spawnWorldPos = transform.TransformPoint(new Vector3(randomLocalPos.x, randomLocalPos.y, 0f));
+			FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
+			circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
+
+			float circleRadius = GetCircleRadius(circle);
+			if (!IsSpawnPositionClear(spawnWorldPos, circleRadius))
+			{
+				Destroy(circle.gameObject);
+				continue;
+			}
+
+			activeCircles.Add(circle);
+			FishingCircle spawnedCircle = circle;
+			circle.OnCircleCompleted += (wasSuccessful, status) => OnCircleCompleted(spawnedCircle, wasSuccessful, status);
+
+			spawnedCount++;
+			return;
+		}
+
+		Debug.LogWarning("[FishingGame] Failed to find a valid spawn position for a circle.");
 	}
 
-	private void OnCircleCompleted(bool wasSuccessful, FishingCircleResult status)
+	private void OnCircleCompleted(FishingCircle completedCircle, bool wasSuccessful, FishingCircleResult status)
 	{
+		if (completedCircle != null)
+		{
+			activeCircles.Remove(completedCircle);
+		}
+
 		circlesCompleted++;
 		if (wasSuccessful)
 		{
@@ -119,6 +143,42 @@ public class FishingGame : MonoBehaviour {
 		}
 		// Debug
 		Debug.Log($"[FishingGame] Circle completed: {circlesCompleted}/{settings.CirclesToSpawn}, Total: {totalScore}, {statusType(status)}");
+	}
+
+	private bool IsSpawnPositionClear(Vector3 candidatePosition, float candidateRadius)
+	{
+		activeCircles.RemoveAll(circle => circle == null);
+
+		for (int i = 0; i < activeCircles.Count; i++)
+		{
+			FishingCircle existingCircle = activeCircles[i];
+			float existingRadius = GetCircleRadius(existingCircle);
+			float minimumDistance = existingRadius + candidateRadius + spawnSpacingBuffer;
+
+			if (Vector3.Distance(candidatePosition, existingCircle.transform.position) < minimumDistance)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private float GetCircleRadius(FishingCircle circle)
+	{
+		if (circle == null)
+		{
+			return 0f;
+		}
+
+		Collider2D circleCollider = circle.GetComponent<Collider2D>();
+		if (circleCollider == null)
+		{
+			return 0f;
+		}
+
+		Bounds bounds = circleCollider.bounds;
+		return Mathf.Max(bounds.extents.x, bounds.extents.y);
 	}
 
 	private string statusType(FishingCircleResult status)
