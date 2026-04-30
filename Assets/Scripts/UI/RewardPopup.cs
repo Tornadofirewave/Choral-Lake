@@ -55,6 +55,11 @@ namespace ChoralLake.UI
 
         private void SetAlpha(float alpha)
         {
+            if (rewardIcon != null)
+            {
+                var c = rewardIcon.color;
+                rewardIcon.color = new Color(c.r, c.g, c.b, alpha);
+            }
             foreach (var sr in fadedRenderers)
             {
                 if (sr == null) continue;

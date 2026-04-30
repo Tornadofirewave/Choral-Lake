@@ -15,6 +15,12 @@ namespace ChoralLake.Gameplay
 
         private bool collected;
 
+        private void Start()
+        {
+            if (rod != null && GameManager.Instance != null && GameManager.Instance.OwnsRod(rod.Id))
+                Destroy(gameObject);
+        }
+
         public string InteractPrompt => interactPrompt;
         public bool CanInteract => rod != null && !collected;
         public Transform Transform => transform;
