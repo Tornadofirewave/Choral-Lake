@@ -37,3 +37,6 @@ MonoBehaviour:
   - id: sfx_pickup_rod
     clip: {fileID: 8300000, guid: 3626dca04c5143c41beacc73612a8369, type: 3}
     volume: 0.5
+  - id: sfx_tacklebox_open
+    clip: {fileID: 8300000, guid: 005e6a3348ad1974bb932e33280fdace, type: 3}
+    volume: 0.5
