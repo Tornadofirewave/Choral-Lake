@@ -734,11 +734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0ae0ecaedf9e34da65df7af0c43595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.SceneFishing
-  targetSceneName: FIshingAcapella
+  targetSceneName: FishingAcapella
   targetSpawnId: default
   sourceLake: {fileID: 11400000, guid: cfe6f7d703f25824d9fa7282c4b2b414, type: 2}
   returnSpawnId: lake_acapella
-  fishingSceneName: FIshingAcapella
+  fishingSceneName: FishingAcapella
   fishingSpawnId: default
 --- !u!1 &1016342148
 GameObject:

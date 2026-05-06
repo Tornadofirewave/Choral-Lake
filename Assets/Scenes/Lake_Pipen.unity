@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.SceneTransition
   targetSceneName: Town
-  targetSpawnId: lake_acapella
+  targetSpawnId: lake_pipen
 --- !u!61 &818714720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ Transform:
   m_GameObject: {fileID: 818714718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.98, y: -0.03, z: 0}
+  m_LocalPosition: {x: 9.18, y: -0.03, z: 0}
   m_LocalScale: {x: 0.2886811, y: 5.4470997, z: 0.91603}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2833,7 +2833,7 @@ Transform:
   m_GameObject: {fileID: 1692218680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.81, y: -0.36, z: 0}
+  m_LocalPosition: {x: 7.72, y: -0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
