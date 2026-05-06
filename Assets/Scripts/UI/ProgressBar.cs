@@ -7,6 +7,7 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField] private RectTransform thresholdMarker;
     [SerializeField, Min(0f)] private float fillLerpSpeed = 12f;
     [SerializeField] private Color reachedThresholdColor = Color.green;
+    [SerializeField] private Color reachedPerfecftColor = new Color32(0xF9, 0xFF, 0x53, 0xFF);
 
     private float currentValue;
     private float targetValue;
@@ -73,9 +74,18 @@ public class ProgressBar : MonoBehaviour {
         float normalizedProgress = Mathf.Clamp01(currentValue / maximum);
         fillImage.fillAmount = normalizedProgress;
 
+        // If a threshold is defined, prefer the "perfect" color at full fill,
+        // otherwise use the threshold color when passed, or the default color.
         if (thresholdNormalized >= 0f)
         {
-            fillImage.color = normalizedProgress >= thresholdNormalized ? reachedThresholdColor : defaultFillColor;
+            if (normalizedProgress >= 1f)
+            {
+                fillImage.color = reachedPerfecftColor;
+            }
+            else if (normalizedProgress >= thresholdNormalized)
+            {
+                fillImage.color = reachedThresholdColor;
+            }
         }
     }
 
