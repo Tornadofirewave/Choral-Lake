@@ -30,6 +30,7 @@ namespace ChoralLake.DebugTools
                 Debug.LogError("[SmokeTest] FishDatabase is not assigned on the GameDatabase.");
                 return;
             }
+            var fishDb = db.FishDatabase;
 
             var rod = db.GetRodById(commonRodId);
             if (rod == null)
@@ -51,14 +52,14 @@ namespace ChoralLake.DebugTools
                     Debug.LogError($"[SmokeTest] Fish '{id}' not found in FishDatabase.");
                     return;
                 }
-                expectedTotal += fish.SellCost;
+                expectedTotal += Mathf.RoundToInt(fish.SellCost * fishDb.Multiplier);
                 gm.AddFishToInventory(id);
             }
 
             Debug.Log($"[SmokeTest] Unique fish count before sell: {gm.UniqueFishCount} (expected 3 if all three IDs were unique)");
 
             int sold = gm.SellAllFish();
-            Debug.Log($"[SmokeTest] Sold for: {sold} (expected {expectedTotal} — real sell costs from FishDatabase)");
+            Debug.Log($"[SmokeTest] Sold for: {sold} (expected {expectedTotal} — FishDatabase multiplier applied)");
             Debug.Log($"[SmokeTest] Unique fish count after sell: {gm.UniqueFishCount} (expected 3 — must NOT be cleared)");
 
             enabled = false;

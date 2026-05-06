@@ -74,12 +74,15 @@ namespace ChoralLake.Core
         public int SellAllFish()
         {
             int total = 0;
+            var fishDb = database != null ? database.FishDatabase : null;
+            float multiplier = fishDb != null ? fishDb.Multiplier : 1f;
+
             foreach (var id in SaveData.unsoldFishIds)
             {
                 var fish = database != null ? database.GetFishById(id) : null;
                 if (fish != null)
                 {
-                    total += fish.SellCost;
+                    total += Mathf.RoundToInt(fish.SellCost * multiplier);
                 }
                 else
                 {

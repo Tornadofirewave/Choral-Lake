@@ -27,6 +27,7 @@ public class FishingGame : MonoBehaviour {
 	private float totalScore; // Totaled score based on Perfects, Goods, and Bads
 	// private bool fishAwarded;
 	private bool sessionCompleted;
+	private bool perfectSession;
 	private bool playerWasHidden;
 
 
@@ -248,6 +249,7 @@ public class FishingGame : MonoBehaviour {
 
 		float successRate = totalScore / (settings.CirclesToSpawn * 10f);
 		bool metThreshold = successRate >= settings.CompletionThreshold;
+		perfectSession = successRate == 1f;
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +
 			$"Met threshold: {metThreshold}");
@@ -289,11 +291,24 @@ public class FishingGame : MonoBehaviour {
 			Debug.Log("[FishingGame] Press Escape to return to the lake.");
 
 			// Show completion UI if configured
-			if (fishingCompleteUIPrefab != null)
-			{
-				FishingCompleteUI ui = Instantiate(fishingCompleteUIPrefab);
-				ui.Show(fish.DisplayName, fish.Icon, () => ReturnToLake());
-			}
+				if (fishingCompleteUIPrefab != null)
+				{
+					FishingCompleteUI ui = Instantiate(fishingCompleteUIPrefab);
+					bool isSpecial = perfectSession;
+					int sellPrice = fish.SellCost; // default base
+					// Try to get the FishDatabase from the GameManager's database container
+					var gameDb = gm?.Database;
+					if (gameDb != null)
+					{
+						var fishDb = gameDb.FishDatabase;
+						if (fishDb != null)
+						{
+							sellPrice = Mathf.RoundToInt(fish.SellCost * fishDb.Multiplier);
+						}
+					}
+
+					ui.Show(fish.DisplayName, fish.Icon, () => ReturnToLake(), isSpecial, sellPrice);
+				}
 		}
 		else
 		{
