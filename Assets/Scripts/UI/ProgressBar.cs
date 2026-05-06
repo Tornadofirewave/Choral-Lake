@@ -7,13 +7,13 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField] private RectTransform thresholdMarker;
     [SerializeField, Min(0f)] private float fillLerpSpeed = 12f;
     [SerializeField] private Color reachedThresholdColor = Color.green;
-    [SerializeField] private Color reachedPerfecftColor = new Color32(0xF9, 0xFF, 0x53, 0xFF);
+    // User-provided color: R=250, G=255, B=117, A=255 -> normalized RGBA
+    [SerializeField] private Color reachedPerfecftColor = new Color(250f/255f, 255f/255f, 117f/255f, 1f);
 
     private float currentValue;
     private float targetValue;
     private float maximum = 1f;
     private float thresholdNormalized = -1f;
-    private Color defaultFillColor = Color.white;
 
     private void Awake()
     {
@@ -25,11 +25,6 @@ public class ProgressBar : MonoBehaviour {
         if (fillArea == null && fillImage != null)
         {
             fillArea = fillImage.rectTransform.parent as RectTransform;
-        }
-
-        if (fillImage != null)
-        {
-            defaultFillColor = fillImage.color;
         }
     }
     

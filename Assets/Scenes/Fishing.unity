@@ -321,6 +321,8 @@ MonoBehaviour:
   fillArea: {fileID: 1982419485}
   thresholdMarker: {fileID: 1745706265}
   fillLerpSpeed: 8
+  reachedThresholdColor: {r: 0, g: 1, b: 0, a: 1}
+  reachedPerfecftColor: {r: 0.98107725, g: 1, b: 0.4575472, a: 1}
 --- !u!1 &1079045447
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,8 +358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.079}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -527.5, y: 437.1}
-  m_SizeDelta: {x: 98.14, y: 98.85}
+  m_AnchoredPosition: {x: -527.75134, y: 437.3949}
+  m_SizeDelta: {x: 98.13, y: 103.916}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1079045449
 MonoBehaviour:
@@ -372,19 +374,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25882354, g: 0.8156863, b: 1, a: 1}
+  m_Color: {r: 0.09411765, g: 0.49019608, b: 0.9764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3865681179047083402, guid: b552648ed8878464993e4469f6452656, type: 3}
+  m_Sprite: {fileID: -6623427717408524850, guid: b552648ed8878464993e4469f6452656, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
