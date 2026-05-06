@@ -734,11 +734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0ae0ecaedf9e34da65df7af0c43595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.SceneFishing
-  targetSceneName: Fishing
+  targetSceneName: FIshingAcapella
   targetSpawnId: default
   sourceLake: {fileID: 11400000, guid: cfe6f7d703f25824d9fa7282c4b2b414, type: 2}
   returnSpawnId: lake_acapella
-  fishingSceneName: Fishing
+  fishingSceneName: FIshingAcapella
   fishingSpawnId: default
 --- !u!1 &1016342148
 GameObject:
@@ -989,6 +989,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 2267404652545599347, guid: 5149e78e64c97cd4a8000e19780d3cdc, type: 3}
+    - target: {fileID: 8117930635441333586, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8248437200584723803, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
       propertyPath: rod
       value: 
@@ -2722,71 +2726,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!1001 &1928421890
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678083834810872957, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2086428446014686380, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_Name
-      value: FishingRodPickup (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7110511800260163730, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 344355384868289149, guid: 5149e78e64c97cd4a8000e19780d3cdc, type: 3}
-    - target: {fileID: 8248437200584723803, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
-      propertyPath: rod
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e2e232cbbc5ebc4697a5c2c4b77e5df, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
 --- !u!1 &2123245497
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,5 +3923,4 @@ SceneRoots:
   - {fileID: 241938032}
   - {fileID: 4329602935622323968}
   - {fileID: 1161033457}
-  - {fileID: 1928421890}
   - {fileID: 39977603}
