@@ -65,9 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2408432365988191519, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
+  m_Sprite: {fileID: 2122227763030943985, guid: a3cf06968940ba14b9b7999c25dd1de6, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -578,5 +578,6 @@ MonoBehaviour:
   boxImage: {fileID: 8193591230946503765}
   fishImage: {fileID: 6496180369841354324}
   fadeInDuration: 0.5
-  popupSfx: {fileID: 8300000, guid: 3c7a86f10481b0544b9ca295dcfe721d, type: 3}
+  successPopupSfx: {fileID: 8300000, guid: 3c7a86f10481b0544b9ca295dcfe721d, type: 3}
+  failurePopupSfx: {fileID: 8300000, guid: a5d84b17cd6eb9342a10766b0ca351ba, type: 3}
   popupSfxVolume: 1

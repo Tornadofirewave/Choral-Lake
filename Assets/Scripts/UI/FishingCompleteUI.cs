@@ -11,7 +11,8 @@ public class FishingCompleteUI : MonoBehaviour
     [SerializeField] private Image boxImage; // the 32x32 box background
     [SerializeField] private Image fishImage; // the fish sprite to display inside the box
     [SerializeField, Min(0f)] private float fadeInDuration = 0.5f;
-    [SerializeField] private AudioClip popupSfx;
+    [SerializeField] private AudioClip successPopupSfx;
+    [SerializeField] private AudioClip failurePopupSfx;
     [SerializeField, Range(0f, 1f)] private float popupSfxVolume = 1f;
 
     private Action onReturn;
@@ -88,9 +89,7 @@ public class FishingCompleteUI : MonoBehaviour
 
     public void Show(string fishName, Sprite fishSprite, Action onReturnCallback, bool isSpecial = false)
     {
-        onReturn = onReturnCallback;
-        fadeElapsedTime = 0f;
-        canClose = false;
+        BeginShow(onReturnCallback);
 
         if (titleText != null)
         {
@@ -106,8 +105,12 @@ public class FishingCompleteUI : MonoBehaviour
 
         if (fishImage != null)
         {
-            fishImage.sprite = fishSprite;
-            fishImage.enabled = fishSprite != null;
+            if (fishSprite != null)
+            {
+                fishImage.sprite = fishSprite;
+            }
+
+            fishImage.enabled = true;
         }
 
         // boxImage remains as-is; ensure it's visible
@@ -116,10 +119,42 @@ public class FishingCompleteUI : MonoBehaviour
             boxImage.enabled = true;
         }
 
-        if (popupSfx != null && audioSource != null)
+        if (successPopupSfx != null && audioSource != null)
         {
-            audioSource.PlayOneShot(popupSfx, popupSfxVolume);
+            audioSource.PlayOneShot(successPopupSfx, popupSfxVolume);
         }
+    }
+
+    public void ShowFailure(Action onReturnCallback)
+    {
+        BeginShow(onReturnCallback);
+
+        if (titleText != null)
+        {
+            titleText.text = "You failed to catch a fish... Try Again!";
+        }
+
+        if (fishImage != null)
+        {
+            fishImage.enabled = true;
+        }
+
+        if (boxImage != null)
+        {
+            boxImage.enabled = true;
+        }
+
+        if (failurePopupSfx != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(failurePopupSfx, popupSfxVolume);
+        }
+    }
+
+    private void BeginShow(Action onReturnCallback)
+    {
+        onReturn = onReturnCallback;
+        fadeElapsedTime = 0f;
+        canClose = false;
     }
 
     private void OnReturnClicked()

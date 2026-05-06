@@ -258,10 +258,14 @@ public class FishingGame : MonoBehaviour {
 		{
 			RollAndGrantFishReward();
 		}
-
-		if (!metThreshold)
+		else
 		{
 			Debug.Log("[FishingGame] Threshold not met. No fish awarded.");
+			if (fishingCompleteUIPrefab != null)
+			{
+				FishingCompleteUI ui = Instantiate(fishingCompleteUIPrefab);
+				ui.ShowFailure(() => ReturnToLake());
+			}
 		}
 	}
 
