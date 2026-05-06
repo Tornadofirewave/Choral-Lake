@@ -4813,7 +4813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.SceneManagement.LakeTransition
   targetSceneName: Lake_Pipen
-  targetSpawnId: default
+  targetSpawnId: lake_pipen_spawn
   lake: {fileID: 11400000, guid: 37fa0d5814a4b344ca6dc76d1e570d35, type: 2}
   lockedMessage: The path is blocked. You need more unique fish to proceed.
   blockedConversationId: 

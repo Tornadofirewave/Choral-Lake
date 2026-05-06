@@ -50,7 +50,7 @@ MonoBehaviour:
     icon: {fileID: -6466221823273959262, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
     flavorText: Lake 1 Fish
   - id: rainbow_trout
-    displayName: 'Rainbow Trout '
+    displayName: Rainbow Trout
     rarity: 1
     sellCost: 15
     icon: {fileID: 8562202301317368195, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
@@ -62,19 +62,19 @@ MonoBehaviour:
     icon: {fileID: -7784685719765339314, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
     flavorText: Lake 1 Fish
   - id: 'blue_discus '
-    displayName: 'Blue Discus '
+    displayName: Blue Discus
     rarity: 1
     sellCost: 20
     icon: {fileID: -4440527869562961428, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
     flavorText: Lake 1 Fish
   - id: butterfly_fish
-    displayName: 'Butterfly Fish '
+    displayName: Butterfly Fish
     rarity: 2
     sellCost: 25
     icon: {fileID: 4177943815818732514, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
     flavorText: Lake 1 Fish
   - id: crab
-    displayName: crab
+    displayName: Crab
     rarity: 2
     sellCost: 30
     icon: {fileID: 3888636848816401433, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
@@ -103,4 +103,3 @@ MonoBehaviour:
     sellCost: 400
     icon: {fileID: -6987894976487797077, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
     flavorText: Lake 1 Legendary Fish
-  multiplier: 1.5
