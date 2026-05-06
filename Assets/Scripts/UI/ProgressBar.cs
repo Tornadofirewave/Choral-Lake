@@ -6,11 +6,13 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField] private RectTransform fillArea;
     [SerializeField] private RectTransform thresholdMarker;
     [SerializeField, Min(0f)] private float fillLerpSpeed = 12f;
+    [SerializeField] private Color reachedThresholdColor = Color.green;
 
     private float currentValue;
     private float targetValue;
     private float maximum = 1f;
     private float thresholdNormalized = -1f;
+    private Color defaultFillColor = Color.white;
 
     private void Awake()
     {
@@ -22,6 +24,11 @@ public class ProgressBar : MonoBehaviour {
         if (fillArea == null && fillImage != null)
         {
             fillArea = fillImage.rectTransform.parent as RectTransform;
+        }
+
+        if (fillImage != null)
+        {
+            defaultFillColor = fillImage.color;
         }
     }
     
@@ -63,7 +70,13 @@ public class ProgressBar : MonoBehaviour {
             return;
         }
 
-        fillImage.fillAmount = Mathf.Clamp01(currentValue / maximum);
+        float normalizedProgress = Mathf.Clamp01(currentValue / maximum);
+        fillImage.fillAmount = normalizedProgress;
+
+        if (thresholdNormalized >= 0f)
+        {
+            fillImage.color = normalizedProgress >= thresholdNormalized ? reachedThresholdColor : defaultFillColor;
+        }
     }
 
     private void UpdateThresholdMarker()
