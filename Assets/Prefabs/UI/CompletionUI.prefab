@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5855411180907154602, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+  m_Sprite: {fileID: -2408432365988191519, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a90994dceb47e4340b762c125d8c3439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf01998b55b71744bb43775586f54f45, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -577,4 +577,4 @@ MonoBehaviour:
   titleText: {fileID: 4269969584042568639}
   boxImage: {fileID: 8193591230946503765}
   fishImage: {fileID: 6496180369841354324}
-  closeInputDelay: 0.08
+  fadeInDuration: 0.5
