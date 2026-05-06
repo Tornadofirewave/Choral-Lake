@@ -578,3 +578,5 @@ MonoBehaviour:
   boxImage: {fileID: 8193591230946503765}
   fishImage: {fileID: 6496180369841354324}
   fadeInDuration: 0.5
+  popupSfx: {fileID: 8300000, guid: 3c7a86f10481b0544b9ca295dcfe721d, type: 3}
+  popupSfxVolume: 1

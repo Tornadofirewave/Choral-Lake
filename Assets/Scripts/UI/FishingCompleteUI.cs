@@ -11,9 +11,12 @@ public class FishingCompleteUI : MonoBehaviour
     [SerializeField] private Image boxImage; // the 32x32 box background
     [SerializeField] private Image fishImage; // the fish sprite to display inside the box
     [SerializeField, Min(0f)] private float fadeInDuration = 0.5f;
+    [SerializeField] private AudioClip popupSfx;
+    [SerializeField, Range(0f, 1f)] private float popupSfxVolume = 1f;
 
     private Action onReturn;
     private CanvasGroup canvasGroup;
+    private AudioSource audioSource;
     private float fadeElapsedTime;
     private bool canClose;
 
@@ -24,6 +27,16 @@ public class FishingCompleteUI : MonoBehaviour
         {
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
         }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.spatialBlend = 0f;
 
         SetRaycastTargets(false);
     }
@@ -101,6 +114,11 @@ public class FishingCompleteUI : MonoBehaviour
         if (boxImage != null)
         {
             boxImage.enabled = true;
+        }
+
+        if (popupSfx != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(popupSfx, popupSfxVolume);
         }
     }
 
