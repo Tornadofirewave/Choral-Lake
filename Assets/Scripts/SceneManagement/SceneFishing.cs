@@ -18,6 +18,7 @@ namespace ChoralLake.SceneManagement
 
         private bool _playerInRange;
         private Collider2D _playerCollider;
+        private PlayerControls _controls;
 
         [Header("Lake Context")]
         [Tooltip("Lake this dock belongs to. Used for validation and editor convenience.")]
@@ -68,13 +69,26 @@ namespace ChoralLake.SceneManagement
             _playerCollider = null;
         }
 
-        private void Update()
+        private void Awake()
+        {
+            _controls = new PlayerControls();
+        }
+
+        private void OnEnable()
+        {
+            _controls.Player.Interact.performed += OnInteractPressed;
+            _controls.Player.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _controls.Player.Interact.performed -= OnInteractPressed;
+            _controls.Player.Disable();
+        }
+
+        private void OnInteractPressed(InputAction.CallbackContext ctx)
         {
             if (!_playerInRange || _playerCollider == null) return;
-
-            var keyboard = Keyboard.current;
-            if (keyboard == null || !keyboard.eKey.wasPressedThisFrame) return;
-
             if (!CanTransition(_playerCollider)) return;
 
             bool started = SceneLoader.LoadScene(

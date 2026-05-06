@@ -52,7 +52,7 @@ namespace ChoralLake.SceneManagement
                 GameManager.Instance.SaveData.currentSceneName = sceneName;
             }
 
-            FadeOut(() => SceneManager.LoadScene(sceneName));
+            FadeOut(() => SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single));
             return true;
         }
 
