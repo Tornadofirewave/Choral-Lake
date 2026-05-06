@@ -141,8 +141,7 @@ namespace ChoralLake.UI
                     continue;
                 }
                 var entry = Instantiate(entryPrefab, entryContainer);
-                float multiplier = fishDb != null ? fishDb.Multiplier : 1f;
-                entry.SetData(fish, counts[id], multiplier);
+                entry.SetData(fish, counts[id]);
                 _visibleEntries.Add(entry);
             }
         }

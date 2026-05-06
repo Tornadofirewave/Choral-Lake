@@ -86,7 +86,7 @@ public class FishingCompleteUI : MonoBehaviour
         }
     }
 
-    public void Show(string fishName, Sprite fishSprite, Action onReturnCallback, bool isSpecial = false, int sellPrice = -1)
+    public void Show(string fishName, Sprite fishSprite, Action onReturnCallback, bool isSpecial = false)
     {
         onReturn = onReturnCallback;
         fadeElapsedTime = 0f;
@@ -96,7 +96,7 @@ public class FishingCompleteUI : MonoBehaviour
         {
             if (isSpecial)
             {
-                titleText.text = $"Perfect Combo! You've caught a special {fishName}!";
+                titleText.text = $"Perfect! You've caught a {fishName} twice!";
             }
             else
             {

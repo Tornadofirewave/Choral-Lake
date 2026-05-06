@@ -8,15 +8,11 @@ namespace ChoralLake.Data
     public class FishDatabase : ScriptableObject
     {
         [SerializeField] private List<FishEntry> entries = new();
-        [Header("Pricing")]
-        [SerializeField, Min(0f)] private float multiplier = 1.5f;
 
         private Dictionary<string, FishEntry> _byId;
 
         public IReadOnlyList<FishEntry> AllEntries => entries;
         public int Count => entries.Count;
-
-        public float Multiplier => multiplier;
 
         public FishEntry GetById(string id)
         {

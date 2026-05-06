@@ -20,11 +20,11 @@ namespace ChoralLake.UI
         public int Quantity { get; private set; }
         public int LineTotal { get; private set; }
 
-        public virtual void SetData(FishEntry fish, int quantity, float multiplier = 1f)
+        public virtual void SetData(FishEntry fish, int quantity)
         {
             Fish = fish;
             Quantity = Mathf.Max(1, quantity);
-            LineTotal = fish != null ? Mathf.RoundToInt(fish.SellCost * multiplier) * Quantity : 0;
+            LineTotal = (fish != null ? fish.SellCost : 0) * Quantity;
 
             if (iconImage != null)
             {

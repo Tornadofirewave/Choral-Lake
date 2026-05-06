@@ -287,6 +287,10 @@ public class FishingGame : MonoBehaviour {
 		if (fish != null)
 		{
 			gm.AddFishToInventory(fish.Id);
+			if (perfectSession)
+			{
+				gm.AddFishToInventory(fish.Id);
+			}
 			Debug.Log($"[FishingGame] Granted fish: {fish.DisplayName} ({fish.Rarity})");
 			Debug.Log("[FishingGame] Press Escape to return to the lake.");
 
@@ -295,19 +299,7 @@ public class FishingGame : MonoBehaviour {
 				{
 					FishingCompleteUI ui = Instantiate(fishingCompleteUIPrefab);
 					bool isSpecial = perfectSession;
-					int sellPrice = fish.SellCost; // default base
-					// Try to get the FishDatabase from the GameManager's database container
-					var gameDb = gm?.Database;
-					if (gameDb != null)
-					{
-						var fishDb = gameDb.FishDatabase;
-						if (fishDb != null)
-						{
-							sellPrice = Mathf.RoundToInt(fish.SellCost * fishDb.Multiplier);
-						}
-					}
-
-					ui.Show(fish.DisplayName, fish.Icon, () => ReturnToLake(), isSpecial, sellPrice);
+					ui.Show(fish.DisplayName, fish.Icon, () => ReturnToLake(), isSpecial);
 				}
 		}
 		else
