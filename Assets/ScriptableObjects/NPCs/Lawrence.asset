@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5139074120926494e98e8d13e88adff2, type: 3}
+  m_Name: Lawrence
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Data.NpcAttendantSO
+  id: lawrence
+  displayName: Lawrence
+  dialogueConversationId: 
+  portrait: {fileID: 0}
+  walkSprite: {fileID: 485550601256817107, guid: 3f33a39f69f53fb4cba228df1b6d95ca, type: 3}
+  animatorController: {fileID: 9100000, guid: 8d0eaabd97aa9984ea3c00fdf9432da6, type: 2}

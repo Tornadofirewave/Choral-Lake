@@ -7,8 +7,9 @@ Player spends money at the Ticket Booth to summon a lootbox ship. The ship docks
 1. Player presses E on `TicketBooth` → `TicketBoothUI.Open()`.
 2. Player selects a rarity tier. `GameManager.TryPurchaseTicket(ticket)`:
    - Deducts `ticket.Price` via `TrySpendMoney`.
-   - Picks a random `NpcAttendantSO` from `GameDatabase.attendants`.
-   - Writes `pendingTicketId`, `pendingAttendantId`, `pendingShipPhase` to `PlayerSaveData`.
+   - Pre-rolls the loot (`ticket.LootTable.Roll`). Stores `pendingRewardId` + `pendingRewardKind`.
+   - If result is `rod_legendary`: selects `GameDatabase.legendaryAttendant`. Otherwise selects a random `NpcAttendantSO` from `GameDatabase.attendants`.
+   - Writes `pendingTicketId`, `pendingAttendantId`, `pendingRewardId`, `pendingRewardKind`, `pendingShipPhase` to `PlayerSaveData`.
    - Fires `OnPendingTicketChanged`.
 3. UI closes. `TicketShipSpawner` in Town scene detects the pending ticket and spawns `TicketShip.prefab`.
 
@@ -32,7 +33,8 @@ Phase is mirrored to `PlayerSaveData.pendingShipPhase` on every transition, enab
 ## Loot Roll (`TicketLootTableSO.Roll`)
 - Weighted random pick from `List<LootEntry>`.
 - If picked entry is `LootKind.Rod` and `legendaryRodOwned == true`, returns `fallbackBaitIdIfRodOwned` as bait instead.
-- `GameManager.RollPendingTicketReward()` calls Roll and immediately grants the result via `GrantRod`/`GrantBait`.
+- Roll happens at **purchase time** (`TryPurchaseTicket`), result stored in `SaveData.pendingRewardId/Kind`.
+- `GameManager.RollPendingTicketReward()` reads the stored result and grants it via `GrantRod`/`GrantBait` — no second roll.
 
 ## Legendary Rod Removal
 - Only the legendary ticket's loot table contains a rod entry (`rod_legendary`).
@@ -46,7 +48,7 @@ Phase is mirrored to `PlayerSaveData.pendingShipPhase` on every transition, enab
 
 ## Persistence
 Purchase deducts money immediately. If the player quits mid-voyage:
-- `pendingTicketId` / `pendingAttendantId` / `pendingShipPhase` survive in `PlayerSaveData`.
+- `pendingTicketId` / `pendingAttendantId` / `pendingRewardId` / `pendingRewardKind` / `pendingShipPhase` survive in `PlayerSaveData`.
 - On next load to Town, `TicketShipSpawner.OnEnable` + `OnSceneLoadComplete` re-spawns the ship.
 
 ## Reward Popup (`RewardPopup.cs`)
@@ -73,8 +75,20 @@ Purchase deducts money immediately. If the player quits mid-voyage:
 4. Add the TicketSO to `GameDatabase.tickets`.
 5. Add a new slot in the `TicketBoothUI` prefab and assign the SO.
 
+## NPC Attendant Appearances
+`ShipAttendant` drives two animator parameters at runtime:
+- `IsMoving` (bool) — true while walking, false while idle.
+- `MoveY` (float) — `+1` = walking up (returning to ship), `-1` = walking down (exiting). Locked to `+1` in idle (face-up).
+
+Each `NpcAttendantSO.AnimatorController` must expose these two parameters and include states: **Walk Down**, **Walk Up**, **Idle Up**.
+
+Attendant pool:
+- `GameDatabase.attendants` — random pool used for non-legendary rewards.
+- `GameDatabase.legendaryAttendant` — specific NPC used when the pre-rolled reward is `rod_legendary`.
+
 ## Adding a New NPC Attendant
 1. Create `NpcAttendantSO` asset under `Assets/ScriptableObjects/Attendants/`.
-2. Set `dialogueConversationId` to a unique string.
-3. Add conversation rows to `Assets/Resources/dialogue.csv` for that id.
-4. Add the SO to `GameDatabase.attendants`.
+2. Create an `AnimatorController` with `IsMoving` (bool) and `MoveY` (float) parameters. Add Idle Up, Walk Down, Walk Up states with appropriate clip transitions.
+3. Set `dialogueConversationId` to a unique string.
+4. Add conversation rows to `Assets/Resources/dialogue.csv` for that id.
+5. For regular attendants: add the SO to `GameDatabase.attendants`. For the legendary attendant: assign to `GameDatabase.legendaryAttendant`.

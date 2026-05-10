@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 9216370a66aa9484cb617c98fb0d666d
+guid: 2386373086446484a9e4211b7e4bb79f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 871796330842218243
-    second: NPC-Bryant_0
+      213: 4851057213694588545
+    second: NPC-Bao-sheet_0
   - first:
-      213: 4679690095976658632
-    second: NPC-Bryant_1
+      213: -7316465827364239425
+    second: NPC-Bao-sheet_1
   - first:
-      213: -8817890080899069106
-    second: NPC-Bryant_2
+      213: 6582372448498267062
+    second: NPC-Bao-sheet_2
   - first:
-      213: -351212766101329439
-    second: NPC-Bryant_3
+      213: 2052696642952263947
+    second: NPC-Bao-sheet_3
   - first:
-      213: 1597373168369582473
-    second: NPC-Bryant_4
+      213: 5850515672500051131
+    second: NPC-Bao-sheet_4
   - first:
-      213: 2768891431476469870
-    second: NPC-Bryant_5
+      213: -14706994945708354
+    second: NPC-Bao-sheet_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -141,7 +141,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NPC-Bryant_0
+      name: NPC-Bao-sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30fd658d42e391c00800000000000000
-      internalID: 871796330842218243
+      spriteID: 186bc5775da625340800000000000000
+      internalID: 4851057213694588545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC-Bryant_1
+      name: NPC-Bao-sheet_1
       rect:
         serializedVersion: 2
         x: 16
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c63a95295991f040800000000000000
-      internalID: 4679690095976658632
+      spriteID: fb78ba42811b67a90800000000000000
+      internalID: -7316465827364239425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC-Bryant_2
+      name: NPC-Bao-sheet_2
       rect:
         serializedVersion: 2
         x: 32
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4b029bc0bf80a580800000000000000
-      internalID: -8817890080899069106
+      spriteID: 6b3be04fdd8495b50800000000000000
+      internalID: 6582372448498267062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC-Bryant_3
+      name: NPC-Bao-sheet_3
       rect:
         serializedVersion: 2
         x: 48
@@ -222,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e9a2fb99dd302bf0800000000000000
-      internalID: -351212766101329439
+      spriteID: b097eca98b4ac7c10800000000000000
+      internalID: 2052696642952263947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC-Bryant_4
+      name: NPC-Bao-sheet_4
       rect:
         serializedVersion: 2
         x: 64
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 981c862fe620b2610800000000000000
-      internalID: 1597373168369582473
+      spriteID: bbc983cb105313150800000000000000
+      internalID: 5850515672500051131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC-Bryant_5
+      name: NPC-Bao-sheet_5
       rect:
         serializedVersion: 2
         x: 80
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6027c236141d6620800000000000000
-      internalID: 2768891431476469870
+      spriteID: ebe2c86e010cbcff0800000000000000
+      internalID: -14706994945708354
       vertices: []
       indices: 
       edges: []
@@ -276,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5b6e52d3cec88b74b936b821d3bf146b
+    spriteID: 2f93a63b792e94240b755b29f5d3330c
     internalID: 0
     vertices: []
     indices: 
@@ -288,12 +288,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      NPC-Bryant_0: 871796330842218243
-      NPC-Bryant_1: 4679690095976658632
-      NPC-Bryant_2: -8817890080899069106
-      NPC-Bryant_3: -351212766101329439
-      NPC-Bryant_4: 1597373168369582473
-      NPC-Bryant_5: 2768891431476469870
+      NPC-Bao-sheet_0: 4851057213694588545
+      NPC-Bao-sheet_1: -7316465827364239425
+      NPC-Bao-sheet_2: 6582372448498267062
+      NPC-Bao-sheet_3: 2052696642952263947
+      NPC-Bao-sheet_4: 5850515672500051131
+      NPC-Bao-sheet_5: -14706994945708354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

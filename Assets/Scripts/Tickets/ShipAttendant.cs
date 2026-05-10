@@ -84,16 +84,35 @@ namespace ChoralLake.Tickets
             }
         }
 
+        private static readonly int AnimIsMoving = Animator.StringToHash("IsMoving");
+        private static readonly int AnimMoveY    = Animator.StringToHash("MoveY");
+
         private void MoveToward(Vector2 target)
         {
             var dir = (target - rb.position).normalized;
             rb.linearVelocity = dir * moveSpeed;
+            SetAnimatorMoving(dir.y);
         }
 
         private void OnArrivedAtExit()
         {
             rb.linearVelocity = Vector2.zero;
             _phase = Phase.Idle;
+            SetAnimatorIdle();
+        }
+
+        private void SetAnimatorMoving(float dirY)
+        {
+            if (animator == null) return;
+            animator.SetBool(AnimIsMoving, true);
+            animator.SetFloat(AnimMoveY, dirY);
+        }
+
+        private void SetAnimatorIdle()
+        {
+            if (animator == null) return;
+            animator.SetBool(AnimIsMoving, false);
+            animator.SetFloat(AnimMoveY, 1f); // face up toward ship while idle
         }
 
         public void Interact()

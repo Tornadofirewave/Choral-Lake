@@ -18,6 +18,7 @@ namespace ChoralLake.Data
         [Header("Ticket System")]
         [SerializeField] private List<TicketSO> tickets = new();
         [SerializeField] private List<NpcAttendantSO> attendants = new();
+        [SerializeField] private NpcAttendantSO legendaryAttendant;
 
         private Dictionary<string, FishingRodSO> _rodsById;
         private Dictionary<string, LakeSO> _lakesById;
@@ -37,6 +38,8 @@ namespace ChoralLake.Data
         public LakeSO GetLakeById(string id) => Lookup(_lakesById, id, "lake");
         public TicketSO GetTicketById(string id) => Lookup(_ticketsById, id, "ticket");
         public NpcAttendantSO GetAttendantById(string id) => Lookup(_attendantsById, id, "attendant");
+
+        public NpcAttendantSO GetLegendaryAttendant() => legendaryAttendant;
 
         public NpcAttendantSO GetRandomAttendant()
         {

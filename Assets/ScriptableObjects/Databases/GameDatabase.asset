@@ -28,4 +28,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4eb2b54f2419be047bc8576c77859527, type: 2}
   - {fileID: 11400000, guid: 9d3ff91345286cb45858e479b6ce5732, type: 2}
   - {fileID: 11400000, guid: b19dea681cc78c940aff6e4f807020e3, type: 2}
-  attendants: []
+  attendants:
+  - {fileID: 11400000, guid: c5f2a1170f7ca4f499122555c9154d03, type: 2}
+  - {fileID: 11400000, guid: 846f725a8b8ef604aa6639c03a6f38c1, type: 2}
+  - {fileID: 11400000, guid: 0453477b022b34942b75d1c6b15ac0ef, type: 2}
+  - {fileID: 11400000, guid: 1b121d3f9c9d4d14db109fb44f92b356, type: 2}
+  legendaryAttendant: {fileID: 11400000, guid: 7612c1339ac3e2048bb9779d0886b221, type: 2}

@@ -200,9 +200,16 @@ namespace ChoralLake.Core
             }
             if (!TrySpendMoney(ticket.Price)) return false;
 
-            var attendant = database?.GetRandomAttendant();
+            var reward = ticket.LootTable.Roll(OwnsRod(LEGENDARY_ROD_ID));
+            bool isLegendary = reward.Kind == LootKind.Rod && reward.Id == LEGENDARY_ROD_ID;
+            var attendant = isLegendary
+                ? database?.GetLegendaryAttendant()
+                : database?.GetRandomAttendant();
+
             SaveData.pendingTicketId = ticket.Id;
             SaveData.pendingAttendantId = attendant != null ? attendant.Id : string.Empty;
+            SaveData.pendingRewardId = reward.Id ?? string.Empty;
+            SaveData.pendingRewardKind = reward.Kind;
             SaveData.pendingShipPhase = TicketShipPhase.Approaching;
             SaveSystem.Save(SaveData);
             OnPendingTicketChanged?.Invoke();
@@ -218,6 +225,8 @@ namespace ChoralLake.Core
                 Debug.LogWarning($"[GameManager] Clearing stale pendingTicketId '{SaveData.pendingTicketId}' — not found in database.");
                 SaveData.pendingTicketId = string.Empty;
                 SaveData.pendingAttendantId = string.Empty;
+                SaveData.pendingRewardId = string.Empty;
+                SaveData.pendingRewardKind = LootKind.Bait;
                 SaveData.pendingShipPhase = TicketShipPhase.None;
             }
         }
@@ -226,20 +235,21 @@ namespace ChoralLake.Core
         {
             SaveData.pendingTicketId = string.Empty;
             SaveData.pendingAttendantId = string.Empty;
+            SaveData.pendingRewardId = string.Empty;
+            SaveData.pendingRewardKind = LootKind.Bait;
             SaveData.pendingShipPhase = TicketShipPhase.None;
             OnPendingTicketChanged?.Invoke();
         }
 
         public LootResult RollPendingTicketReward()
         {
-            var ticket = database?.GetTicketById(SaveData.pendingTicketId);
-            if (ticket == null || ticket.LootTable == null)
+            if (string.IsNullOrEmpty(SaveData.pendingRewardId))
             {
-                Debug.LogError("[GameManager] RollPendingTicketReward: ticket or loot table not found.");
+                Debug.LogError("[GameManager] RollPendingTicketReward: no pre-rolled reward found.");
                 return default;
             }
 
-            var result = ticket.LootTable.Roll(OwnsRod(LEGENDARY_ROD_ID));
+            var result = new LootResult { Kind = SaveData.pendingRewardKind, Id = SaveData.pendingRewardId };
 
             if (result.Kind == LootKind.Rod)
                 GrantRod(result.Id);

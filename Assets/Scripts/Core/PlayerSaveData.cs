@@ -28,6 +28,8 @@ namespace ChoralLake.Core
         public string pendingTicketId;
         public string pendingAttendantId;
         public TicketShipPhase pendingShipPhase;
+        public string pendingRewardId;
+        public ChoralLake.Data.LootKind pendingRewardKind;
 
         public PlayerSaveData()
         {
@@ -44,6 +46,8 @@ namespace ChoralLake.Core
             pendingTicketId = string.Empty;
             pendingAttendantId = string.Empty;
             pendingShipPhase = TicketShipPhase.None;
+            pendingRewardId = string.Empty;
+            pendingRewardKind = ChoralLake.Data.LootKind.Bait;
         }
 
         public static PlayerSaveData NewGame()
