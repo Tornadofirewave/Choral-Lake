@@ -17,4 +17,4 @@ MonoBehaviour:
   dialogueConversationId: 
   portrait: {fileID: 0}
   walkSprite: {fileID: 0}
-  animatorController: {fileID: 9100000, guid: 3c1e2fe2dd7f59846aec2217dd165e64, type: 2}
+  animatorController: {fileID: 9100000, guid: bb7184dbdf7c8ca44a38d4959d018b00, type: 2}
