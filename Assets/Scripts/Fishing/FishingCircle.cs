@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using Unity.VisualScripting;
+using TMPro;
 
 public enum FishingCircleResult
 {
@@ -23,6 +24,7 @@ public class FishingCircle : MonoBehaviour {
     private float perfectWindow = 0.25f;
     private float goodWindow = 0.75f;
     [SerializeField] private float fadeDuration = 0.2f;
+    [SerializeField] private TMP_Text indexLabel;
     private bool debugGraceWindowLogs = true;
 
     private Transform ringSprite;
@@ -133,6 +135,11 @@ public class FishingCircle : MonoBehaviour {
         return keyboard.zKey.wasPressedThisFrame || keyboard.xKey.wasPressedThisFrame;
     }
 
+    public void SetIndex(int index)
+    {
+        if (indexLabel != null) indexLabel.text = index.ToString();
+    }
+
     public void Initialize(float newTimeDuration, float newPerfectWindow, bool enableDebugLogs)
     {
         timeDuration = Mathf.Max(0f, newTimeDuration);
@@ -215,6 +222,14 @@ public class FishingCircle : MonoBehaviour {
             renderer.color = color;
         }
 
+        // Fade out the index label text as well
+        if (indexLabel != null)
+        {
+            Color textColor = indexLabel.color;
+            textColor.a = alpha;
+            indexLabel.color = textColor;
+        }
+
         if (t >= 1f)
         {
             Destroy(gameObject);
@@ -234,6 +249,14 @@ public class FishingCircle : MonoBehaviour {
             Color color = renderer.color;
             color.a = 1f;
             renderer.color = color;
+        }
+
+        // Restore index label text alpha
+        if (indexLabel != null)
+        {
+            Color textColor = indexLabel.color;
+            textColor.a = 1f;
+            indexLabel.color = textColor;
         }
     }
 

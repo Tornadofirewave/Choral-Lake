@@ -140,6 +140,7 @@ public class FishingGame : MonoBehaviour {
 			FishingCircle spawnedCircle = circle;
 			circle.OnCircleCompleted += (wasSuccessful, status) => OnCircleCompleted(spawnedCircle, wasSuccessful, status);
 
+            circle.SetIndex(spawnedCount + 1);
 			spawnedCount++;
 			return;
 		}
