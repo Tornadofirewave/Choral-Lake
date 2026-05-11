@@ -15,9 +15,9 @@ MonoBehaviour:
   id: rod_legendary
   displayName: Legendary Rod
   maxBaitRarity: 3
-  commonWeight: 30
-  rareWeight: 30
-  epicWeight: 30
-  legendaryWeight: 10
+  commonWeight: 20
+  rareWeight: 25
+  epicWeight: 50
+  legendaryWeight: 15
   inventoryIcon: {fileID: 6926164595493724515, guid: 5149e78e64c97cd4a8000e19780d3cdc, type: 3}
   heldSprite: {fileID: 0}
