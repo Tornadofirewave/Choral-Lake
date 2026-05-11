@@ -100,15 +100,17 @@ public class FishingGame : MonoBehaviour {
 				Random.Range(settings.SpawnMin.y, settings.SpawnMax.y));
 
 			Vector3 spawnWorldPos = transform.TransformPoint(new Vector3(randomLocalPos.x, randomLocalPos.y, 0f));
-			FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
-			circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
 
-			float circleRadius = GetCircleRadius(circle);
-			if (!IsSpawnPositionClear(spawnWorldPos, circleRadius))
+			// Determine candidate radius from the prefab before instantiating so
+			// we can validate the spawn position without creating/removing objects.
+			float candidateRadius = GetCircleRadius(settings.CirclePrefab);
+			if (!IsSpawnPositionClear(spawnWorldPos, candidateRadius))
 			{
-				Destroy(circle.gameObject);
 				continue;
 			}
+
+			FishingCircle circle = Instantiate(settings.CirclePrefab, spawnWorldPos, Quaternion.identity, spawnParent);
+			circle.Initialize(settings.TimeDuration, settings.PerfectWindow, settings.DebugGraceWindowLogs);
 
 			activeCircles.Add(circle);
 			FishingCircle spawnedCircle = circle;

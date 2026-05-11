@@ -23,9 +23,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lake_Bell.unity
     guid: f60a558033e9fc24b96b938e8d1246b4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Fishing.unity
     guid: efa8aa5a4756d6349a82dfbf59d29074
+  - enabled: 1
+    path: Assets/Scenes/FishingAcapella.unity
+    guid: ccfca95cfb47e0e49afb0439970fef8d
+  - enabled: 1
+    path: Assets/Scenes/FishingPipen.unity
+    guid: c54ddd125b3d50947a045efbb2e56db4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
