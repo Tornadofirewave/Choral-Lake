@@ -30,7 +30,7 @@ MonoBehaviour:
     guaranteedRarity: 2
     icon: {fileID: 7142516469680083159, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
     circleSpawnDecrease: 8
-    thresholdDecrease: 12
+    thresholdDecrease: 15
   - id: bait_legendary
     displayName: Legendary Bait
     guaranteedRarity: 3

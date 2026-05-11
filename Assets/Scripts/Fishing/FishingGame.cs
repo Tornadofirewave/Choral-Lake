@@ -57,7 +57,7 @@ public class FishingGame : MonoBehaviour {
 		}
 
 		// If all circles have been handled, check if session is complete
-		if (!sessionCompleted && circlesCompleted >= settings.CirclesToSpawn)
+		if (!sessionCompleted && circlesCompleted >= GetAdjustedCirclesToSpawn())
 		{
 			OnFishingSessionComplete();
 			return;
@@ -86,7 +86,31 @@ public class FishingGame : MonoBehaviour {
 			return false;
 		}
 
-		return spawnedCount < settings.CirclesToSpawn;
+		return spawnedCount < GetAdjustedCirclesToSpawn();
+	}
+
+	private int GetAdjustedCirclesToSpawn()
+	{
+		int baseCircles = settings.CirclesToSpawn;
+		var gm = GameManager.Instance;
+		if (gm?.SaveData == null) return baseCircles;
+
+		var bait = gm.Database?.GetBaitById(gm.SaveData.equippedBaitId);
+		if (bait == null) return baseCircles;
+
+		return Mathf.Max(1, baseCircles - bait.CircleSpawnDecrease);
+	}
+
+	private float GetAdjustedCompletionThreshold()
+	{
+		float baseThreshold = settings.CompletionThreshold;
+		var gm = GameManager.Instance;
+		if (gm?.SaveData == null) return baseThreshold;
+
+		var bait = gm.Database?.GetBaitById(gm.SaveData.equippedBaitId);
+		if (bait == null) return baseThreshold;
+
+		return Mathf.Max(0f, Mathf.Min(1f, baseThreshold - (bait.ThresholdDecrease / 100f)));
 	}
 
 	private void SpawnCircle()
@@ -162,7 +186,7 @@ public class FishingGame : MonoBehaviour {
 			return;
 		}
 
-		progressBar.SetProgress(totalScore / 10f, settings.CirclesToSpawn, settings.CompletionThreshold);
+		progressBar.SetProgress(totalScore / 10f, GetAdjustedCirclesToSpawn(), GetAdjustedCompletionThreshold());
 	}
 
 	private void SpawnResultPopup(FishingCircle completedCircle, FishingCircleResult status)
@@ -249,11 +273,13 @@ public class FishingGame : MonoBehaviour {
 	{
 		sessionCompleted = true;
 
-		float successRate = totalScore / (settings.CirclesToSpawn * 10f);
-		bool metThreshold = successRate >= settings.CompletionThreshold;
+		int adjustedCircles = GetAdjustedCirclesToSpawn();
+		float adjustedThreshold = GetAdjustedCompletionThreshold();
+		float successRate = totalScore / (adjustedCircles * 10f);
+		bool metThreshold = successRate >= adjustedThreshold;
 		perfectSession = successRate == 1f;
 
-		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {settings.CompletionThreshold:P0}). " +
+		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {adjustedThreshold:P0}). " +
 			$"Met threshold: {metThreshold}");
 
 		if (metThreshold)
