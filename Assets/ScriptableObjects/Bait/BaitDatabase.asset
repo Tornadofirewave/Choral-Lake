@@ -17,15 +17,23 @@ MonoBehaviour:
     displayName: Common Bait
     guaranteedRarity: 0
     icon: {fileID: 2865906195106238846, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
+    circleSpawnDecrease: 3
+    thresholdDecrease: 5
   - id: bait_rare
     displayName: Rare Bait
     guaranteedRarity: 1
     icon: {fileID: -9177039919303097523, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
+    circleSpawnDecrease: 5
+    thresholdDecrease: 8
   - id: bait_epic
     displayName: Epic Bait
     guaranteedRarity: 2
     icon: {fileID: 7142516469680083159, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
+    circleSpawnDecrease: 8
+    thresholdDecrease: 12
   - id: bait_legendary
     displayName: Legendary Bait
     guaranteedRarity: 3
     icon: {fileID: -6131971823601528324, guid: 11a76bf43864c0248876dd0ac6f40090, type: 3}
+    circleSpawnDecrease: 10
+    thresholdDecrease: 20
