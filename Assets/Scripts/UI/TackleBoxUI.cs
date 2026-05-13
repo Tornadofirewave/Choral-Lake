@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ChoralLake.Core;
+using UnityEngine.UI;
 
 namespace ChoralLake.UI
 {
@@ -14,6 +15,8 @@ namespace ChoralLake.UI
         [SerializeField] private List<TackleBoxRodSlot> rodSlots;
         [SerializeField] private List<TackleBoxBaitSlot> baitSlots;
         [SerializeField, Min(0f)] private float fadeInDuration = 0.25f;
+        [SerializeField] private Button closeButton;
+        [SerializeField] private Button helpButton;
 
         private float _fadeElapsed;
         private bool _isOpen;
@@ -26,6 +29,16 @@ namespace ChoralLake.UI
             Instance = this;
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
             SetVisible(false);
+        }
+
+        private void OnEnable()
+        {
+            if (closeButton != null) closeButton.onClick.AddListener(Hide);
+        }
+
+        private void OnDisable()
+        {
+            if (closeButton != null) closeButton.onClick.RemoveListener(Hide);
         }
 
         public void Show()
