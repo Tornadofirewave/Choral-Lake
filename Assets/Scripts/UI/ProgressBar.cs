@@ -7,7 +7,6 @@ public class ProgressBar : MonoBehaviour {
     [SerializeField] private RectTransform thresholdMarker;
     [SerializeField, Min(0f)] private float fillLerpSpeed = 12f;
     [SerializeField] private Color reachedThresholdColor = Color.green;
-    // User-provided color: R=250, G=255, B=117, A=255 -> normalized RGBA
     [SerializeField] private Color reachedPerfecftColor = new Color(250f/255f, 255f/255f, 117f/255f, 1f);
 
     private float currentValue;
