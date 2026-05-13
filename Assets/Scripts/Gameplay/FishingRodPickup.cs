@@ -12,6 +12,7 @@ namespace ChoralLake.Gameplay
         [SerializeField] private FishingRodSO rod;
         [SerializeField] private string sfxId = "sfx_pickup_rod";
         [SerializeField] private string interactPrompt = "Pick up rod";
+        [SerializeField] private CanvasGroup helpUI;
 
         private bool collected;
 
@@ -41,11 +42,45 @@ namespace ChoralLake.Gameplay
             var gm = GameManager.Instance;
             gm.GrantRod(rod.Id);
             gm.EquipRod(rod.Id);
+
+            if (rod.Id == "rod_common" && helpUI != null)
+            {
+                ShowHelpUI(helpUI);
+            }
+
             AudioManager.Instance?.PlaySfx(sfxId);
             RewardPopup.Instance?.Show(rod.InventoryIcon, rod.DisplayName);
             gm.SaveGame();
 
             Destroy(gameObject);
+        }
+
+        private static void ShowHelpUI(CanvasGroup canvasGroup)
+        {
+            Transform current = canvasGroup.transform;
+            while (current != null)
+            {
+                if (!current.gameObject.activeSelf)
+                {
+                    current.gameObject.SetActive(true);
+                }
+
+                current = current.parent;
+            }
+
+            current = canvasGroup.transform;
+            while (current != null)
+            {
+                CanvasGroup group = current.GetComponent<CanvasGroup>();
+                if (group != null)
+                {
+                    group.alpha = 1f;
+                    group.interactable = true;
+                    group.blocksRaycasts = true;
+                }
+
+                current = current.parent;
+            }
         }
     }
 }
