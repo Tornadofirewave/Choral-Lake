@@ -76,19 +76,16 @@ namespace ChoralLake.SceneManagement
 
         private void OnEnable()
         {
-            _controls.Player.Interact.performed += OnInteractPressed;
-            _controls.Player.Enable();
         }
 
         private void OnDisable()
         {
-            _controls.Player.Interact.performed -= OnInteractPressed;
-            _controls.Player.Disable();
         }
 
-        private void OnInteractPressed(InputAction.CallbackContext ctx)
+        private void Update()
         {
             if (!_playerInRange || _playerCollider == null) return;
+            if (Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame) return;
             if (!CanTransition(_playerCollider)) return;
 
             bool started = SceneLoader.LoadScene(
