@@ -31,6 +31,7 @@ namespace ChoralLake.UI
         private bool _helpOpen;
         private float _helpFadeElapsed;
         private bool _helpCloseArmed;
+        private bool _showTutorialFirstOpen = true;
         private Camera _uiCamera;
 
         private void Awake()
@@ -67,6 +68,12 @@ namespace ChoralLake.UI
 
             // Make sure help is hidden when opening main menu
             HideHelp();
+
+            if (_showTutorialFirstOpen)
+            {
+                _showTutorialFirstOpen = false;
+                ShowHelp();
+            }
 
             var canvas = GetComponentInParent<Canvas>();
             _uiCamera = canvas != null ? canvas.worldCamera : null;
