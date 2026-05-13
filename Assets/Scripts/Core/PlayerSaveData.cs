@@ -31,6 +31,9 @@ namespace ChoralLake.Core
         public string pendingRewardId;
         public ChoralLake.Data.LootKind pendingRewardKind;
 
+        // Tutorial flags
+        public bool showedTackleBoxTutorial;
+
         public PlayerSaveData()
         {
             money = 0;
@@ -48,6 +51,7 @@ namespace ChoralLake.Core
             pendingShipPhase = TicketShipPhase.None;
             pendingRewardId = string.Empty;
             pendingRewardKind = ChoralLake.Data.LootKind.Bait;
+            showedTackleBoxTutorial = false;
         }
 
         public static PlayerSaveData NewGame()

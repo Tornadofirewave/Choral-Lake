@@ -31,7 +31,6 @@ namespace ChoralLake.UI
         private bool _helpOpen;
         private float _helpFadeElapsed;
         private bool _helpCloseArmed;
-        private bool _showTutorialFirstOpen = true;
         private Camera _uiCamera;
 
         private void Awake()
@@ -69,9 +68,12 @@ namespace ChoralLake.UI
             // Make sure help is hidden when opening main menu
             HideHelp();
 
-            if (_showTutorialFirstOpen)
+            // Show tutorial on first open
+            var gm = GameManager.Instance;
+            if (gm != null && !gm.SaveData.showedTackleBoxTutorial)
             {
-                _showTutorialFirstOpen = false;
+                gm.SaveData.showedTackleBoxTutorial = true;
+                gm.SaveGame();
                 ShowHelp();
             }
 
