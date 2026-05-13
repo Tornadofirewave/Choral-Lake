@@ -412,6 +412,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &193182716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6599403252984515667, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
+  m_PrefabInstance: {fileID: 1339244904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &241938030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,11 +1179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1515512275601365429, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -19
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1515512275601365429, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -52
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 1515512275601365429, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1198,12 +1203,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6599403252984515667, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6599403252984515667, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1339244907}
   m_SourcePrefab: {fileID: 100100000, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
 --- !u!224 &1339244905 stripped
 RectTransform:
@@ -1215,6 +1223,21 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 7081029234475566877, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
   m_PrefabInstance: {fileID: 1339244904}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1339244907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193182716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939264e2f6e975845bb0c4e56152959a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.UI.FishingTutorialUI
+  canvasGroup: {fileID: 1339244906}
+  fadeInDuration: 0.25
+  panelRect: {fileID: 2091521162}
 --- !u!1 &1365151747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,6 +3065,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!224 &2091521162 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6219821658472604000, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
+  m_PrefabInstance: {fileID: 1339244904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2123245497
 GameObject:
   m_ObjectHideFlags: 0

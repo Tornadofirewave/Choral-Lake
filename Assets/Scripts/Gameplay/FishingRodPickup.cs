@@ -45,7 +45,12 @@ namespace ChoralLake.Gameplay
 
             if (rod.Id == "rod_common" && helpUI != null)
             {
-                ShowHelpUI(helpUI);
+                var tutorialUI = helpUI.GetComponent<UI.FishingTutorialUI>();
+                if (tutorialUI != null)
+                {
+                    tutorialUI.Show();
+                    Debug.Log("Tutorial Activated");
+                }
             }
 
             AudioManager.Instance?.PlaySfx(sfxId);
@@ -53,34 +58,6 @@ namespace ChoralLake.Gameplay
             gm.SaveGame();
 
             Destroy(gameObject);
-        }
-
-        private static void ShowHelpUI(CanvasGroup canvasGroup)
-        {
-            Transform current = canvasGroup.transform;
-            while (current != null)
-            {
-                if (!current.gameObject.activeSelf)
-                {
-                    current.gameObject.SetActive(true);
-                }
-
-                current = current.parent;
-            }
-
-            current = canvasGroup.transform;
-            while (current != null)
-            {
-                CanvasGroup group = current.GetComponent<CanvasGroup>();
-                if (group != null)
-                {
-                    group.alpha = 1f;
-                    group.interactable = true;
-                    group.blocksRaycasts = true;
-                }
-
-                current = current.parent;
-            }
         }
     }
 }
