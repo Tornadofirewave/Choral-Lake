@@ -40,3 +40,6 @@ MonoBehaviour:
   - id: sfx_tacklebox_open
     clip: {fileID: 8300000, guid: 005e6a3348ad1974bb932e33280fdace, type: 3}
     volume: 0.5
+  - id: sfx_tacklebox_open
+    clip: {fileID: 8300000, guid: 005e6a3348ad1974bb932e33280fdace, type: 3}
+    volume: 0.5
