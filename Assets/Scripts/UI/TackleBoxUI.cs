@@ -11,16 +11,26 @@ namespace ChoralLake.UI
         public static TackleBoxUI Instance { get; private set; }
 
         [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField, Min(0f)] private float fadeInDuration = 0.25f;
+
+        [Header("Tackle Box Menu")]
         [SerializeField] private RectTransform panelRect;
         [SerializeField] private List<TackleBoxRodSlot> rodSlots;
         [SerializeField] private List<TackleBoxBaitSlot> baitSlots;
-        [SerializeField, Min(0f)] private float fadeInDuration = 0.25f;
+
+        [Header("Help Menu")]
+        [SerializeField] private RectTransform helpRect;
+
+        [Header("Buttons")]
         [SerializeField] private Button closeButton;
         [SerializeField] private Button helpButton;
 
         private float _fadeElapsed;
         private bool _isOpen;
         private bool _fadeDone;
+        private bool _helpOpen;
+        private float _helpFadeElapsed;
+        private bool _helpCloseArmed;
         private Camera _uiCamera;
 
         private void Awake()
@@ -29,16 +39,19 @@ namespace ChoralLake.UI
             Instance = this;
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
             SetVisible(false);
+            HideHelp();
         }
 
         private void OnEnable()
         {
             if (closeButton != null) closeButton.onClick.AddListener(Hide);
+            if (helpButton != null) helpButton.onClick.AddListener(ShowHelp);
         }
 
         private void OnDisable()
         {
             if (closeButton != null) closeButton.onClick.RemoveListener(Hide);
+            if (helpButton != null) helpButton.onClick.RemoveListener(ShowHelp);
         }
 
         public void Show()
@@ -51,6 +64,9 @@ namespace ChoralLake.UI
             canvasGroup.blocksRaycasts = true;
             _fadeElapsed = 0f;
             _fadeDone    = false;
+
+            // Make sure help is hidden when opening main menu
+            HideHelp();
 
             var canvas = GetComponentInParent<Canvas>();
             _uiCamera = canvas != null ? canvas.worldCamera : null;
@@ -66,6 +82,39 @@ namespace ChoralLake.UI
             UnsubscribeEvents();
             ModalStack.Pop();
             SetVisible(false);
+        }
+
+        private void ShowHelp()
+        {
+            if (_helpOpen) return;
+            _helpOpen = true;
+            _helpFadeElapsed = 0f;
+            _helpCloseArmed = false;
+            if (helpRect != null)
+            {
+                helpRect.gameObject.SetActive(true);
+                CanvasGroup helpCanvasGroup = helpRect.GetComponent<CanvasGroup>();
+                if (helpCanvasGroup != null)
+                {
+                    helpCanvasGroup.alpha = 0f;
+                }
+            }
+        }
+
+        private void HideHelp()
+        {
+            _helpOpen = false;
+            _helpFadeElapsed = 0f;
+            _helpCloseArmed = false;
+            if (helpRect != null)
+            {
+                CanvasGroup helpCanvasGroup = helpRect.GetComponent<CanvasGroup>();
+                if (helpCanvasGroup != null)
+                {
+                    helpCanvasGroup.alpha = 0f;
+                }
+                helpRect.gameObject.SetActive(false);
+            }
         }
 
         private void SetVisible(bool visible)
@@ -91,11 +140,31 @@ namespace ChoralLake.UI
                 return;
             }
 
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            // Handle help menu fade-in
+            if (_helpOpen)
             {
-                var pos = Mouse.current.position.ReadValue();
-                if (!RectTransformUtility.RectangleContainsScreenPoint(panelRect, pos, _uiCamera))
-                    Hide();
+                _helpFadeElapsed += Time.unscaledDeltaTime;
+                CanvasGroup helpCanvasGroup = helpRect != null ? helpRect.GetComponent<CanvasGroup>() : null;
+                if (helpCanvasGroup != null)
+                {
+                    helpCanvasGroup.alpha = Mathf.Clamp01(_helpFadeElapsed / fadeInDuration);
+                }
+
+                if (!_helpCloseArmed)
+                {
+                    if (Mouse.current == null || !Mouse.current.leftButton.isPressed)
+                    {
+                        _helpCloseArmed = true;
+                    }
+
+                    return;
+                }
+
+                if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    HideHelp();
+                }
+                return;
             }
         }
 
