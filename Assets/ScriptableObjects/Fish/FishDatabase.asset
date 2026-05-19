@@ -91,15 +91,81 @@ MonoBehaviour:
     sellCost: 100
     icon: {fileID: -2860549909802170002, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
     flavorText: Lake 1 Legendary Fish
-  - id: L_salmon
-    displayName: Legendary Salmon
-    rarity: 3
-    sellCost: 200
-    icon: {fileID: -2408432365988191519, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
-    flavorText: Lake 2 Legendary Fish
   - id: L_northern_pike
     displayName: Legendary Northern Pike
     rarity: 3
     sellCost: 400
     icon: {fileID: -6987894976487797077, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
     flavorText: Lake 1 Legendary Fish
+  - id: c_minnow
+    displayName: Common Minow
+    rarity: 0
+    sellCost: 13
+    icon: {fileID: 7161886116384921695, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: river_perch
+    displayName: River perch
+    rarity: 0
+    sellCost: 15
+    icon: {fileID: 2316000379840296099, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: golden_trout
+    displayName: Golden Trout
+    rarity: 0
+    sellCost: 18
+    icon: {fileID: 5551162239717915705, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: silverfin
+    displayName: Silverfin
+    rarity: 1
+    sellCost: 30
+    icon: {fileID: -2138169658848872653, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: mahimahi
+    displayName: Mahi Mahi
+    rarity: 1
+    sellCost: 36
+    icon: {fileID: -4525875717327998074, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: parrotfish
+    displayName: Parrot Fish
+    rarity: 1
+    sellCost: 42
+    icon: {fileID: -5855411180907154602, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: blue_cichlid
+    displayName: Blue Cichlid
+    rarity: 2
+    sellCost: 50
+    icon: {fileID: 3093555907524137670, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: bluegill
+    displayName: Blue GIll
+    rarity: 2
+    sellCost: 48
+    icon: {fileID: -2843299357937944970, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: flounder
+    displayName: Flounder
+    rarity: 2
+    sellCost: 54
+    icon: {fileID: 6554164663265866747, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: octopus
+    displayName: Octopus
+    rarity: 2
+    sellCost: 60
+    icon: {fileID: 5368666533138668104, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 FIsh
+  - id: axolotl
+    displayName: Axolotl
+    rarity: 2
+    sellCost: 62
+    icon: {fileID: -3209027340831218189, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
+    flavorText: Lake 2 Fish
+  - id: L_salmon
+    displayName: Legendary Salmon
+    rarity: 3
+    sellCost: 200
+    icon: {fileID: -2408432365988191519, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
+    flavorText: Lake 2 Legendary Fish

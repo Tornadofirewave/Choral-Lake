@@ -16,4 +16,17 @@ MonoBehaviour:
   displayName: Lake Pipen
   sceneName: Lake_Pipen
   uniqueFishRequiredToUnlock: 10
-  fishIdPool: []
+  fishIdPool:
+  - c_minnow
+  - river_perch
+  - c_minnow
+  - golden_trout
+  - silverfin
+  - mahimahi
+  - parrotfish
+  - blue_cichild
+  - bluegill
+  - flounder
+  - octopus
+  - axolotl
+  - L_salmon
