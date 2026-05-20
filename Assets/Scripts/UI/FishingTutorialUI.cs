@@ -5,6 +5,8 @@ namespace ChoralLake.UI
 {
     public class FishingTutorialUI : MonoBehaviour
     {
+        public static FishingTutorialUI Instance { get; private set; }
+
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField, Min(0f)] private float fadeInDuration = 0.25f;
         [SerializeField] private RectTransform panelRect;
@@ -16,8 +18,15 @@ namespace ChoralLake.UI
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
             SetVisible(false);
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
         }
 
         public void Show()
