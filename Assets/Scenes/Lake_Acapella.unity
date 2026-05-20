@@ -696,6 +696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 4850908094673250027, guid: 65f6472556cf1fe47ad2c0bc2fb2794a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1203,7 +1207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6599403252984515667, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3167,6 +3171,9 @@ GameObject:
   - component: {fileID: 2074466675}
   - component: {fileID: 2074466674}
   - component: {fileID: 2074466673}
+  - component: {fileID: 2074466678}
+  - component: {fileID: 2074466677}
+  - component: {fileID: 2074466676}
   m_Layer: 0
   m_Name: FishingSign
   m_TagString: Untagged
@@ -3294,6 +3301,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2074466676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074466672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb037d62f6d65b40b176db74fca22d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Gameplay.FishingTutorialInteractable
+  interactPrompt: Open tutorial
+--- !u!114 &2074466677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074466672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f311dcf874f0308409d2e3e74f0efca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Rendering.YSort
+  precision: 100
+--- !u!210 &2074466678
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074466672}
+  m_Enabled: 1
+  m_SortingLayerID: 409434755
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!224 &2091521162 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6219821658472604000, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
