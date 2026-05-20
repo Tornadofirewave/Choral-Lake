@@ -43,6 +43,9 @@ namespace ChoralLake.Tickets
         private void Awake()
         {
             if (rb == null) rb = GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
         public void Initialize(Transform exitPoint, Vector2 returnPos, Action onDone)
