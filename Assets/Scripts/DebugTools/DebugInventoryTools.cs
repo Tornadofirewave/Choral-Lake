@@ -12,7 +12,7 @@ namespace ChoralLake.DebugTools
     public class DebugInventoryTools : MonoBehaviour
     {
         [Header("Fish IDs to grant (comma-separated)")]
-        [SerializeField] private string fishIdsToGrant = "pufferfish_1,salmon_1,starfish_1";
+        [SerializeField] private string fishIdsToGrant = "L_rainbow_trout,L_salmon,L_northern_pike";
 
         [Header("Rod")]
         [SerializeField] private string commonRodId = "rod_common";
@@ -23,14 +23,14 @@ namespace ChoralLake.DebugTools
 
         private void Update()
         {
-            if (Keyboard.current != null && Keyboard.current.f5Key.wasPressedThisFrame)
-                GrantFishFromField();
-
             if (Keyboard.current != null && Keyboard.current.f6Key.wasPressedThisFrame)
-                GrantCommonRod();
+                // GrantCommonRod();
 
             if (Keyboard.current != null && Keyboard.current.f7Key.wasPressedThisFrame)
                 ResetSaveData();
+
+            if (Keyboard.current != null && Keyboard.current.f8Key.wasPressedThisFrame)
+                GrantFishFromField();
         }
 
         [ContextMenu("Grant Fish From Field")]

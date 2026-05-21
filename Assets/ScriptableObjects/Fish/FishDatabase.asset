@@ -13,24 +13,6 @@ MonoBehaviour:
   m_Name: FishDatabase
   m_EditorClassIdentifier: ChoralLake::ChoralLake.Data.FishDatabase
   entries:
-  - id: starfish_1
-    displayName: Starfish
-    rarity: 0
-    sellCost: 100
-    icon: {fileID: 8966945178157639174, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
-    flavorText: 
-  - id: pufferfish_1
-    displayName: Pufferfish
-    rarity: 1
-    sellCost: 200
-    icon: {fileID: 7910131988914132003, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
-    flavorText: 
-  - id: salmon_1
-    displayName: Salmon
-    rarity: 2
-    sellCost: 250
-    icon: {fileID: 4694313144681828600, guid: 7f7aeb376ccf7b34890bd39104bd274d, type: 3}
-    flavorText: 
   - id: anchovy
     displayName: Anchovy
     rarity: 0
@@ -90,12 +72,6 @@ MonoBehaviour:
     rarity: 3
     sellCost: 100
     icon: {fileID: -2860549909802170002, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
-    flavorText: Lake 1 Legendary Fish
-  - id: L_northern_pike
-    displayName: Legendary Northern Pike
-    rarity: 3
-    sellCost: 400
-    icon: {fileID: -6987894976487797077, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
     flavorText: Lake 1 Legendary Fish
   - id: c_minnow
     displayName: Common Minow
@@ -168,4 +144,10 @@ MonoBehaviour:
     rarity: 3
     sellCost: 200
     icon: {fileID: -2408432365988191519, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
+    flavorText: Lake 2 Legendary Fish
+  - id: L_northern_pike
+    displayName: Legendary Northern Pike
+    rarity: 3
+    sellCost: 400
+    icon: {fileID: -6987894976487797077, guid: a6d5d87706da29743983fc7a41ab3de1, type: 3}
     flavorText: Lake 2 Legendary Fish

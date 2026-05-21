@@ -3244,7 +3244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341dc0a190d1c8a418495089c8d0183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.DebugTools.DebugInventoryTools
-  fishIdsToGrant: starfish_1, salmon_1, pufferfish_1
+  fishIdsToGrant: L_rainbow_trout,L_salmon,L_northern_pike
   commonRodId: rod_common
   moneyAmount: 100
 --- !u!1 &1197068252
