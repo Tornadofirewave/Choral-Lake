@@ -29,6 +29,7 @@ public class FishingGame : MonoBehaviour {
 	private bool sessionCompleted;
 	private bool perfectSession;
 	private bool playerWasHidden;
+	private string sessionBaitId = string.Empty;
 
 
 	private void Start()
@@ -92,10 +93,7 @@ public class FishingGame : MonoBehaviour {
 	private int GetAdjustedCirclesToSpawn()
 	{
 		int baseCircles = settings.CirclesToSpawn;
-		var gm = GameManager.Instance;
-		if (gm?.SaveData == null) return baseCircles;
-
-		var bait = gm.Database?.GetBaitById(gm.SaveData.equippedBaitId);
+		var bait = GetEquippedSessionBait();
 		if (bait == null) return baseCircles;
 
 		return Mathf.Max(1, baseCircles - bait.CircleSpawnDecrease);
@@ -104,13 +102,45 @@ public class FishingGame : MonoBehaviour {
 	private float GetAdjustedCompletionThreshold()
 	{
 		float baseThreshold = settings.CompletionThreshold;
-		var gm = GameManager.Instance;
-		if (gm?.SaveData == null) return baseThreshold;
-
-		var bait = gm.Database?.GetBaitById(gm.SaveData.equippedBaitId);
+		var bait = GetEquippedSessionBait();
 		if (bait == null) return baseThreshold;
 
 		return Mathf.Max(0f, Mathf.Min(1f, baseThreshold - (bait.ThresholdDecrease / 100f)));
+	}
+
+	private BaitEntry GetEquippedSessionBait()
+	{
+		var gm = GameManager.Instance;
+		if (gm?.SaveData == null) return null;
+
+		if (string.IsNullOrEmpty(sessionBaitId))
+		{
+			string equippedBaitId = gm.SaveData.equippedBaitId;
+			if (string.IsNullOrEmpty(equippedBaitId) || gm.GetBaitCount(equippedBaitId) <= 0)
+			{
+				return null;
+			}
+
+			sessionBaitId = equippedBaitId;
+		}
+
+		return gm.GetBaitCount(sessionBaitId) > 0
+			? gm.Database?.GetBaitById(sessionBaitId)
+			: null;
+	}
+
+	private void ConsumeSessionBait()
+	{
+		if (string.IsNullOrEmpty(sessionBaitId)) return;
+
+		var gm = GameManager.Instance;
+		if (gm == null) return;
+
+		if (gm.ConsumeBait(sessionBaitId))
+		{
+			gm.SaveGame();
+			Debug.Log($"[FishingGame] Consumed bait: {sessionBaitId}");
+		}
 	}
 
 	private void SpawnCircle()
@@ -279,6 +309,7 @@ public class FishingGame : MonoBehaviour {
 		float successRate = totalScore / (adjustedCircles * 10f);
 		bool metThreshold = successRate >= adjustedThreshold;
 		perfectSession = successRate == 1f;
+		ConsumeSessionBait();
 
 		Debug.Log($"[FishingGame] Fishing session complete! Success rate: {successRate:P0} (threshold: {adjustedThreshold:P0}). " +
 			$"Met threshold: {metThreshold}");
