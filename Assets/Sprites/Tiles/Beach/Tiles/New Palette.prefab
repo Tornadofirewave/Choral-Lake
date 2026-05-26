@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2900099517995028030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7260974633894292104}
+  m_Layer: 0
+  m_Name: 'hitbox (Missing Prefab with guid: 682a5faf1b0f24f4c95a00318c04204c)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7260974633894292104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900099517995028030}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 22.5625, y: -18.8125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6732395157179307394}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3079152826584894669
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +106,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7260974633894292104}
+  - {fileID: 6982614641717281972}
   m_Father: {fileID: 8467072252535208124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &1676553847824758369
@@ -2631,7 +2664,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 337
-      m_TileSpriteIndex: 337
+      m_TileSpriteIndex: 358
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4385,6 +4418,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 92c4699494ee1b241b76716923acef61, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 0f3e814a4eba0c44eaae0c8e51545e7b, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 8589518481714570124, guid: 59d99a3694fe40443a4f30f4eadb2f37, type: 3}
@@ -5060,8 +5095,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 8360180821258374603, guid: ca58e137b8de5b04f8a4a16feb919a60, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -6203055758245662136, guid: ca58e137b8de5b04f8a4a16feb919a60, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 1129031018401096933, guid: 7f3aa91e2c43bda478b0b487767e40fc, type: 3}
   - m_RefCount: 1
@@ -5102,6 +5137,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 21756f62dcdf5734aab5c47cc3b46c80, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 9d696b3b9f506d74e8f1561dc4c066d4, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -6203055758245662136, guid: ca58e137b8de5b04f8a4a16feb919a60, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 358
     m_Data:
@@ -5125,13 +5162,15 @@ Tilemap:
   - m_RefCount: 354
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.8830825, g: 0.46934423, b: 0.5334505, a: 1}
+    m_Data: {r: 0.82087946, g: 0.47540772, b: 0.58187497, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.81309193, g: 0.32881513, b: 0.41324824, a: 1}
+    m_Data: {r: 0.7231594, g: 0.3676344, b: 0.39434785, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.95810103, g: 0.4695634, b: 0.5399904, a: 1}
+    m_Data: {r: 0.95262295, g: 0.54099125, b: 0.59116507, a: 1}
   - m_RefCount: 1
-    m_Data: {r: 0.84967387, g: 0.41845867, b: 0.53540474, a: 1}
+    m_Data: {r: 0.7290455, g: 0.40852574, b: 0.4093469, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: -6.5309004e+13, g: -6.5309004e+13, b: -6.5309004e+13, a: -6.5309004e+13}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5212,7 +5251,38 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
---- !u!114 &5418989838750869538
+--- !u!1 &5223808451354329024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6982614641717281972}
+  m_Layer: 0
+  m_Name: 'hitbox (Missing Prefab with guid: 682a5faf1b0f24f4c95a00318c04204c)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6982614641717281972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223808451354329024}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.1875, y: -18.8125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6732395157179307394}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2260349165426139106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
