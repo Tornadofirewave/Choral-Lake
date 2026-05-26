@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ChoralLake.Core;
+using ChoralLake.Data;
 
 namespace ChoralLake.DebugTools
 {
@@ -31,6 +32,9 @@ namespace ChoralLake.DebugTools
 
             if (Keyboard.current != null && Keyboard.current.f8Key.wasPressedThisFrame)
                 GrantFishFromField();
+
+            if (Keyboard.current != null && Keyboard.current.f9Key.wasPressedThisFrame)
+                GrantUniqueFish();
         }
 
         [ContextMenu("Grant Fish From Field")]
@@ -51,6 +55,40 @@ namespace ChoralLake.DebugTools
                 granted++;
             }
             Debug.Log($"[DebugInventoryTools] Granted {granted} fish.");
+        }
+
+        [ContextMenu("Grant 10 Unique Fish")]
+        public void GrantUniqueFish()
+        {
+            if (GameManager.Instance == null)
+            {
+                Debug.LogError("[DebugInventoryTools] GameManager.Instance is null.");
+                return;
+            }
+            var db = GameManager.Instance.Database;
+            if (db == null)
+            {
+                Debug.LogError("[DebugInventoryTools] GameDatabase is null on GameManager.");
+                return;
+            }
+
+            const string targetLakeId = "lake_acapella";
+            var lake = db.GetLakeById(targetLakeId);
+            if (lake == null)
+            {
+                Debug.LogError($"[DebugInventoryTools] Could not find lake '{targetLakeId}' in GameDatabase.");
+                return;
+            }
+
+            int granted = 0;
+            foreach (var fishId in lake.FishIdPool)
+            {
+                if (string.IsNullOrWhiteSpace(fishId)) continue;
+                GameManager.Instance.AddFishToInventory(fishId);
+                granted++;
+            }
+
+            Debug.Log($"[DebugInventoryTools] Granted {granted} fish from {targetLakeId}.");
         }
 
         [ContextMenu("Grant Money")]
