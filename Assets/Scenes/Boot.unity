@@ -3217,6 +3217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ChoralLake::ChoralLake.Core.GameManager
   database: {fileID: 11400000, guid: eefef428606d941438d661caa22c25d2, type: 2}
+  cursorTexture: {fileID: 2800000, guid: 57ea2f2c4288da44497f6e9a27e8ecfc, type: 3}
 --- !u!4 &1183133706
 Transform:
   m_ObjectHideFlags: 0

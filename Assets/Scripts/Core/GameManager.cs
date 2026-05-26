@@ -15,6 +15,7 @@ namespace ChoralLake.Core
 
         public PlayerSaveData SaveData { get; private set; }
         public ChoralLake.Dialogue.DialogueDatabase DialogueDatabase { get; private set; }
+        public Texture2D cursorTexture;
 
         public const string DEFAULT_STARTING_LAKE_ID = "lake_01";
 
@@ -38,6 +39,7 @@ namespace ChoralLake.Core
             ValidatePendingTicket();
             DialogueDatabase = new ChoralLake.Dialogue.DialogueDatabase();
             DialogueDatabase.LoadFromResources("dialogue");
+            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
         }
 
         // --- Money ---

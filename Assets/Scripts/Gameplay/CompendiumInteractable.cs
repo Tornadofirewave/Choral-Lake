@@ -14,6 +14,8 @@ namespace ChoralLake.Gameplay
         public bool CanInteract => true;
         public Transform Transform => transform;
 
+        
+
         public void Interact() => Open();
 
         public void OnPointerClick(PointerEventData eventData)

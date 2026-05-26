@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 254138486}
   - component: {fileID: 254138485}
   - component: {fileID: 254138484}
+  - component: {fileID: 254138487}
   m_Layer: 0
   m_Name: FishingSign
   m_TagString: Untagged
@@ -409,6 +410,22 @@ SortingGroup:
   m_SortingOrder: 0
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &254138487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254138480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c512fadf86d5d34998e472ff0535f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorChange
+  cursorTexture: {fileID: 2800000, guid: 57ea2f2c4288da44497f6e9a27e8ecfc, type: 3}
+  pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
+  cursorHotSpot: {x: 0, y: 0}
+  pointerHotSpot: {x: 16, y: 0}
 --- !u!1 &295649543
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +614,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2086428446014686380, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 843943485}
   m_SourcePrefab: {fileID: 100100000, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
 --- !u!1 &652379036
 GameObject:
@@ -770,6 +790,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &843943480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2086428446014686380, guid: 64cccab1993a6d64b9cd0a88697881f6, type: 3}
+  m_PrefabInstance: {fileID: 602705157}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &843943485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843943480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c512fadf86d5d34998e472ff0535f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorChange
+  cursorTexture: {fileID: 2800000, guid: 57ea2f2c4288da44497f6e9a27e8ecfc, type: 3}
+  pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
+  cursorHotSpot: {x: 0, y: 0}
+  pointerHotSpot: {x: 16, y: 0}
 --- !u!1 &845352337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6599403252984515667, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
@@ -4769,6 +4810,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1969494200}
   - component: {fileID: 1969494199}
+  - component: {fileID: 1969494202}
+  - component: {fileID: 1969494201}
   m_Layer: 0
   m_Name: WaterShadow
   m_TagString: Untagged
@@ -4850,6 +4893,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1969494201
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969494198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!114 &1969494202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969494198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c512fadf86d5d34998e472ff0535f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorChange
+  cursorTexture: {fileID: 2800000, guid: 57ea2f2c4288da44497f6e9a27e8ecfc, type: 3}
+  pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
+  cursorHotSpot: {x: 0, y: 0}
+  pointerHotSpot: {x: 16, y: 0}
 --- !u!1 &2138404353
 GameObject:
   m_ObjectHideFlags: 0
