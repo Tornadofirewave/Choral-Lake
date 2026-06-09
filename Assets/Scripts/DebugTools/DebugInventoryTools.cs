@@ -25,7 +25,9 @@ namespace ChoralLake.DebugTools
         private void Update()
         {
             if (Keyboard.current != null && Keyboard.current.f6Key.wasPressedThisFrame)
+            {
                 // GrantCommonRod();
+            }
 
             if (Keyboard.current != null && Keyboard.current.f7Key.wasPressedThisFrame)
                 ResetSaveData();
