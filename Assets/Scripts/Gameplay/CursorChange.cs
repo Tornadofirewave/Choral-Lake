@@ -37,10 +37,22 @@ public class CursorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             return;
         }
 
-        int targetSize = Mathf.Max(8, cursorSize);
-        Texture2D scaled = ScaleTexture(sourceTexture, targetSize, targetSize);
-        Vector2 scaledHotSpot = ScaleHotSpot(sourceTexture, hotSpot, targetSize, targetSize);
+        int maxSize = Mathf.Max(8, cursorSize);
+        
+        Vector2Int targetSize = GetScaledSize(sourceTexture, maxSize);
+        Texture2D scaled = ScaleTexture(sourceTexture, targetSize.x, targetSize.y);
+        Vector2 scaledHotSpot = ScaleHotSpot(sourceTexture, hotSpot, targetSize.x, targetSize.y);
+
         Cursor.SetCursor(scaled, scaledHotSpot, CursorMode.ForceSoftware);
+    }
+
+    Vector2Int GetScaledSize(Texture2D source, int maxSize)
+    {
+        float scale = maxSize / (float)Mathf.Max(source.width, source.height);
+        int width = Mathf.Max(1, Mathf.RoundToInt(source.width * scale));
+        int height = Mathf.Max(1, Mathf.RoundToInt(source.height * scale));
+
+        return new Vector2Int(width, height);
     }
 
     Texture2D ScaleTexture(Texture2D source, int width, int height)
@@ -55,6 +67,7 @@ public class CursorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         RenderTexture.active = null;
         RenderTexture.ReleaseTemporary(rt);
+        
         return result;
     }
 
