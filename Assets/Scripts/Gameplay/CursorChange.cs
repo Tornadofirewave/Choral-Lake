@@ -11,9 +11,8 @@ public class CursorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public Vector2 cursorHotSpot = Vector2.zero;
     public Vector2 pointerHotSpot = new Vector2(16, 0);
 
-    [Header("Cursor Size")]
-    [Range(8, 128)]
-    public int cursorSize = 32;
+
+    private int cursorSize = 32;
 
     void Start()
     {
@@ -30,15 +29,18 @@ public class CursorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         ApplyCursor(cursorTexture, cursorHotSpot);
     }
 
-    void ApplyCursor(Texture2D sourceTexture, Vector2 hotSpot)
+    public void ApplyCursor(Texture2D sourceTexture, Vector2 hotSpot)
     {
-        if (sourceTexture == null)
+        if (sourceTexture == null) return;
+
+        if (CursorManager.Instance != null)
         {
+            CursorManager.Instance.ApplyCursor(sourceTexture, hotSpot);
             return;
         }
 
+        // Fallback to local implementation when CursorManager isn't present
         int maxSize = Mathf.Max(8, cursorSize);
-        
         Vector2Int targetSize = GetScaledSize(sourceTexture, maxSize);
         Texture2D scaled = ScaleTexture(sourceTexture, targetSize.x, targetSize.y);
         Vector2 scaledHotSpot = ScaleHotSpot(sourceTexture, hotSpot, targetSize.x, targetSize.y);

@@ -39,7 +39,7 @@ namespace ChoralLake.Core
             ValidatePendingTicket();
             DialogueDatabase = new ChoralLake.Dialogue.DialogueDatabase();
             DialogueDatabase.LoadFromResources("dialogue");
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.ForceSoftware);
+            
         }
 
         // --- Money ---
