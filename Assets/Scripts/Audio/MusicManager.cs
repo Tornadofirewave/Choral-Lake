@@ -9,7 +9,6 @@ namespace ChoralLake.Audio
 
         [SerializeField] private MusicLibrarySO musicLibrary;
         [SerializeField] private float fadeDuration = 1f;
-
         private AudioSource _sourceA;
         private AudioSource _sourceB;
         private AudioSource _active;
@@ -51,6 +50,7 @@ namespace ChoralLake.Audio
         private IEnumerator Crossfade(MusicEntry entry)
         {
             var incoming = _active == _sourceA ? _sourceB : _sourceA;
+            incoming.pitch = entry.PlaybackSpeed;
             incoming.clip   = entry.Clip;
             incoming.volume = 0f;
             incoming.loop   = true;
@@ -92,7 +92,10 @@ namespace ChoralLake.Audio
             src.playOnAwake = false;
             src.loop        = true;
             src.volume      = 0f;
+            src.pitch       = 1f;
             return src;
         }
+
+        // Per-track playback speed is defined on MusicEntry.PlaybackSpeed.
     }
 }

@@ -5,6 +5,7 @@ using ChoralLake.Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ChoralLake.Audio;
 
 /// <summary>
 /// Main fishing game controller. Spawns circles, tracks player success,
@@ -16,6 +17,9 @@ public class FishingGame : MonoBehaviour {
 	[SerializeField] private ProgressBar progressBar;
 	[Header("Completion UI")]
 	[SerializeField] private FishingCompleteUI fishingCompleteUIPrefab;
+
+	[Header("SFX")]
+	[SerializeField] private string circleClickSfxId = string.Empty;
 	private Transform spawnParent;
 	[SerializeField] private LakeSO currentLake;
 	[SerializeField, Min(0f)] private float spawnSpacingBuffer = 0.1f;
@@ -186,6 +190,12 @@ public class FishingGame : MonoBehaviour {
 		}
 
 		SpawnResultPopup(completedCircle, status);
+
+		// Play click SFX if the circle was clicked (successful input)
+		if (wasSuccessful && !string.IsNullOrEmpty(circleClickSfxId))
+		{
+			AudioManager.Instance?.PlaySfx(circleClickSfxId);
+		}
 
 		circlesCompleted++;
 		if (wasSuccessful)
