@@ -579,6 +579,7 @@ MonoBehaviour:
   pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
   cursorHotSpot: {x: 0, y: 0}
   pointerHotSpot: {x: 16, y: 0}
+  cursorSize: 32
 --- !u!1 &554180992
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +797,7 @@ MonoBehaviour:
   pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
   cursorHotSpot: {x: 0, y: 0}
   pointerHotSpot: {x: 16, y: 0}
+  cursorSize: 32
 --- !u!1 &870189605
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,8 +870,8 @@ Transform:
   m_GameObject: {fileID: 870189605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.00041826, y: -0.32, z: 0}
+  m_LocalScale: {x: 1.0146255, y: 1.0751, z: 1.0751}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3311,6 +3313,7 @@ MonoBehaviour:
   pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
   cursorHotSpot: {x: 0, y: 0}
   pointerHotSpot: {x: 16, y: 0}
+  cursorSize: 32
 --- !u!58 &1969494202
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3544,6 +3547,7 @@ MonoBehaviour:
   pointerTexture: {fileID: 2800000, guid: d6d5fc1b2116b464fb43acd0d10b17da, type: 3}
   cursorHotSpot: {x: 0, y: 0}
   pointerHotSpot: {x: 16, y: 0}
+  cursorSize: 32
 --- !u!224 &2091521162 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6219821658472604000, guid: 06d7b9fbd30661943b6728d11f2b4812, type: 3}
