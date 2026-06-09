@@ -15,5 +15,5 @@ MonoBehaviour:
   id: lake_bell
   displayName: Lake Bell
   sceneName: Lake_Bell
-  uniqueFishRequiredToUnlock: 0
+  uniqueFishRequiredToUnlock: 23
   fishIdPool: []

@@ -1,6 +1,7 @@
 using UnityEngine;
 using ChoralLake.Core;
 using ChoralLake.Data;
+using ChoralLake.UI;
 
 namespace ChoralLake.SceneManagement
 {
@@ -69,6 +70,8 @@ namespace ChoralLake.SceneManagement
 
         private void TryPlayBlockedDialogue()
         {
+            TryShowBlockedProgressPopup();
+
             var dm = ChoralLake.Dialogue.DialogueManager.Instance;
             if (dm != null && !string.IsNullOrEmpty(blockedConversationId)
                 && !dm.IsOpen
@@ -79,6 +82,18 @@ namespace ChoralLake.SceneManagement
                 return;
             }
             Debug.Log($"[LakeTransition] Blocked: {lockedMessage} ({GameManager.Instance?.UniqueFishCount}/{lake.UniqueFishRequiredToUnlock} unique fish)");
+        }
+
+        private void TryShowBlockedProgressPopup()
+        {
+            var gm = GameManager.Instance;
+            if (gm == null || RewardPopup.Instance == null || lake == null)
+            {
+                return;
+            }
+
+            string progressText = $"{gm.UniqueFishCount}/{lake.UniqueFishRequiredToUnlock} Unique Fish";
+            RewardPopup.Instance.Show(null, progressText);
         }
     }
 }
