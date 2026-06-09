@@ -18,31 +18,31 @@ MonoBehaviour:
     volume: 0.5
   - id: sfx_receipt_tick
     clip: {fileID: 8300000, guid: be7ef11547ba0154c92edb222ba63474, type: 3}
-    volume: 0.5
+    volume: 0.15
   - id: sfx_ticket_purchase
     clip: {fileID: 8300000, guid: cbdb517c61c665141b45f11b2566320e, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_reward_chime_common
     clip: {fileID: 8300000, guid: 186020f3b5ecc0c48be61de313bc8c13, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_reward_chime_rare
     clip: {fileID: 8300000, guid: 186020f3b5ecc0c48be61de313bc8c13, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_reward_chime_epic
     clip: {fileID: 8300000, guid: 186020f3b5ecc0c48be61de313bc8c13, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_reward_chime_legendary
     clip: {fileID: 8300000, guid: 16524eda3330c18479e4a3eab618146e, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_pickup_rod
     clip: {fileID: 8300000, guid: 186020f3b5ecc0c48be61de313bc8c13, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_tacklebox_open
     clip: {fileID: 8300000, guid: 765f98df94a5653428131f626f28bbdc, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_tacklebox_open
     clip: {fileID: 8300000, guid: 765f98df94a5653428131f626f28bbdc, type: 3}
-    volume: 0.5
+    volume: 0.1
   - id: sfx_circle_tap
     clip: {fileID: 0}
-    volume: 0.15
+    volume: 0.1
