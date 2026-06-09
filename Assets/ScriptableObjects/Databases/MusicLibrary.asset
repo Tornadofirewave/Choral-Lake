@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoralLake.Audio.MusicLibrarySO
   entries:
   - id: music_town
-    clip: {fileID: 8300000, guid: a4a5af72a71093445ac25eb0422dd6d9, type: 3}
+    clip: {fileID: 8300000, guid: e2e29acc71f9e0c44bb79405c9c059bb, type: 3}
     volume: 0.5
   - id: music_lake_acapella
     clip: {fileID: 0}
